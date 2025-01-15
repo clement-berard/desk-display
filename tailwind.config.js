@@ -5,7 +5,7 @@ module.exports = {
   darkMode: ["class"],
   safelist: ["dark"],
   prefix: "",
-  
+
   theme: {
     container: {
       center: true,
@@ -82,5 +82,5 @@ module.exports = {
       },
     },
   },
-  plugins: [animate],
+  plugins: [animate, require('@tailwindcss/line-clamp')],
 }

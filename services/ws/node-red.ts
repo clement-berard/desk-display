@@ -5,11 +5,11 @@ export class WebSocketService {
   private socket: WebSocket | null = null;
   private url: string;
   private reconnectInterval: number;
-  private isConnected: boolean = false;
+  private isConnected = false;
   private messageCallbacks: WebSocketCallback[] = [];
   private connectionCallbacks: ((isConnected: boolean) => void)[] = [];
 
-  constructor(url: string, reconnectInterval: number = 5000) {
+  constructor(url: string, reconnectInterval = 1000) {
     this.url = url;
     this.reconnectInterval = reconnectInterval;
     this.connect();
@@ -19,27 +19,31 @@ export class WebSocketService {
     this.socket = new WebSocket(this.url);
 
     this.socket.onopen = () => {
-      console.log('Connecté au WebSocket');
+      console.log('[ws_node_red] connected to WebSocket');
       this.isConnected = true;
+      // biome-ignore lint/complexity/noForEach: <explanation>
       this.connectionCallbacks.forEach((callback) => callback(true));
     };
 
     this.socket.onmessage = (event) => {
-      console.log('Message reçu:', event.data);
+      console.log('[ws_node_red] msg received:', event.data);
       const data = JSON.parse(event.data);
+      // biome-ignore lint/complexity/noForEach: <explanation>
       this.messageCallbacks.forEach((callback) => callback(data));
     };
 
-    this.socket.onclose = () => {
-      console.log('Déconnecté du WebSocket');
+    this.socket.onclose = (toto) => {
+      console.log('[ws_node_red] disconnected from WebSocket');
       this.isConnected = false;
+      // biome-ignore lint/complexity/noForEach: <explanation>
       this.connectionCallbacks.forEach((callback) => callback(false));
       this.handleReconnect();
     };
 
     this.socket.onerror = (error) => {
-      console.error('Erreur WebSocket:', error);
+      console.error('[ws_node_red] error WebSocket:', error);
       this.isConnected = false;
+      // biome-ignore lint/complexity/noForEach: <explanation>
       this.connectionCallbacks.forEach((callback) => callback(false));
       this.handleReconnect();
     };
@@ -47,7 +51,7 @@ export class WebSocketService {
 
   private handleReconnect() {
     setTimeout(() => {
-      console.log('Tentative de reconnexion...');
+      console.log('[ws_node_red] Retry to connect...');
       this.connect();
     }, this.reconnectInterval);
   }

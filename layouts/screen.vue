@@ -1,21 +1,9 @@
 <template>
-  <div id="screen-display">
-    <slot />
+  <div class="relative w-screen h-screen overflow-hidden">
+    <div class="fixed top-0 left-0 w-[1600px] h-[600px] overflow-hidden">
+      <slot></slot>
+    </div>
   </div>
 </template>
 
-<style lang="scss" scoped>
-  $RES_X: 1600px;
-  $RES_Y: 600px;
-  div#screen-display {
-    margin: 2rem;
-    outline: 2rem solid black;
-    width: $RES_X;
-    min-width: $RES_X;
-    max-width: $RES_X;
-    height: $RES_Y;
-    min-height: $RES_Y;
-    max-height: $RES_Y;
-    overflow: hidden;
-  }
-</style>
+<script setup lang="ts"></script>
