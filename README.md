@@ -2,6 +2,14 @@
 
 <img src="https://m.media-amazon.com/images/I/615R1XOqbkL._AC_SL1500_.jpg" height="400px">
 
+## Goals
+
+My project is to create a customizable DIY tablet that meets my specific needs. 
+
+It will be more versatile than a typical stream deck, featuring a larger touchscreen for improved usability. The goal is to design a device where I can integrate whatever tools or functions I want, tailored to my workflow.
+
+Additionally, I'll be repurposing a Raspberry Pi that's been sitting unused in my drawer, making the project both practical and sustainable.
+
 ## Materials
 
 - [Waveshare 9.3inch Capacitive Touch Display](https://www.waveshare.com/product/raspberry-pi/displays/lcd-oled/9.3inch-1600x600-lcd.htm)
@@ -27,6 +35,9 @@
 ```shell
 vi /boot/config.txt
 ```
+
+<details>
+<summary>Content of `/boot/config.txt`</summary>
 
 ```text
 # Docs: https://www.raspberrypi.com/documentation/computers/config_txt.html
@@ -140,12 +151,16 @@ overscan_right=0
 overscan_top=0
 overscan_bottom=0
 ```
+</details>
 
 ### `chromium-autostart.sh`
 
 ```shell
 vim /var/lib/dietpi/dietpi-software/installed/chromium-autostart.sh
 ```
+
+<details>
+<summary>Content of `chromium-autostart.sh`</summary>
 
 ```text
 #!/bin/bash
@@ -216,3 +231,5 @@ STARTX='xinit'
 
 exec "$STARTX" "$FP_CHROMIUM" ${CHROMIUM_OPTS[@]} "${URL:-https://dietpi.com/}" -- -nocursor
 ```
+</details>
+
