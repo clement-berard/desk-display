@@ -1,8 +1,7 @@
-// src/composables/useWebSocket.ts
-import { ref, onMounted, onBeforeUnmount } from 'vue';
 import { WebSocketService } from '@/services/ws/node-red';
+import { onBeforeUnmount, onMounted, ref } from 'vue';
 
-export function useWebSocket(url: string, reconnectInterval: number = 5000) {
+export function useWebSocket(url: string, reconnectInterval = 5000) {
   const messages = ref<any>(null);
   const isConnected = ref(false);
 

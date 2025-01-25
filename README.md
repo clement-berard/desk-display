@@ -1,75 +1,238 @@
-# Nuxt Minimal Starter
+# desk-display
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+<img src="https://m.media-amazon.com/images/I/615R1XOqbkL._AC_SL1500_.jpg" height="400px">
 
-## Setup
+## Goals
 
-Make sure to install dependencies:
+My project is to create a customizable DIY tablet that meets my specific needs. 
 
-```bash
-# npm
-npm install
+It will be more versatile than a typical stream deck, featuring a larger touchscreen for improved usability. The goal is to design a device where I can integrate whatever tools or functions I want, tailored to my workflow.
 
-# pnpm
-pnpm install
+Additionally, I'll be repurposing a Raspberry Pi that's been sitting unused in my drawer, making the project both practical and sustainable.
 
-# yarn
-yarn install
+## Materials
 
-# bun
-bun install
+- [Waveshare 9.3inch Capacitive Touch Display](https://www.waveshare.com/product/raspberry-pi/displays/lcd-oled/9.3inch-1600x600-lcd.htm)
+- [Wiki Waveshare 9.3inch](https://www.waveshare.com/wiki/9.3inch_1600x600_LCD#Resource)
+- [RaspberryPi 3B](https://www.raspberrypi.com/products/raspberry-pi-3-model-b/)
+- [Support / Stand 3D Model](https://www.thingiverse.com/thing:6439195)
+
+
+## Stack
+
+- Nuxt 3
+- Node-RED
+- Home Assistant
+
+## Communication
+
+![comm-schema.svg](docs/comm-schema.svg)
+
+## DietPi
+
+### `config.txt`
+
+```shell
+vi /boot/config.txt
 ```
 
-## Development Server
+<details>
+<summary>Content of `/boot/config.txt`</summary>
 
-Start the development server on `http://localhost:3000`:
+```text
+# Docs: https://www.raspberrypi.com/documentation/computers/config_txt.html
+# Overlays: https://github.com/raspberrypi/firmware/blob/master/boot/overlays/README
 
-```bash
-# npm
-npm run dev
+#-------Display---------
+# Max allocated framebuffers: Set to "0" in headless mode to reduce memory usage
+# - Defaults to "2" on RPi4 and "1" on earlier RPi models
+#max_framebuffers=0
 
-# pnpm
-pnpm dev
+# If you get no picture, set the following to "1" to apply most compatible HDMI settings.
+#hdmi_safe=1
 
-# yarn
-yarn dev
+# Uncomment to adjust the HDMI signal strength if you have interferences, blanking, or no display.
+# - Ranges from "0" to "11", use values above "7" only if required, e.g. with very long HDMI cable.
+# - Default on first RPi1 A/B is "2", else "5", on RPi4 this setting is ignored.
+#config_hdmi_boost=5
 
-# bun
-bun run dev
+# Uncomment if HDMI display is not detected and composite is being outputted.
+#hdmi_force_hotplug=1
+
+# Uncomment to disable HDMI even if plugged, e.g. to force composite output.
+#hdmi_ignore_hotplug=1
+
+# Uncomment to force a console size. By default it will be display's size minus overscan.
+#framebuffer_width=1600
+#framebuffer_height=600
+
+# Uncomment to enable SDTV/composite output on RPi4. This has no effect on previous RPi models.
+#enable_tvout=0
+# SDTV mode
+#sdtv_mode=0
+
+# Uncomment to force a specific HDMI mode (this will force VGA).
+hdmi_group=2
+hdmi_mode=87
+hdmi_cvt=1600 600 60 6 0 0 0
+
+# Uncomment to force an HDMI mode rather than DVI. This enables HDMI audio in DMT modes.
+hdmi_drive=2
+
+# Set "hdmi_blanking=1" to allow the display going into standby after 10 minutes without input.
+# With default value "0", the display shows a blank screen instead, but will not go into standby.
+# NB: Some legacy OpenMAX applications (OMXPlayer) cannot wake screens from real standby.
+hdmi_blanking=1
+
+# Set to "1" if your display has a black border of unused pixels visible.
+disable_overscan=1
+
+# Uncomment the following to adjust overscan.
+# Use positive numbers if console goes off screen, and negative if there is too much border.
+#overscan_left=16
+#overscan_right=16
+#overscan_top=16
+#overscan_bottom=16
+
+# Rotation
+display_hdmi_rotate=0
+#lcd_rotate=0
+
+#-------RPi camera module-------
+#start_x=1
+#disable_camera_led=1
+
+#-------GPU memory splits-------
+gpu_mem_256=76
+gpu_mem_512=256
+gpu_mem_1024=256
+
+#-------Boot splash screen------
+disable_splash=1
+
+#-------Onboard sound-----------
+dtparam=audio=on
+
+#-------I2C-------------
+#dtparam=i2c_arm=on
+#dtparam=i2c_arm_baudrate=100000
+
+#-------SPI-------------
+dtparam=spi=on
+
+#-------Serial/UART-----
+# NB: "enable_uart=1" will enforce "core_freq=250" on RPi models with onboard WiFi.
+enable_uart=0
+
+#-------SD card HPD-----
+# Comment to enable SD card hot-plug detection, while booting via USB or network.
+# NB: This causes constant CPU load and kernel errors when no SD card is inserted.
+dtparam=sd_poll_once
+
+#-------Overclock-------
+temp_limit=75
+initial_turbo=20
+
+#over_voltage=0
+#arm_freq=1200
+#core_freq=400
+#sdram_freq=450
+
+#over_voltage_min=0
+#arm_freq_min=300
+#core_freq_min=250
+#sdram_freq_min=400
+arm_64bit=1
+
+max_usb_current=1
+
+overscan_left=0
+overscan_right=0
+overscan_top=0
+overscan_bottom=0
+```
+</details>
+
+### `chromium-autostart.sh`
+
+```shell
+vim /var/lib/dietpi/dietpi-software/installed/chromium-autostart.sh
 ```
 
-## Production
+<details>
+<summary>Content of `chromium-autostart.sh`</summary>
 
-Build the application for production:
+```text
+#!/bin/bash
+# Autostart script for kiosk mode, based on @AYapejian: https://github.com/MichaIng/DietPi/issues/1737#issue-318697621
 
-```bash
-# npm
-npm run build
+# Resolution to use for kiosk mode, should ideally match current system resolution
+RES_X=$(sed -n '/^[[:blank:]]*SOFTWARE_CHROMIUM_RES_X=/{s/^[^=]*=//p;q}' /boot/dietpi.txt)
+RES_Y=$(sed -n '/^[[:blank:]]*SOFTWARE_CHROMIUM_RES_Y=/{s/^[^=]*=//p;q}' /boot/dietpi.txt)
 
-# pnpm
-pnpm build
+# Command line switches: https://peter.sh/experiments/chromium-command-line-switches/
+# - Review and add custom flags in: /etc/chromium.d
 
-# yarn
-yarn build
+# If you want tablet mode, uncomment the next line.
+#CHROMIUM_OPTS="$CHROMIUM_OPTS --force-tablet-mode --tablet-ui"
 
-# bun
-bun run build
+CHROMIUM_OPTS=(
+  --kiosk  # Mode kiosque plein écran
+  --window-size=1600,600  # Taille de la fenêtre adaptée à votre écran
+  --window-position=0,0  # Position de la fenêtre à l'origine
+  --noerrdialogs  # Désactiver les boîtes de dialogue d'erreur
+  --disable-translate  # Désactiver la traduction
+  --disable-infobars  # Supprimer les infobars
+  --disable-features=TranslateUI  # Désactiver les fonctionnalités inutiles
+  --disable-pinch  # Désactiver le zoom tactile (inutile sur un kiosque)
+  --overscroll-history-navigation=0  # Désactiver la navigation par overscroll
+  --no-first-run  # Ignorer la configuration initiale
+  --disable-notifications  # Désactiver les notifications
+  --disable-crash-reporter  # Désactiver les rapports de crash
+  --disable-domain-reliability  # Désactiver les rapports de fiabilité
+  --disable-renderer-backgrounding  # Forcer les processus de rendu à rester actifs
+  --disable-component-update  # Désactiver les mises à jour automatiques des composants
+  --disable-sync  # Désactiver la synchronisation
+  --disable-default-apps  # Désactiver les applications par défaut
+  --disable-extensions  # Désactiver les extensions (souvent inutiles en mode kiosque)
+  --disable-logging  # Réduire la verbosité des logs
+  --disable-hang-monitor  # Éviter les alertes de processus bloqués
+  --no-crash-upload
+  --disable-breakpad
+  --incognito
+  --fast
+  --fast-start
+  --disk-cache-dir=/dev/null
+  --disk-cache-size=1
+  --password-store=basic
+  --start-fullscreen
+  --hide-scrollbars
+  --ignore-gpu-blocklist  # Activer l'accélération GPU même si elle est bloquée par Chromium
+  --enable-unsafe-webgpu  # Activer WebGPU pour une meilleure performance graphique
+  --use-gl=egl
+  --disable-gpu-compositing  # Désactiver la composition GPU si elle est instable
+  --enable-gpu-rasterization  # Activer la rasterisation GPU pour les images
+  --enable-smooth-scrolling  # Activer le défilement fluide
+  --enable-gpu
+  --force-tablet-mode
+  --tablet-ui
+)
+
+# Home page
+URL=$(sed -n '/^[[:blank:]]*SOFTWARE_CHROMIUM_AUTOSTART_URL=/{s/^[^=]*=//p;q}' /boot/dietpi.txt)
+
+# RPi or Debian Chromium package
+FP_CHROMIUM=$(command -v chromium-browser)
+[ "$FP_CHROMIUM" ] || FP_CHROMIUM=$(command -v chromium)
+
+# Use "startx" as non-root user to get required permissions via systemd-logind
+STARTX='xinit'
+[ "$USER" = 'root' ] || STARTX='startx'
+
+exec "$STARTX" "$FP_CHROMIUM" ${CHROMIUM_OPTS[@]} "${URL:-https://dietpi.com/}" -- -nocursor
 ```
+</details>
 
-Locally preview production build:
+## Photos
 
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+![IMG_8459.JPG](docs/photos/IMG_8459.JPG)
