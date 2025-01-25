@@ -233,3 +233,6 @@ exec "$STARTX" "$FP_CHROMIUM" ${CHROMIUM_OPTS[@]} "${URL:-https://dietpi.com/}" 
 ```
 </details>
 
+## Photos
+
+![IMG_8459.JPG](docs/photos/IMG_8459.JPG)
