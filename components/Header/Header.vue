@@ -1,23 +1,26 @@
 <template>
-  <header class="grid grid-cols-12 gap-4 bg-background px-4 py-2">
-    <div class="col-span-5">
-      <span class="font-bold">
-      {{ dataWsNodeRed["main_sensors"]?.["sensor.temps_salon"] }} °C -
-      {{ dataWsNodeRed?.['main_sensors']?.["weather.state_translated"] }}
+  <header class="grid grid-cols-12 gap-4 bg-background px-4 py-2 h-full">
+    <div class="col-span-4 h-full">
+      <div class="h-full">
+      <span class="font-bold text-3xl">
+      {{ dataWsNodeRed?.main_sensors?.sensor?.temps_salon }} °C -
+      {{ dataWsNodeRed?.main_sensors?.weather?.state_translated }}
       </span>
+        <img :src="dataWsNodeRed?.main_sensors?.weather?.stateIconUrl" alt="weather-icon"
+             class="w-12 inline-block -mt-3 ml-2" />
+      </div>
     </div>
-    <div class="col-span-2 text-center">
-      <Clock @click="showDialogDebug = true" />
+    <div class="col-span-4 flex justify-center h-full text-3xl">
+      <Clock @click="showDialogDebug = true"/>
     </div>
     <transition name="fade">
-      <div class="col-span-5 flex items-center justify-end w-full">
+      <div class="col-span-4 flex justify-end w-full">
         <template v-if="dataWsNodeRed?.sonos_player_media?.isPlaying">
-          <Music class="pr-2 h-4 inline-block animate-bounce text-primary" />
-          <div class="truncate font-bold">
-            {{dataWsNodeRed?.sonos_player_media?.sourceName}}
+          <Music class="mr-2 h-6 inline-block text-primary mt-1"/>
+          <div class="truncate font-bold text-3xl">
+            {{ dataWsNodeRed?.sonos_player_media?.sourceName }}
           </div>
         </template>
-
       </div>
     </transition>
   </header>
@@ -29,6 +32,7 @@ import { Music } from 'lucide-vue-next';
 import { storeToRefs } from 'pinia';
 import { useGlobalStore } from '~/stores/globalStore';
 import { useWsNodeRedStore } from '~/stores/wsNodeRedStore';
+
 const globalStore = useGlobalStore();
 
 const { showDialogDebug } = storeToRefs(globalStore);
