@@ -36,6 +36,12 @@ Additionally, I'll be repurposing a Raspberry Pi that's been sitting unused in m
 vi /boot/config.txt
 ```
 
+In order to use `ddcutil` with `i2c` add: 
+
+```text
+dtparam=i2c2_iknowwhatimdoing
+```
+
 <details>
 <summary>Content of `/boot/config.txt`</summary>
 
@@ -236,3 +242,12 @@ exec "$STARTX" "$FP_CHROMIUM" ${CHROMIUM_OPTS[@]} "${URL:-https://dietpi.com/}" 
 ## Photos
 
 ![IMG_8459.JPG](docs/photos/IMG_8459.JPG)
+
+## 3D Model Stand
+[Dis_left v1.stl](docs/3d/Dis_left%20v1.stl)
+
+[DIs_right v1.stl](docs/3d/DIs_right%20v1.stl)
+
+![stand-slicer.jpg](docs/3d/stand-slicer.jpg)
+![Screenshot 2025-01-26 at 11.47.48.png](docs/3d/Screenshot%202025-01-26%20at%2011.47.48.png)
+![Screenshot 2025-01-26 at 11.47.55.png](docs/3d/Screenshot%202025-01-26%20at%2011.47.55.png)

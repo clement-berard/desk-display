@@ -1,12 +1,15 @@
+import { construct } from 'radash';
+import { getIconUrlFromState } from '~/services/weather';
 import type { WsNodeRedKeys } from '~/stores/wsNodeRedStore';
 
 export function processNodeWsRedMessage(key: keyof WsNodeRedKeys, value: any) {
-  if (key === 'sonos_player_media') {
-    // @ts-ignore
+  if (key === 'main_sensors') {
+    const constructedObject: any = construct(value);
 
-    return {
-      ...value,
-    };
+    // @ts-ignore
+    constructedObject.weather.stateIconUrl = getIconUrlFromState(constructedObject.weather.state);
+
+    return constructedObject;
   }
   return value;
 }

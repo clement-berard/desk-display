@@ -1,6 +1,9 @@
 <script setup lang="ts">
+import ContentLayout from '@/components/Layouts/Content.vue';
+import IdleScreen from '@/components/Layouts/IdleScreen.vue';
 import Lights from '@/components/Main/Lights.vue';
 import Radios from '@/components/Main/Radios.vue';
+import Sand from '@/components/Main/Sand.vue';
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Box, LampCeilingIcon, RadioIcon } from 'lucide-vue-next';
@@ -13,72 +16,63 @@ import { definePageMeta, useGlobalStore } from '#imports';
 
 const globalStore = useGlobalStore();
 
-const { currentMainScreen } = storeToRefs(globalStore);
-
-const withFrame = true; //import.meta.dev;
+const { currentMainScreen, currentSideCarousel, isIdle, isIdleLongTime, isDev } = storeToRefs(globalStore);
 
 definePageMeta({
-  layout: withFrame ? 'screen' : 'default',
+  layout: 'screen',
 });
 </script>
 
 <template>
-  <div class="flex w-full flex-col h-full">
-    <Header/>
-    <main class="flex-1 flex flex-col gap-2 h-full">
-      <div class="grid gap-4 grid-cols-12 h-[550px]">
-        <Card class="col-span-3 h-full rounded-none border-0 overflow-y-auto bg-background">
-          <div class="flex flex-col h-full justify-between">
-            <main class=" h-full overflow-y-hidden mb-4 p-2">
-              <Carousel :opts="{align: 'start'}" orientation="vertical" class="w-full">
-                <CarouselContent class="h-[500px]">
-                  <CarouselItem class="h-full overflow-hidden">
-                    <MediaPart/>
-                  </CarouselItem>
-                  <CarouselItem class="h-full overflow-hidden">
-                    <Weather/>
-                  </CarouselItem>
-                </CarouselContent>
-              </Carousel>
-            </main>
-            <footer class="justify-center justify-items-center flex p-2">
-              <Tabs :default-value="currentMainScreen" class="w-full">
-                <TabsList class="w-full">
-                  <TabsTrigger value="radios" @click="currentMainScreen = 'radios'" class="h-12 w-full">
-                    <RadioIcon></RadioIcon>
-                  </TabsTrigger>
-                  <TabsTrigger value="lights" @click="currentMainScreen = 'lights'" class="h-12 w-full">
-                    <LampCeilingIcon/>
-                  </TabsTrigger>
-                  <TabsTrigger value="box" @click="currentMainScreen = 'box'" class="h-12 w-full">
-                    <Box></Box>
-                  </TabsTrigger>
-                </TabsList>
-              </Tabs>
-            </footer>
-          </div>
-        </Card>
-        <Card class="col-span-9 rounded-none h-full p-2 border-0 bg-background">
-          <Radios v-if="currentMainScreen === 'radios'"/>
-          <Lights v-if="currentMainScreen === 'lights'"/>
-<!--          <transition-->
-<!--              enter-from-class="translate-x-[150%] opacity-0"-->
-<!--              enter-active-class="transition duration-300"-->
-<!--          >-->
-<!--            -->
-<!--          </transition>-->
-<!--          <transition-->
-<!--              enter-from-class="translate-x-[150%] opacity-0"-->
-<!--              enter-active-class="transition duration-300"-->
-<!--          >-->
+  <div class="h-[600px] w-[1600px]" :class="{'brightness-50': !isDev && isIdle}">
+    <template v-if="isDev || !isIdleLongTime">
+      <section class="h-[60px] w-full overflow-hidden">
+        <Header/>
+      </section>
+      <section class="h-[540px] w-full overflow-hidden">
+        <ContentLayout>
+          <template #side>
+            <Carousel :opts="{align: 'start'}" orientation="vertical" class="w-full" v-model="currentSideCarousel">
+              <CarouselContent class="h-[460px]">
+                <CarouselItem class=" h-full" key="media">
+                  <MediaPart/>
 
-<!--          </transition>-->
-        </Card>
-      </div>
-    </main>
-    <client-only>
-      <Settings/>
-    </client-only>
+                </CarouselItem>
+                <CarouselItem class=" h-full" key="weather">
+                  <Weather/>
+                </CarouselItem>
+              </CarouselContent>
+            </Carousel>
+          </template>
+          <template #side-footer>
+            <Tabs :default-value="currentMainScreen" class="h-full">
+              <TabsList class="w-full h-full">
+                <TabsTrigger value="radios" @click="currentMainScreen = 'radios'" class="h-full w-full">
+                  <RadioIcon></RadioIcon>
+                </TabsTrigger>
+                <TabsTrigger value="lights" @click="currentMainScreen = 'lights'" class="h-full w-full">
+                  <LampCeilingIcon/>
+                </TabsTrigger>
+                <TabsTrigger value="box" @click="currentMainScreen = 'box'" class="h-full w-full">
+                  <Box></Box>
+                </TabsTrigger>
+              </TabsList>
+            </Tabs>
+          </template>
+          <template #content>
+            <Radios v-show="currentMainScreen === 'radios'"/>
+            <Lights v-show="currentMainScreen === 'lights'"/>
+            <Sand v-show="currentMainScreen === 'box'"/>
+          </template>
+        </ContentLayout>
+      </section>
+      <client-only>
+        <Settings/>
+      </client-only>
+    </template>
+    <template v-else>
+      <IdleScreen />
+    </template>
   </div>
 </template>
 

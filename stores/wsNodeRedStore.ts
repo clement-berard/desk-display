@@ -5,12 +5,23 @@ import { processNodeWsRedMessage } from '~/services/ws/node-red-matcher';
 
 export type WsNodeRedKeys = {
   main_sensors: {
-    'sensor.sensor_temp_balcon_temperature': number;
-    'sensor.temps_salon': number;
-    'weather.humidity': number;
-    'weather.rain_chance': number;
-    'weather.state': string;
-    'weather.state_translated': string;
+    sensor: {
+      sensor_temp_balcon_temperature: number;
+      temps_salon: number;
+    };
+    weather: {
+      humidity: number;
+      rain_chance: number;
+      state: string;
+      stateIconUrl: string;
+      state_translated: string;
+      alert: {
+        global: string;
+        wind: boolean;
+        rain: boolean;
+        thunderstorm: boolean;
+      };
+    };
   };
   sonos_player_media: {
     mediaTitle?: string;

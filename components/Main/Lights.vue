@@ -58,8 +58,8 @@ const pageOne: Page<any> = [
     backgroundImage: getUnsplashImage('1624115773145-9b77fe912897'),
   },
   {
-    title: 'Salon Calm TV',
-    onClick: () => setScene('salon_calm_tv'),
+    title: 'Chambre Toggle',
+    onClick: () => setScene('chambre_toggle'),
   },
 ];
 
