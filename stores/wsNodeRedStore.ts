@@ -5,6 +5,9 @@ import { processNodeWsRedMessage } from '~/services/ws/node-red-matcher';
 
 export type WsNodeRedKeys = {
   main_sensors: {
+    all_lights: {
+      chambre: number;
+    };
     sensor: {
       sensor_temp_balcon_temperature: number;
       temps_salon: number;

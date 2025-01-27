@@ -23,10 +23,20 @@ Additionally, I'll be repurposing a Raspberry Pi that's been sitting unused in m
 - Nuxt 3
 - Node-RED
 - Home Assistant
+- PocketBase
+- ...
 
 ## Communication
 
 ![comm-schema.svg](docs/comm-schema.svg)
+
+There is a small API written in Golang running on a Raspberry Pi using the DietPi OS.
+
+This API is designed to execute commands to control the screen, leveraging tools like ddcutil.
+
+It allows for tasks such as adjusting the screen brightness or turning the screen off.
+
+Additionally, this API serves as a bridge to integrate with tools like Node-RED, enabling seamless integration into automation scenarios.
 
 ## DietPi
 
@@ -239,9 +249,25 @@ exec "$STARTX" "$FP_CHROMIUM" ${CHROMIUM_OPTS[@]} "${URL:-https://dietpi.com/}" 
 ```
 </details>
 
+### Misc
+
+#### Timezone
+
+```shell
+# show TZ
+date +%Z
+
+# set new TZ
+timedatectl set-timezone Europe/Paris
+```
+
 ## Photos
 
 ![IMG_8459.JPG](docs/photos/IMG_8459.JPG)
+![IMG_8468.JPG](docs/photos/IMG_8468.JPG)
+![IMG_8477.jpg](docs/photos/IMG_8477.jpg)
+![IMG_8478.JPG](docs/photos/IMG_8478.JPG)
+![IMG_8479.JPG](docs/photos/IMG_8479.JPG)
 
 ## 3D Model Stand
 [Dis_left v1.stl](docs/3d/Dis_left%20v1.stl)

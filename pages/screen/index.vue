@@ -7,16 +7,18 @@ import Sand from '@/components/Main/Sand.vue';
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Box, LampCeilingIcon, RadioIcon } from 'lucide-vue-next';
-import { storeToRefs } from 'pinia';
 import Header from '~/components/Header/Header.vue';
 import Settings from '~/components/Settings/Settings.vue';
 import MediaPart from '~/components/Side/Media.vue';
 import Weather from '~/components/Side/Weather.vue';
-import { definePageMeta, useGlobalStore } from '#imports';
+import { definePageMeta, storeToRefs, useDisplayStore, useGlobalStore } from '#imports';
 
 const globalStore = useGlobalStore();
+const displayStore = useDisplayStore();
 
-const { currentMainScreen, currentSideCarousel, isIdle, isIdleLongTime, isDev } = storeToRefs(globalStore);
+const { currentMainScreen, currentSideCarousel } = storeToRefs(globalStore);
+
+const { showMainScreen, showIdleScreen, isLowBrightness } = storeToRefs(displayStore);
 
 definePageMeta({
   layout: 'screen',
@@ -24,8 +26,8 @@ definePageMeta({
 </script>
 
 <template>
-  <div class="h-[600px] w-[1600px]" :class="{'brightness-50': !isDev && isIdle}">
-    <template v-if="isDev || !isIdleLongTime">
+  <div class="h-[600px] w-[1600px]" :class="{'brightness-50': isLowBrightness}">
+    <template v-if="showMainScreen">
       <section class="h-[60px] w-full overflow-hidden">
         <Header/>
       </section>
@@ -70,7 +72,7 @@ definePageMeta({
         <Settings/>
       </client-only>
     </template>
-    <template v-else>
+    <template v-if="showIdleScreen">
       <IdleScreen />
     </template>
   </div>

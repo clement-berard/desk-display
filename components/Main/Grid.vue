@@ -19,17 +19,17 @@
                 >
               </template>
               <template v-if="item?.backgroundImage && item?.title">
-                <div class="relative h-full rounded-lg overflow-hidden">
-                  <img :src="item?.backgroundImage" class="w-full h-full object-cover">
+                <div class="relative h-full rounded-lg overflow-hidden text-center">
+                  <img :src="item?.backgroundImage" class="w-full h-full object-cover" alt="" :class="{'grayscale': item?.isBackgroundImageGray ?? false}" />
                   <div class="absolute inset-0 flex items-center justify-center backdrop-blur-sm bg-black/20">
-                    <span class="text-3xl" v-if="item?.title">
+                    <span class="text-3xl p-2" v-if="item?.title">
                       {{ item.title }}
                     </span>
                   </div>
                 </div>
               </template>
               <template v-if="!item?.backgroundImage && item?.title">
-                <div class="flex items-center justify-center text-center text-3xl h-full">
+                <div class="flex items-center justify-center text-center text-3xl h-full p-1">
                   {{ item.title }}
                 </div>
               </template>
@@ -50,6 +50,7 @@ export type Item<Data = Record<any, any>> = {
   onClick?: (data: Data, options: { sendToApiNodeRed: typeof sendToApiNodeRed }) => void;
   data?: Data;
   title?: string;
+  isBackgroundImageGray?: boolean;
 };
 
 export type Page<Data> = Item<Data>[];
