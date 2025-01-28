@@ -18,7 +18,7 @@ const displayStore = useDisplayStore();
 
 const { currentMainScreen, currentSideCarousel } = storeToRefs(globalStore);
 
-const { showMainScreen, showIdleScreen, isLowBrightness } = storeToRefs(displayStore);
+const { showMainScreen, showIdleScreen, isLowBrightness, forceBrightnessNightShift } = storeToRefs(displayStore);
 
 definePageMeta({
   layout: 'screen',
@@ -26,7 +26,7 @@ definePageMeta({
 </script>
 
 <template>
-  <div class="h-[600px] w-[1600px]" :class="{'brightness-50': isLowBrightness}">
+  <div class="h-[600px] w-[1600px]" :class="{'brightness-50': isLowBrightness, 'night-screen-mode': forceBrightnessNightShift}">
     <template v-if="showMainScreen">
       <section class="h-[60px] w-full overflow-hidden">
         <Header/>

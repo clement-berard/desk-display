@@ -1,6 +1,6 @@
 <template>
   <div class="flex items-center justify-center grayscale h-full flex-col" @click="wakeUpScreen">
-    <div class="text-6xl block">{{fullDate}}</div>
+    <div class="text-6xl block font-normal">{{fullDate}}</div>
     <template v-if="dataWsNodeRed?.sonos_player_media?.isPlaying && dataWsNodeRed?.sonos_player_media?.showAuthorTitle">
       <div class="text-3xl line-clamp-1 font-semibold mt-2">
         {{ dataWsNodeRed?.sonos_player_media?.mediaArtist }}

@@ -22,14 +22,14 @@
                 <div class="relative h-full rounded-lg overflow-hidden text-center">
                   <img :src="item?.backgroundImage" class="w-full h-full object-cover" alt="" :class="{'grayscale': item?.isBackgroundImageGray ?? false}" />
                   <div class="absolute inset-0 flex items-center justify-center backdrop-blur-sm bg-black/20">
-                    <span class="text-3xl p-2" v-if="item?.title">
+                    <span class="text-3xl p-2 font-normal" v-if="item?.title">
                       {{ item.title }}
                     </span>
                   </div>
                 </div>
               </template>
               <template v-if="!item?.backgroundImage && item?.title">
-                <div class="flex items-center justify-center text-center text-3xl h-full p-1">
+                <div class="flex items-center justify-center text-center text-3xl h-full p-1 font-normal">
                   {{ item.title }}
                 </div>
               </template>

@@ -3,7 +3,7 @@
 	"organizeImports": { "enabled": true },
 	"files": {
 		"include": ["*.vue", "*.ts", "*.json"],
-		"ignore": ["**/dist", "components/ui/*", ".nuxt"]
+		"ignore": ["**/dist", "components/ui/*", ".nuxt", ".output"]
 	},
 	"javascript": {
 		"formatter": {
