@@ -32,7 +32,7 @@ export class WebSocketService {
       this.messageCallbacks.forEach((callback) => callback(data));
     };
 
-    this.socket.onclose = (toto) => {
+    this.socket.onclose = () => {
       console.log('[ws_node_red] disconnected from WebSocket');
       this.isConnected = false;
       // biome-ignore lint/complexity/noForEach: <explanation>

@@ -1,7 +1,7 @@
 <template>
-  <div class="flex items-center justify-center grayscale h-full flex-col">
+  <div class="flex items-center justify-center grayscale h-full flex-col" @click="wakeUpScreen">
     <div class="text-6xl block">{{fullDate}}</div>
-    <template v-if="dataWsNodeRed?.sonos_player_media?.isPlaying">
+    <template v-if="dataWsNodeRed?.sonos_player_media?.isPlaying && dataWsNodeRed?.sonos_player_media?.showAuthorTitle">
       <div class="text-3xl line-clamp-1 font-semibold mt-2">
         {{ dataWsNodeRed?.sonos_player_media?.mediaArtist }}
       </div>
@@ -12,10 +12,9 @@
   </div>
 </template>
 <script setup lang="ts">
-import { storeToRefs } from 'pinia';
-import { useClock } from '~/composables/useClock';
-import { useWsNodeRedStore } from '~/stores/wsNodeRedStore';
+import { storeToRefs, useClock, useDisplayStore, useWsNodeRedStore } from '#imports';
 const wsNodeRedStore = useWsNodeRedStore();
 const { dataWsNodeRed } = storeToRefs(wsNodeRedStore);
+const { wakeUpScreen } = useDisplayStore();
 const { fullDate } = useClock();
 </script>
