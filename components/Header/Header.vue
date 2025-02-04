@@ -16,7 +16,8 @@
     <transition name="fade">
       <div class="col-span-4 flex justify-end w-full">
         <template v-if="dataWsNodeRed?.sonos_player_media?.isPlaying">
-          <Music class="mr-2 h-6 inline-block text-primary mt-1"/>
+          <MusicBar class="mr-2 inline-block text-primary mt-1" width="24" height="24" />
+<!--          <Music class="mr-2 h-6 inline-block text-primary mt-1"/>-->
           <div class="truncate font-bold text-3xl">
             {{ dataWsNodeRed?.sonos_player_media?.sourceName }}
           </div>
@@ -30,6 +31,7 @@
 import Clock from '@/components/Header/Clock.vue';
 import { Music } from 'lucide-vue-next';
 import { storeToRefs } from 'pinia';
+import MusicBar from '~/components/assets/icons/MusicBar.vue';
 import { useGlobalStore } from '~/stores/globalStore';
 import { useWsNodeRedStore } from '~/stores/wsNodeRedStore';
 

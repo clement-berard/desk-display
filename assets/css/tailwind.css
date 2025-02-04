@@ -13,6 +13,7 @@
     font-optical-sizing: auto;
     font-weight: 200;
     font-style: normal;
+
   }
   .night-screen-mode {
     @apply sepia-[0.4] brightness-90 saturate-50 contrast-[.9];
