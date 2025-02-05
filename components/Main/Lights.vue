@@ -1,5 +1,5 @@
 <template>
-  <Grid :pages="pages"/>
+  <Grid :pages="pages" :is-loading="false" />
 </template>
 <script setup lang="ts">
 import { computed } from 'vue';

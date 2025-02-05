@@ -1,12 +1,9 @@
 <template>
-  <Grid :pages="myPages"/>
+  <Grid :is-loading="isLoading" :pages="myPages"/>
 </template>
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
 import { cluster } from 'radash';
-import { ref } from 'vue';
-import type { Item } from '~/components/Main/Grid.vue';
-import { NC_TABLE_RADIO_ID, nocodbInstance } from '~/services/api/nocodb';
 import { computed, useScreensStore, useWsNodeRedStore } from '#imports';
 import Grid, { type Pages } from './Grid.vue';
 
@@ -14,7 +11,7 @@ const wsNodeRedStore = useWsNodeRedStore();
 const screensStore = useScreensStore();
 
 const { dataWsNodeRed } = storeToRefs(wsNodeRedStore);
-const { radiosList } = storeToRefs(screensStore);
+const { radiosList, isLoading } = storeToRefs(screensStore);
 const { fetchRadioRefetch } = screensStore;
 
 const currentSelectedRadio = dataWsNodeRed?.value?.sonos_player_media?.select_radio_details?.slug;

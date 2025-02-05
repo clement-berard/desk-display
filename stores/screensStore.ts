@@ -1,11 +1,13 @@
 import { useQuery } from '@tanstack/vue-query';
 import { defineStore } from 'pinia';
+import { sleep } from 'radash';
 import { NC_TABLE_RADIO_ID, nocodbInstance } from '~/services/api/nocodb';
 
 export const useScreensStore = defineStore(
   'screensStore',
   () => {
     const fetchRadios = async () => {
+      await sleep(5000);
       return nocodbInstance
         .get(`${NC_TABLE_RADIO_ID}/records`, {
           searchParams: {
