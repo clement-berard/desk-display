@@ -6,7 +6,7 @@ import { storeToRefs } from 'pinia';
 import { cluster } from 'radash';
 import { ref } from 'vue';
 import type { Item } from '~/components/Main/Grid.vue';
-import { pdbClient } from '~/services/api/pdb';
+import { NC_TABLE_RADIO_ID, nocodbInstance } from '~/services/api/nocodb';
 import { useWsNodeRedStore } from '~/stores/wsNodeRedStore';
 import Grid, { type Pages } from './Grid.vue';
 
@@ -18,21 +18,18 @@ const pages = ref<Pages>([]);
 const currentSelectedRadio = dataWsNodeRed?.value?.sonos_player_media?.select_radio_details?.slug;
 
 async function fetchRadios() {
-  const data: any = await pdbClient
-    .get('radios/records', {
+  const data: any = await nocodbInstance
+    .get(`${NC_TABLE_RADIO_ID}/records`, {
       searchParams: {
-        perPage: 1000,
-        skipTotal: true,
-        fields: 'slug,url,image_url',
-        filter: 'disabled=false',
+        fields: 'slug,label,out_media_img',
         sort: '-counter,-last_selected_date,slug',
       },
     })
     .json();
 
-  const items: Item[] = (data.items as any[]).map((item) => {
+  const items: Item[] = (data.list as any[]).map((item) => {
     return {
-      imageSrc: item?.image_url,
+      imageSrc: item?.out_media_img,
       onClick: async (data, { sendToApiNodeRed }) => {
         if (currentSelectedRadio !== data?.slug) {
           await sendToApiNodeRed({
