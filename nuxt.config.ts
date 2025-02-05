@@ -17,6 +17,7 @@ export default defineNuxtConfig({
     '@nuxtjs/color-mode',
     '@pinia/nuxt',
     'pinia-plugin-persistedstate/nuxt',
+    '@hebilicious/vue-query-nuxt',
   ],
   shadcn: {
     /**
