@@ -1,13 +1,12 @@
 import { useQuery } from '@tanstack/vue-query';
 import { defineStore } from 'pinia';
-import { sleep } from 'radash';
 import { NC_TABLE_RADIO_ID, nocodbInstance } from '~/services/api/nocodb';
+import { nodeRedClient } from '~/services/api/node-red';
 
 export const useScreensStore = defineStore(
   'screensStore',
   () => {
     const fetchRadios = async () => {
-      await sleep(5000);
       return nocodbInstance
         .get(`${NC_TABLE_RADIO_ID}/records`, {
           searchParams: {
@@ -28,10 +27,19 @@ export const useScreensStore = defineStore(
       select: (d: any) => d.list,
     });
 
+    async function setRandomRadio() {
+      await nodeRedClient.post('desk-display', {
+        json: {
+          action: 'action_select_radio_random',
+        },
+      });
+    }
+
     return {
       radiosList,
       isLoading,
       fetchRadioRefetch,
+      setRandomRadio,
     };
   },
   {

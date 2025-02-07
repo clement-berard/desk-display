@@ -17,7 +17,7 @@
       <div class="col-span-4 flex justify-end w-full">
         <template v-if="dataWsNodeRed?.sonos_player_media?.isPlaying">
           <MusicBar class="mr-2 inline-block text-primary mt-1" width="24" height="24" />
-          <div class="truncate font-bold text-3xl">
+          <div class="truncate font-bold text-3xl" @click="triggerRandomRadio">
             {{ dataWsNodeRed?.sonos_player_media?.sourceName }}
           </div>
         </template>
@@ -28,17 +28,20 @@
 
 <script lang="ts" setup>
 import Clock from '@/components/Header/Clock.vue';
-import { Music } from 'lucide-vue-next';
-import { storeToRefs } from 'pinia';
 import MusicBar from '~/components/assets/icons/MusicBar.vue';
-import { useGlobalStore } from '~/stores/globalStore';
-import { useWsNodeRedStore } from '~/stores/wsNodeRedStore';
+import { storeToRefs, useGlobalStore, useScreensStore, useWsNodeRedStore } from '#imports';
 
 const globalStore = useGlobalStore();
+const screensStore = useScreensStore();
 
 const { showDialogDebug } = storeToRefs(globalStore);
+const { setRandomRadio } = screensStore;
 
 const wsNodeRedStore = useWsNodeRedStore();
 
 const { dataWsNodeRed } = storeToRefs(wsNodeRedStore);
+
+async function triggerRandomRadio() {
+  await setRandomRadio();
+}
 </script>
