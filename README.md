@@ -1,5 +1,7 @@
 # desk-display
 
+⚠️ Draft project, dirty code 🫢
+
 <img src="https://m.media-amazon.com/images/I/615R1XOqbkL._AC_SL1500_.jpg" height="400px">
 
 ## Goals
