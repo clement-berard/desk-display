@@ -3,14 +3,23 @@ import { ref, watch } from 'vue';
 import { useWebSocket } from '~/composables/useWsNodeRed';
 import { processNodeWsRedMessage } from '~/services/ws/node-red-matcher';
 
+type DeskDisplayConfig = {
+  prevent_standby: boolean;
+  force_brightness_nightshift: boolean;
+  force_low_brightness: boolean;
+  button_reset_standby: string;
+};
+
 export type WsNodeRedKeys = {
   main_sensors: {
+    desk_display_config: DeskDisplayConfig;
     all_lights: {
       chambre: number;
     };
     sensor: {
       sensor_temp_balcon_temperature: number;
       temps_salon: number;
+      has_desk_consumption: boolean;
     };
     weather: {
       humidity: number;

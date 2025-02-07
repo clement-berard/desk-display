@@ -1,0 +1,23 @@
+{
+  "name": "my-project",
+  "build": {
+      "dockerfile": "Dockerfile",
+
+      // Runs docker from the project root instead of `.devcontainer`,
+      // to ensure `COPY pnpm-lock.yaml ./` works
+      "context": ".."
+  },
+  "mounts": [
+    "source=${localWorkspaceFolder},target=/app,type=bind"
+  ],
+  "portsAttributes": {
+    "3000": {
+      "label": "nuxt3-app"
+    }
+  },
+  "forwardPorts": [3000],
+
+  // --offline will use the packages pre-loaded into the store
+  // during `RUN pnpm fetch` in the Dockerfile
+  "postCreateCommand": "pnpm install"
+}
