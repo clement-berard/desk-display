@@ -37,8 +37,16 @@ definePageMeta({
             <Carousel :opts="{align: 'start'}" orientation="vertical" class="w-full" v-model="currentSideCarousel">
               <CarouselContent class="h-[460px]">
                 <CarouselItem class=" h-full" key="media">
-                  <MediaPart/>
-
+                  <Carousel :opts="{align: 'start'}" class="w-full" v-model="currentSideCarousel">
+                    <CarouselContent class="h-[460px]">
+                      <CarouselItem class=" h-full" key="media">
+                        <MediaPart/>
+                      </CarouselItem>
+                      <CarouselItem class=" h-full" key="weather">
+                        <div>WIP</div>
+                      </CarouselItem>
+                    </CarouselContent>
+                  </Carousel>
                 </CarouselItem>
                 <CarouselItem class=" h-full" key="weather">
                   <Weather/>
@@ -50,7 +58,7 @@ definePageMeta({
             <Tabs :default-value="currentMainScreen" class="h-full">
               <TabsList class="w-full h-full">
                 <TabsTrigger value="radios" @click="currentMainScreen = 'radios'" class="h-full w-full">
-                  <RadioIcon></RadioIcon>
+                  <RadioIcon />
                 </TabsTrigger>
                 <TabsTrigger value="lights" @click="currentMainScreen = 'lights'" class="h-full w-full">
                   <LampCeilingIcon/>

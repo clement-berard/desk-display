@@ -4,15 +4,15 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
 import { cluster } from 'radash';
-import { computed, useScreensStore, useWsNodeRedStore } from '#imports';
+import { computed, useRadiosStore, useWsNodeRedStore } from '#imports';
 import Grid, { type Pages } from './Grid.vue';
 
 const wsNodeRedStore = useWsNodeRedStore();
-const screensStore = useScreensStore();
+const radiosStore = useRadiosStore();
 
 const { dataWsNodeRed } = storeToRefs(wsNodeRedStore);
-const { radiosList, isLoading } = storeToRefs(screensStore);
-const { fetchRadioRefetch } = screensStore;
+const { radiosList, isLoading } = storeToRefs(radiosStore);
+const { fetchRadioRefetch } = radiosStore;
 
 const currentSelectedRadio = dataWsNodeRed?.value?.sonos_player_media?.select_radio_details?.slug;
 
