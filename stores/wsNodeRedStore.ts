@@ -41,7 +41,7 @@ export type WsNodeRedKeys = {
     mediaImageUrl: string;
     isPlaying: boolean;
     hasAuthorTitle: boolean;
-    hasSelectRadio: boolean;
+    hasRadioSelected: boolean;
     showRadioName: boolean;
     showAuthorTitle: boolean;
     volumeLevel: number;

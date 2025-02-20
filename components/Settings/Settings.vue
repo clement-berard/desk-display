@@ -2,50 +2,43 @@
   <Drawer :open="showDialogDebug" @update:open="open => showDialogDebug = open">
     <DrawerContent class="h-full">
       <DrawerHeader>
-        <DrawerTitle @click="showDialogDebug = false">Settings</DrawerTitle>
-
+        <div class="text-xl font-bold">Settings</div>
       </DrawerHeader>
-      <div class="p-4">
-        <Tabs default-value="global">
-          <TabsList>
-            <TabsTrigger value="global">
+      <div class="p-4 h-[400px] overflow-y-scroll">
+        <template v-if="currentMainScreen === 'global'">
+          <pre>Screen {{ resolution }}</pre>
+          <Button @click="reloadPage">Reload</Button>
+        </template>
+        <template v-if="currentMainScreen === 'stores'">
+            <pre>{{crush(globalStore.$state)}}</pre>
+            <pre>{{crush(wsNodeRedStore.$state)}}</pre>
+        </template>
+      </div>
+      <DrawerFooter class="h-24">
+        <Tabs :default-value="currentMainScreen" class="h-full">
+          <TabsList class="w-full h-full">
+            <TabsTrigger value="global" @click="currentMainScreen = 'global'" class="h-full w-full">
               Global
             </TabsTrigger>
-            <TabsTrigger value="stores">
+            <TabsTrigger value="stores" @click="currentMainScreen = 'stores'" class="h-full w-full">
               Stores
             </TabsTrigger>
           </TabsList>
-          <TabsContent value="global">
-            <client-only>
-              <pre>Screen {{ resolution }}</pre>
-              <Button @click="reloadPage">Reload</Button>
-            </client-only>
-          </TabsContent>
-          <TabsContent value="stores">
-            <ScrollArea class="h-72 w-full">
-            <pre>globalStore {{globalStore.$state}}</pre>
-            <pre>wsNodeRedStore {{wsNodeRedStore.$state}}</pre>
-            </ScrollArea>
-          </TabsContent>
         </Tabs>
-
-      </div>
-      <DrawerFooter>
-        Footer
       </DrawerFooter>
     </DrawerContent>
   </Drawer>
 </template>
 <script setup lang="ts">
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { storeToRefs } from 'pinia';
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { crush } from 'radash';
 import { onMounted } from 'vue';
 import { Button } from '~/components/ui/button';
-import { Drawer, DrawerContent, DrawerFooter, DrawerHeader, DrawerTitle } from '~/components/ui/drawer';
+import { Drawer, DrawerContent, DrawerFooter, DrawerHeader } from '~/components/ui/drawer';
 import { useGlobalStore } from '~/stores/globalStore';
 import { useWsNodeRedStore } from '~/stores/wsNodeRedStore';
-
+import { ref, storeToRefs } from '#imports';
+const currentMainScreen = ref('global');
 let resolution = {
   available: '',
   real: '',

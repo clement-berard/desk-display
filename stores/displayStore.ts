@@ -6,6 +6,7 @@ const ONE_MINUTE = 60 * 1_000;
 const IDLE_TIME_SHORT = ONE_MINUTE;
 const IDLE_TIME_MEDIUM = ONE_MINUTE * 2;
 const IDLE_TIME_LONG = ONE_MINUTE * 15;
+const FORCE_IDLE_SCREEN = false;
 
 export const useDisplayStore = defineStore('displayStore', () => {
   const wsNodeRedStore = useWsNodeRedStore();
@@ -67,7 +68,7 @@ export const useDisplayStore = defineStore('displayStore', () => {
   });
 
   const showMainScreen = computed(() => {
-    return !enableDisplayStandbyProcess.value || isScreenWakeUp.value;
+    return !FORCE_IDLE_SCREEN && (!enableDisplayStandbyProcess.value || isScreenWakeUp.value);
   });
 
   const showIdleScreen = computed(() => {
