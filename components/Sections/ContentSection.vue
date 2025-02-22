@@ -1,5 +1,5 @@
 <template>
-  <div class="grid gap-2 grid-cols-12 h-full">
+  <div class="h-[540px] grid gap-2 grid-cols-12">
     <div class="col-span-3 h-full overflow-hidden">
       <div class="flex flex-col h-full">
         <div class="flex-grow h-full w-full overflow-hidden">
