@@ -6,7 +6,7 @@ import Radios from '@/components/Main/Radios.vue';
 import Sand from '@/components/Main/Sand.vue';
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Box, LampCeilingIcon, RadioIcon } from 'lucide-vue-next';
+import { Box, Icon, LampCeilingIcon, RadioIcon } from 'lucide-vue-next';
 import Header from '~/components/Header/Header.vue';
 import Settings from '~/components/Settings/Settings.vue';
 import MediaPart from '~/components/Side/Media.vue';

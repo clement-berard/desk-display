@@ -6,4 +6,22 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script lang="ts" setup>
+import { Panels } from '~/core/Domain/UI/Panels';
+import { onMounted, storeToRefs, useGlobalStore, useLights, useRadios } from '#imports';
+const store = useGlobalStore();
+
+const { panel: panelRadios, initPanel: initPanelRadios } = useRadios();
+const { panel: panelLights, initPanel: initPanelLights } = useLights();
+
+const { allPanels } = storeToRefs(store);
+
+onMounted(() => {
+  const panelsGroup = new Panels();
+  initPanelRadios();
+  initPanelLights();
+
+  panelsGroup?.addPanels([panelRadios.value, panelLights.value]);
+  allPanels.value = panelsGroup;
+});
+</script>
