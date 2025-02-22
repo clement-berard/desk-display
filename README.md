@@ -28,6 +28,7 @@ Additionally, I'll be repurposing a Raspberry Pi that's been sitting unused in m
 - Home Assistant
 - PocketBase
 - NocoDB
+- Golang / Python
 - ...
 
 ## Communication
