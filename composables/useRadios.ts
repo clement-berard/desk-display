@@ -1,12 +1,46 @@
+import { cluster } from 'radash';
 import type { RadioItem } from '~/core/Domain/Entities/Radio';
-import { storeToRefs, useFetch, useWsNodeRedStore } from '#imports';
+import { Page } from '~/core/Domain/UI/Page';
+import { PageItem } from '~/core/Domain/UI/PageItem';
+import { Panel } from '~/core/Domain/UI/Panel';
+import { ref, storeToRefs, useFetch, useWsNodeRedStore } from '#imports';
 
 export function useRadios() {
   const { dataWsNodeRed } = storeToRefs(useWsNodeRedStore());
   const currentSelectedRadio = dataWsNodeRed?.value?.sonos_player_media?.select_radio_details?.slug;
+  const panel = ref<Panel>(new Panel({ id: 'radios_panel' }));
 
   function getRadios() {
     return useFetch<RadioItem[]>('/api/radios');
+  }
+
+  async function initPanel() {
+    panel.value.isLoading = true;
+    const { data } = await getRadios();
+    const clusteredItems = cluster(data.value || [], 10);
+
+    for (let cluster of clusteredItems) {
+      const page = new Page();
+      page.addPageItems(
+        cluster.map((radio) => {
+          return new PageItem({
+            backgroundImage: radio.img_url,
+            onClick: async () => {
+              if (currentSelectedRadio !== radio?.slug) {
+                await useFetch('/api/radios/set', {
+                  query: {
+                    slug: radio.slug,
+                  },
+                });
+              }
+            },
+          });
+        }),
+      );
+      panel.value.addPage(page);
+    }
+
+    panel.value.isLoading = false;
   }
 
   async function setRandomRadio() {
@@ -21,5 +55,7 @@ export function useRadios() {
     getRadios,
     setRandomRadio,
     currentSelectedRadio,
+    panel,
+    initPanel,
   };
 }
