@@ -49,13 +49,12 @@
 import { Skeleton } from '@/components/ui/skeleton';
 import { list } from 'radash';
 import { Carousel, CarouselContent, CarouselItem } from '~/components/ui/carousel';
-import { nodeRedClient } from '~/services/api/node-red';
 import { computed } from '#imports';
 
 export type Item<Data = Record<any, any>> = {
   imageSrc?: string;
   backgroundImage?: string;
-  onClick?: (data: Data, options: { sendToApiNodeRed: typeof sendToApiNodeRed }) => void;
+  onClick?: (data: Data) => void;
   data?: Data;
   title?: string;
   isBackgroundImageGray?: boolean;
@@ -74,17 +73,9 @@ const getPages = computed(() => {
   return pages;
 });
 
-async function sendToApiNodeRed(payload: Record<any, any>) {
-  await nodeRedClient.post('desk-display', {
-    json: payload,
-  });
-}
-
 function triggerOnClick(item: Item<any>) {
   if (item?.onClick) {
-    item?.onClick(item?.data || {}, {
-      sendToApiNodeRed,
-    });
+    item?.onClick(item?.data || {});
   }
 }
 </script>

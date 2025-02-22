@@ -38,7 +38,7 @@ There is a small API written in Golang running on a Raspberry Pi using the DietP
 
 This API is designed to execute commands to control the screen, leveraging tools like ddcutil.
 
-It allows for tasks such as adjusting the screen brightness or turning the screen off. [See this file](ddcutil.md)
+It allows for tasks such as adjusting the screen brightness or turning the screen off. [See this file](docs/ddcutil.md)
 
 Additionally, this API serves as a bridge to integrate with tools like Node-RED, enabling seamless integration into automation scenarios.
 
