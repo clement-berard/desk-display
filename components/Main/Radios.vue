@@ -2,37 +2,25 @@
   <Grid :is-loading="isLoading" :pages="myPages"/>
 </template>
 <script setup lang="ts">
-import { storeToRefs } from 'pinia';
 import { cluster } from 'radash';
-import { computed, useRadiosStore, useWsNodeRedStore } from '#imports';
+import { useRadios } from '~/composables/useRadios';
+import { computed, useFetch } from '#imports';
 import Grid, { type Pages } from './Grid.vue';
 
-const wsNodeRedStore = useWsNodeRedStore();
-const radiosStore = useRadiosStore();
-
-const { dataWsNodeRed } = storeToRefs(wsNodeRedStore);
-const { radiosList, isLoading } = storeToRefs(radiosStore);
-const { fetchRadioRefetch } = radiosStore;
-
-const currentSelectedRadio = dataWsNodeRed?.value?.sonos_player_media?.select_radio_details?.slug;
+const { getRadios, currentSelectedRadio } = useRadios();
+const { data: radios, pending: isLoading } = await getRadios();
 
 const allRadiosList = computed(() => {
-  return ((radiosList.value || []) as any[]).map((item) => {
+  return [...(radios?.value || [])].map((item) => {
     return {
-      imageSrc: item?.out_media_img,
-      onClick: async (data: any, { sendToApiNodeRed }: { sendToApiNodeRed: any }) => {
+      imageSrc: item?.img_url,
+      onClick: async (data: any) => {
         if (currentSelectedRadio !== data?.slug) {
-          await sendToApiNodeRed({
-            action: 'action_select_radio_set',
-            payload: {
-              radio: data.slug,
+          await useFetch('/api/radios/set', {
+            query: {
+              slug: data.slug,
             },
           });
-
-          setTimeout(async () => {
-            // await fetchRadios();
-            await fetchRadioRefetch();
-          }, 1000);
         }
       },
       data: item,

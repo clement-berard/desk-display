@@ -29,13 +29,13 @@
 <script lang="ts" setup>
 import Clock from '@/components/Header/Clock.vue';
 import MusicBar from '~/components/assets/icons/MusicBar.vue';
-import { storeToRefs, useGlobalStore, useRadiosStore, useWsNodeRedStore } from '#imports';
+import { storeToRefs, useGlobalStore, useRadios, useWsNodeRedStore } from '#imports';
 
 const globalStore = useGlobalStore();
-const radiosStore = useRadiosStore();
 
 const { showDialogDebug } = storeToRefs(globalStore);
-const { setRandomRadio } = radiosStore;
+
+const { setRandomRadio } = useRadios();
 
 const wsNodeRedStore = useWsNodeRedStore();
 

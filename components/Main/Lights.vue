@@ -4,20 +4,16 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import Grid, { type Pages } from '~/components/Main/Grid.vue';
-import { nodeRedClient } from '~/services/api/node-red';
 import { useWsNodeRedStore } from '~/stores/wsNodeRedStore';
-import { storeToRefs } from '#imports';
+import { storeToRefs, useFetch } from '#imports';
 
 const wsNodeRedStore = useWsNodeRedStore();
 const { dataWsNodeRed } = storeToRefs(wsNodeRedStore);
 
 async function setScene(name: any) {
-  await nodeRedClient.post('desk-display', {
-    json: {
-      action: 'action_set_lights',
-      payload: {
-        scene: name,
-      },
+  return useFetch('/api/node-red/desk-display-api', {
+    query: {
+      action: `set_lights_${name}`,
     },
   });
 }
@@ -32,7 +28,7 @@ const pages = computed<Pages>(() => [
       backgroundImage: getUnsplashImage('1486312338219-ce68d2c6f44d'),
     },
     {
-      title: 'Salon Edison',
+      title: 'Salon Edison Lite',
       onClick: () => setScene('salon_edison'),
       backgroundImage: getUnsplashImage('1458172594959-b57570af4d0a'),
     },
