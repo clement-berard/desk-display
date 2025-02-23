@@ -1,6 +1,6 @@
 import { useIdle, whenever } from '@vueuse/core';
-import { handleLowBrightness, handleStandBy, handleWakeUp } from '~/services/display/display';
-import { computed, defineStore, ref, storeToRefs, toRef, useWsNodeRedStore, watch } from '#imports';
+import { callDisplayHandler } from '~/services/display/display';
+import { computed, defineStore, ref, storeToRefs, useWsNodeRedStore, watch } from '#imports';
 
 const ONE_MINUTE = 60 * 1_000;
 const IDLE_TIME_SHORT = ONE_MINUTE;
@@ -36,19 +36,19 @@ export const useDisplayStore = defineStore('displayStore', () => {
 
   async function wakeUpScreen() {
     isScreenWakeUp.value = true;
-    await handleWakeUp();
+    await callDisplayHandler('on');
   }
 
   whenever(isIdleMiddleTime, async () => {
     if (enableDisplayStandbyProcess.value) {
       isScreenWakeUp.value = false;
-      await handleLowBrightness();
+      await callDisplayHandler('low-brightness');
     }
   });
 
   whenever(isIdleLongTime, async () => {
     if (enableDisplayStandbyProcess.value && !hasDeskConsumption.value) {
-      await handleStandBy();
+      await callDisplayHandler('standby');
     }
   });
 

@@ -5,10 +5,22 @@
 </template>
 
 <script lang="ts" setup>
-import { Panel } from '~/core/Domain/UI/Panel';
+import { onMounted, storeToRefs, useGlobalStore, useLights, useRadios } from '#imports';
 
-const panel = new Panel({ id: 'panel1' });
-console.log('panel', panel);
+const store = useGlobalStore();
+
+const { panel: panelRadios, initPanel: initPanelRadios } = useRadios();
+const { panel: panelLights, initPanel: initPanelLights } = useLights();
+
+const { allPanels } = storeToRefs(store);
+
+onMounted(() => {
+  initPanelRadios();
+  initPanelLights();
+  allPanels.value = [panelRadios.value, panelLights.value];
+
+  console.log('allPanels', allPanels);
+});
 </script>
 
 <style lang="scss">

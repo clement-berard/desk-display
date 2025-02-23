@@ -8,15 +8,15 @@ export class Page {
   pageItems: PageItem[] = [];
   maxPageItems: number;
 
-  constructor(params: PageParams) {
+  constructor(params?: PageParams) {
     this.maxPageItems = params?.maxPageItems || 10;
   }
 
   addPageItems(items: PageItem[]) {
-    this.pageItems = items;
+    this.pageItems = [...this.pageItems, ...items];
   }
 
   addPageItem(item: PageItem) {
-    this.pageItems.push(item);
+    this.pageItems = [...this.pageItems, item];
   }
 }
