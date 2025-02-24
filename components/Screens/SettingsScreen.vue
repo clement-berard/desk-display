@@ -30,11 +30,11 @@
   </Drawer>
 </template>
 <script setup lang="ts">
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { crush } from 'radash';
 import { onMounted } from 'vue';
 import { Button } from '~/components/ui/button';
 import { Drawer, DrawerContent, DrawerFooter, DrawerHeader } from '~/components/ui/drawer';
+import { Tabs, TabsList, TabsTrigger } from '~/components/ui/tabs';
 import { useGlobalStore } from '~/stores/globalStore';
 import { useWsNodeRedStore } from '~/stores/wsNodeRedStore';
 import { ref, storeToRefs } from '#imports';
