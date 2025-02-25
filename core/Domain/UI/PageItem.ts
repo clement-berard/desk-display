@@ -1,4 +1,5 @@
 import type { ComputedRef } from 'vue';
+import { getUnsplashImage } from '~/utils/utils';
 
 interface PageItemParams {
   backgroundImage?: string;
@@ -18,5 +19,17 @@ export class PageItem {
     this.onClick = params?.onClick;
     this.title = params?.title;
     this.isBackgroundImageGray = params?.isBackgroundImageGray;
+  }
+
+  getBackgroundImage() {
+    const isUnsplashImage = this.backgroundImage?.startsWith('unsplash');
+
+    if (this.backgroundImage && isUnsplashImage) {
+      const [, idImage] = this.backgroundImage.split('unsplash-');
+
+      return getUnsplashImage(idImage);
+    }
+
+    return this.backgroundImage;
   }
 }

@@ -7,13 +7,11 @@ export const useGlobalStore = defineStore(
   'globalStore',
   () => {
     const showDialogDebug = ref(false);
-    const currentMainScreen = ref<string>('radios_panel');
     const currentSideCarousel = ref<'media' | 'weather'>('media');
     const allPanels = ref<Panels>();
     const currentPanel = ref<Panel>();
 
     return {
-      currentMainScreen,
       currentSideCarousel,
       showDialogDebug,
       allPanels,

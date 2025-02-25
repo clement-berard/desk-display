@@ -6,7 +6,7 @@
   >
 
     <div class="relative h-full rounded-lg overflow-hidden text-center">
-      <img v-if="pageItem?.backgroundImage" :src="pageItem?.backgroundImage" class="w-full h-full object-cover" alt=""
+      <img v-if="pageItem?.backgroundImage" :src="pageItem?.getBackgroundImage()" class="w-full h-full object-cover" alt=""
            :class="{'grayscale': pageItem?.isBackgroundImageGray ?? false}"/>
       <div v-if="pageItem?.title"
            class="absolute inset-0 flex items-center justify-center backdrop-blur-sm bg-black/20"
