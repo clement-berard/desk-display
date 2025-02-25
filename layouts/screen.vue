@@ -1,12 +1,13 @@
 <template>
   <div class="relative w-screen h-screen overflow-hidden">
-    <div class="fixed top-0 left-0 w-[1600px] h-[600px] overflow-hidden">
+    <div class="fixed top-0 left-0 overflow-hidden" :style="{height: `${DISPLAY_SCREEN_FRAME_HEIGHT}px`, width: `${DISPLAY_SCREEN_FRAME_WIDTH}px`}">
       <slot></slot>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { DISPLAY_SCREEN_FRAME_HEIGHT, DISPLAY_SCREEN_FRAME_WIDTH } from '~/constants/app.constants';
 import { Panels } from '~/core/Domain/UI/Panels';
 import { onMounted, storeToRefs, useGlobalStore, useLights, useRadios } from '#imports';
 const store = useGlobalStore();
