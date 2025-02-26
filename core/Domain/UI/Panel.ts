@@ -4,16 +4,11 @@ interface PanelParams {
   id: string;
   name?: string;
   isLoading?: boolean;
-}
-
-interface GeneratePagesFromItemsParams {
-  itemPerPage?: number;
-  pageColumn?: number;
-  pageRows?: number;
+  pages?: Page[] | Page;
 }
 
 export class Panel {
-  pages: Page[] = [];
+  private _pages: Page[] = [];
   id: string;
   name?: string;
   isLoading?: boolean;
@@ -22,10 +17,15 @@ export class Panel {
     this.id = params.id;
     this.name = params?.name;
     this.isLoading = params?.isLoading ?? false;
+    this.addPages(params?.pages || []);
   }
 
   addPages(pages: Page[] | Page) {
     const allPages: Page[] = Array.isArray(pages) ? pages : [pages];
-    this.pages = [...this.pages, ...allPages];
+    this._pages = [...this._pages, ...allPages];
+  }
+
+  get pages(): Page[] {
+    return this._pages;
   }
 }

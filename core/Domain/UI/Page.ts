@@ -18,7 +18,7 @@ const CONSTANTS = {
 
 export class Page {
   pageItems: PageItem[] = [];
-  maxPageItems: number;
+  private readonly maxPageItems: number;
   pageColumn: number;
   pageRows: number;
 

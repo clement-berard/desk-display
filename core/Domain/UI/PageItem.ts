@@ -4,32 +4,36 @@ import { getUnsplashImage } from '~/utils/utils';
 interface PageItemParams {
   backgroundImage?: string;
   title?: string;
-  onClick?: () => void;
+  onClick?: (pageItem: PageItem) => any | Promise<any>;
   isBackgroundImageGray?: boolean | ComputedRef<boolean>;
 }
 
 export class PageItem {
   backgroundImage?: string;
-  onClick?: () => void;
+  private _onClick?: (pageItem: PageItem) => any | Promise<any>;
   title?: string;
   isBackgroundImageGray?: boolean | ComputedRef<boolean> = false;
 
   constructor(params?: PageItemParams) {
-    this.backgroundImage = params?.backgroundImage;
-    this.onClick = params?.onClick;
+    this.backgroundImage = this.getBackgroundImage(params?.backgroundImage);
+    this._onClick = params?.onClick;
     this.title = params?.title;
     this.isBackgroundImageGray = params?.isBackgroundImageGray;
   }
 
-  getBackgroundImage() {
-    const isUnsplashImage = this.backgroundImage?.startsWith('unsplash');
+  private getBackgroundImage(inputBackgroundImage?: string) {
+    const isUnsplashImage = inputBackgroundImage?.startsWith('unsplash');
 
-    if (this.backgroundImage && isUnsplashImage) {
-      const [, idImage] = this.backgroundImage.split('unsplash-');
+    if (inputBackgroundImage && isUnsplashImage) {
+      const [, idImage] = inputBackgroundImage.split('unsplash-');
 
       return getUnsplashImage(idImage);
     }
 
-    return this.backgroundImage;
+    return inputBackgroundImage;
+  }
+
+  onClick() {
+    return this._onClick?.call(this, this);
   }
 }
