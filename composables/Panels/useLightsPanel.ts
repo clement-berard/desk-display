@@ -1,8 +1,9 @@
+import { Page } from '~/core/Domain/UI/Page';
 import { PageItem } from '~/core/Domain/UI/PageItem';
 import { Panel } from '~/core/Domain/UI/Panel';
 import { computed, ref, storeToRefs, useFetch, useWsNodeRedStore } from '#imports';
 
-export function useLights() {
+export function useLightsPanel() {
   const { dataWsNodeRed } = storeToRefs(useWsNodeRedStore());
   const panel = ref<Panel>(new Panel({ id: 'lights_panel', name: 'Lights' }));
 
@@ -69,7 +70,11 @@ export function useLights() {
       },
     ].map((r) => new PageItem(r));
 
-    panel.value.generatePagesFromItems(rawItems);
+    panel.value.addPages(
+      Page.generatePagesFromItems(rawItems, {
+        pageRows: 3,
+      }),
+    );
   }
 
   return {

@@ -28,14 +28,15 @@
 
 <script lang="ts" setup>
 import MusicBar from '~/components/assets/icons/MusicBar.vue';
-import { storeToRefs, useClock, useGlobalStore, useRadios, useWsNodeRedStore } from '#imports';
+import { useRadiosPanel } from '~/composables/Panels/useRadiosPanel';
+import { storeToRefs, useClock, useGlobalStore, useWsNodeRedStore } from '#imports';
 
 const { fullDate } = useClock();
 const globalStore = useGlobalStore();
 
 const { showDialogDebug } = storeToRefs(globalStore);
 
-const { setRandomRadio } = useRadios();
+const { setRandomRadio } = useRadiosPanel();
 
 const wsNodeRedStore = useWsNodeRedStore();
 
