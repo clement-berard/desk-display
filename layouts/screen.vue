@@ -7,13 +7,15 @@
 </template>
 
 <script lang="ts" setup>
+import { useLightsPanel } from '~/composables/Panels/useLightsPanel';
+import { useRadiosPanel } from '~/composables/Panels/useRadiosPanel';
 import { DISPLAY_SCREEN_FRAME_HEIGHT, DISPLAY_SCREEN_FRAME_WIDTH } from '~/constants/app.constants';
 import { Panels } from '~/core/Domain/UI/Panels';
-import { onMounted, storeToRefs, useGlobalStore, useLights, useRadios } from '#imports';
+import { onMounted, storeToRefs, useGlobalStore } from '#imports';
 const store = useGlobalStore();
 
-const { panel: panelRadios, initPanel: initPanelRadios } = useRadios();
-const { panel: panelLights, initPanel: initPanelLights } = useLights();
+const { panel: panelRadios, initPanel: initPanelRadios } = useRadiosPanel();
+const { panel: panelLights, initPanel: initPanelLights } = useLightsPanel();
 
 const { allPanels, currentPanel } = storeToRefs(store);
 

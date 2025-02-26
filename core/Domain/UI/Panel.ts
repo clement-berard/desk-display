@@ -1,11 +1,15 @@
-import { cluster } from 'radash';
-import { Page } from '~/core/Domain/UI/Page';
-import type { PageItem } from '~/core/Domain/UI/PageItem';
+import type { Page } from '~/core/Domain/UI/Page';
 
 interface PanelParams {
   id: string;
   name?: string;
   isLoading?: boolean;
+}
+
+interface GeneratePagesFromItemsParams {
+  itemPerPage?: number;
+  pageColumn?: number;
+  pageRows?: number;
 }
 
 export class Panel {
@@ -23,21 +27,5 @@ export class Panel {
   addPages(pages: Page[] | Page) {
     const allPages: Page[] = Array.isArray(pages) ? pages : [pages];
     this.pages = [...this.pages, ...allPages];
-  }
-
-  generatePagesFromItems(items: PageItem[], itemPerPage = 10) {
-    const clusteredItems = cluster(items || [], itemPerPage);
-    this.addPages(
-      clusteredItems.map((pageItem) => {
-        const page = new Page();
-        page.addPageItems(pageItem);
-
-        return page;
-      }),
-    );
-  }
-
-  get pagesNumber() {
-    return this.pages.length;
   }
 }
