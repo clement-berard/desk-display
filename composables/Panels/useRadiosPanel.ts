@@ -16,9 +16,9 @@ export function useRadiosPanel() {
     const radiosItems = (data.value || []).map((radio) => {
       return new PageItem({
         backgroundImage: radio.img_url,
-        onClick: async () => {
+        onClick: async (s) => {
           if (currentSelectedRadio !== radio?.slug) {
-            await useFetch('/api/radios/set', {
+            await $fetch('/api/radios/set', {
               query: {
                 slug: radio.slug,
               },
