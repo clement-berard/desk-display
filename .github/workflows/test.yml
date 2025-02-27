@@ -14,7 +14,7 @@ concurrency:
 
 jobs:
   # Build job
-  static-checks:
+  static-checks-frontend:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -22,23 +22,31 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@v4.1.0
         name: Install pnpm
         with:
           version: 9
-          run_install: true
+          run_install: false
+
+      - name: Install dependencies with pnpm
+        run: pnpm install
+        working-directory: ./frontend
 
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 20
           cache: pnpm
+          cache-dependency-path: frontend/pnpm-lock.yaml
 
       - name: Install dependencies
+        working-directory: frontend
         run: pnpm install
 
       - name: Lint
+        working-directory: frontend
         run: pnpm lint:check
 
       - name: Build
+        working-directory: frontend
         run: pnpm build
