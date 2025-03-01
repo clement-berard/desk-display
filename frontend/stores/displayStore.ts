@@ -5,7 +5,6 @@ import { computed, defineStore, ref, storeToRefs, useWsNodeRedStore, watch } fro
 const ONE_MINUTE = 60 * 1_000;
 const IDLE_TIME_SHORT = ONE_MINUTE;
 const IDLE_TIME_MEDIUM = ONE_MINUTE * 2;
-// const IDLE_TIME_LONG = ONE_MINUTE * 15;
 const FORCE_IDLE_SCREEN = false;
 
 export const useDisplayStore = defineStore('displayStore', () => {
@@ -18,7 +17,7 @@ export const useDisplayStore = defineStore('displayStore', () => {
   const { idle: isIdleMiddleTime, reset: resetIdleMiddleTime } = useIdle(IDLE_TIME_MEDIUM, {
     initialState: false,
   });
-  // const { idle: isIdleLongTime, reset: resetIdleLongTime } = useIdle(IDLE_TIME_LONG);
+
   const isScreenWakeUp = ref(true);
   const isDev = ref<boolean>(import.meta.env.DEV);
 
@@ -26,12 +25,9 @@ export const useDisplayStore = defineStore('displayStore', () => {
     () => !isDev.value && !dataWsNodeRed.value?.main_sensors?.desk_display_config?.prevent_standby,
   );
 
-  const hasDeskConsumption = computed(() => dataWsNodeRed.value?.main_sensors?.sensor?.has_desk_consumption);
-
   function resetAllIdleTimers() {
     resetIdleShortTime();
     resetIdleMiddleTime();
-    // resetIdleLongTime();
   }
 
   async function wakeUpScreen() {
@@ -46,12 +42,6 @@ export const useDisplayStore = defineStore('displayStore', () => {
     }
   });
 
-  // whenever(isIdleLongTime, async () => {
-  //   if (enableDisplayStandbyProcess.value && !hasDeskConsumption.value) {
-  //     await callDisplayHandler('standby');
-  //   }
-  // });
-
   const buttonResetStandby = computed(
     () => dataWsNodeRed.value?.main_sensors?.desk_display_config?.button_reset_standby,
   );
@@ -60,12 +50,6 @@ export const useDisplayStore = defineStore('displayStore', () => {
     wakeUpScreen();
     resetAllIdleTimers();
   });
-
-  // watch(hasDeskConsumption, async () => {
-  //   if (!hasDeskConsumption) {
-  //     resetIdleLongTime();
-  //   }
-  // });
 
   const showMainScreen = computed(() => {
     return !FORCE_IDLE_SCREEN && (!enableDisplayStandbyProcess.value || isScreenWakeUp.value);
