@@ -1,7 +1,7 @@
 import { useDateFormat, useNow } from '@vueuse/core';
 
-export function useClock() {
-  const fullDate = useDateFormat(useNow(), 'ddd DD MMM HH:mm', { locales: 'fr' });
+export function useClock(opts = { fullDayName: false }) {
+  const fullDate = useDateFormat(useNow(), `${opts.fullDayName ? 'dddd' : 'ddd'} D MMM HH:mm`, { locales: 'fr' });
 
   return {
     fullDate,

@@ -26,5 +26,5 @@ import { storeToRefs, useClock, useDisplayStore, useWsNodeRedStore } from '#impo
 const wsNodeRedStore = useWsNodeRedStore();
 const { dataWsNodeRed } = storeToRefs(wsNodeRedStore);
 const { wakeUpScreen } = useDisplayStore();
-const { fullDate } = useClock();
+const { fullDate } = useClock({ fullDayName: true });
 </script>
