@@ -9,31 +9,25 @@ interface PageItemParams {
 }
 
 export class PageItem {
-  backgroundImage?: string;
-  private _onClick?: (pageItem: PageItem) => any | Promise<any>;
-  title?: string;
-  isBackgroundImageGray?: boolean | ComputedRef<boolean> = false;
+  readonly backgroundImage?: string;
+  private readonly onClickHandler?: (pageItem: PageItem) => any | Promise<any>;
+  readonly title?: string;
+  readonly isBackgroundImageGray?: boolean | ComputedRef<boolean> = false;
 
   constructor(params?: PageItemParams) {
     this.backgroundImage = this.getBackgroundImage(params?.backgroundImage);
-    this._onClick = params?.onClick;
+    this.onClickHandler = params?.onClick;
     this.title = params?.title;
     this.isBackgroundImageGray = params?.isBackgroundImageGray;
   }
 
   private getBackgroundImage(inputBackgroundImage?: string) {
-    const isUnsplashImage = inputBackgroundImage?.startsWith('unsplash');
-
-    if (inputBackgroundImage && isUnsplashImage) {
-      const [, idImage] = inputBackgroundImage.split('unsplash-');
-
-      return getUnsplashImage(idImage);
-    }
-
-    return inputBackgroundImage;
+    if (!inputBackgroundImage?.startsWith('unsplash')) return inputBackgroundImage;
+    const [, id] = inputBackgroundImage.split('unsplash-');
+    return getUnsplashImage(id);
   }
 
-  onClick() {
-    return this._onClick?.call(this, this);
+  onClick(): ReturnType<NonNullable<typeof this.onClickHandler>> | undefined {
+    return this.onClickHandler?.(this);
   }
 }

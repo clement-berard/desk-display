@@ -6,16 +6,16 @@ import type { Panels } from '~/core/Domain/UI/Panels';
 export const useGlobalStore = defineStore(
   'globalStore',
   () => {
-    const showDialogDebug = ref(false);
-    const currentSideCarousel = ref<'media' | 'weather'>('media');
     const allPanels = ref<Panels>();
     const currentPanel = ref<Panel>();
+    const currentSideCarousel = ref<'media' | 'weather'>('media');
+    const showDialogDebug = ref(false);
 
     return {
-      currentSideCarousel,
-      showDialogDebug,
       allPanels,
       currentPanel,
+      currentSideCarousel,
+      showDialogDebug,
     };
   },
   {
