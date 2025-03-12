@@ -57,7 +57,7 @@ import {
   AlertDialogHeader,
 } from '@/components/ui/alert-dialog';
 import { useWsNodeRedStore } from '~/stores/wsNodeRedStore';
-import { ref, storeToRefs, useFetch } from '#imports';
+import { ref, storeToRefs } from '#imports';
 
 const revealModalCurrentMedia = ref(false);
 
@@ -65,7 +65,7 @@ const wsNodeRedStore = useWsNodeRedStore();
 const { dataWsNodeRed } = storeToRefs(wsNodeRedStore);
 
 async function setVolume(kind: 'up' | 'down' | 'pause' | 'play' | 'toggle_mute') {
-  return useFetch('/api/node-red/desk-display-api', {
+  return $fetch('/api/node-red/desk-display-api', {
     query: {
       action: `player_action_${kind}`,
     },

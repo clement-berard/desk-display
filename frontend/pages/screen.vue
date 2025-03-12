@@ -6,10 +6,28 @@ import HeaderSection from '~/components/Sections/HeaderSection.vue';
 import SideSection from '~/components/Sections/SideSection/SideSection.vue';
 import UIPanel from '~/components/UI-Panel/UI-Panel.vue';
 import { Tabs, TabsList, TabsTrigger } from '~/components/ui/tabs';
-import { definePageMeta, storeToRefs, useDisplayStore, useGlobalStore } from '#imports';
+import { processNodeWsRedMessage } from '~/services/ws/node-red-matcher';
+import {
+  computed,
+  definePageMeta,
+  storeToRefs,
+  useDisplayStore,
+  useGlobalStore,
+  useWsNodeRedStore,
+  watch,
+} from '#imports';
 
 const globalStore = useGlobalStore();
 const displayStore = useDisplayStore();
+
+const wsNodeRedStore = useWsNodeRedStore();
+const { dataWsNodeRed } = storeToRefs(wsNodeRedStore);
+
+const deskDisplayReloadButton = computed(
+  () => dataWsNodeRed?.value?.main_sensors?.desk_display_config.desk_display_reload,
+);
+
+watch(deskDisplayReloadButton, () => location.reload());
 
 const { allPanels, currentPanel } = storeToRefs(globalStore);
 
@@ -33,7 +51,7 @@ definePageMeta({
         <TabsList class="w-full h-full">
           <template v-for="(panel, index) in allPanels?.panelList" :key="index">
             <TabsTrigger :value="panel.id" @click="currentPanel = panel" class="h-full w-full">
-              {{ panel.name }}
+              <span class="text-4xl">{{ panel.name }}</span>
             </TabsTrigger>
           </template>
         </TabsList>

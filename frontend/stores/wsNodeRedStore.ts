@@ -8,6 +8,7 @@ type DeskDisplayConfig = {
   force_brightness_nightshift: boolean;
   force_low_brightness: boolean;
   button_reset_standby: string;
+  desk_display_reload: string;
 };
 
 export type WsNodeRedKeys = {
@@ -16,6 +17,7 @@ export type WsNodeRedKeys = {
     all_lights: {
       chambre: number;
     };
+    text_daily_know: string;
     sensor: {
       has_desk_consumption: boolean;
       sensor_temp_balcon_temperature: number;
