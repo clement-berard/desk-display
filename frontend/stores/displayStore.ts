@@ -1,6 +1,7 @@
 import { useIdle, whenever } from '@vueuse/core';
 import { callDisplayHandler } from '~/services/display/display';
 import { computed, defineStore, ref, storeToRefs, useWsNodeRedStore, watch } from '#imports';
+const isDev = ref<boolean>(import.meta.env.DEV);
 
 const ONE_MINUTE = 60 * 1_000;
 const IDLE_TIME_SHORT = ONE_MINUTE;
@@ -19,7 +20,6 @@ export const useDisplayStore = defineStore('displayStore', () => {
   });
 
   const isScreenWakeUp = ref(true);
-  const isDev = ref<boolean>(import.meta.env.DEV);
 
   const enableDisplayStandbyProcess = computed(
     () => !isDev.value && !dataWsNodeRed.value?.main_sensors?.desk_display_config?.prevent_standby,
@@ -71,11 +71,11 @@ export const useDisplayStore = defineStore('displayStore', () => {
   });
 
   return {
-    showMainScreen,
-    showIdleScreen,
-    isLowBrightness,
-    wakeUpScreen,
-    forceBrightnessNightShift,
     buttonResetStandby,
+    forceBrightnessNightShift,
+    isLowBrightness,
+    showIdleScreen,
+    showMainScreen,
+    wakeUpScreen,
   };
 });

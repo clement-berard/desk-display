@@ -1,5 +1,5 @@
 <template>
-  <div class="full-wh" :class="{'brightness-50': isLowBrightness, 'night-screen-mode': forceBrightnessNightShift}">
+  <div class="full-wh" :class="{'brightness-90': isLowBrightness, 'night-screen-mode': forceBrightnessNightShift}">
     <template v-if="!isIdleState">
       <section class="w-full overflow-hidden" :style="{height:`${FRAME_HEADER_HEIGHT}px`}">
         <slot name="header" />

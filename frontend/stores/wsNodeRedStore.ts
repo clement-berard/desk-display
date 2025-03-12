@@ -17,41 +17,41 @@ export type WsNodeRedKeys = {
       chambre: number;
     };
     sensor: {
+      has_desk_consumption: boolean;
       sensor_temp_balcon_temperature: number;
       temps_salon: number;
-      has_desk_consumption: boolean;
     };
     weather: {
+      alert: {
+        global: string;
+        rain: boolean;
+        thunderstorm: boolean;
+        wind: boolean;
+      };
       humidity: number;
       rain_chance: number;
       state: string;
       stateIconUrl: string;
       state_translated: string;
-      alert: {
-        global: string;
-        wind: boolean;
-        rain: boolean;
-        thunderstorm: boolean;
-      };
     };
   };
   sonos_player_media: {
-    mediaTitle?: string;
-    mediaArtist?: string;
-    mediaImageUrl: string;
-    isPlaying: boolean;
     hasAuthorTitle: boolean;
     hasRadioSelected: boolean;
-    showRadioName: boolean;
-    showAuthorTitle: boolean;
-    volumeLevel: number;
     isMute?: boolean;
+    isPlaying: boolean;
+    mediaArtist?: string;
+    mediaImageUrl: string;
+    mediaTitle?: string;
+    showAuthorTitle: boolean;
+    showRadioName: boolean;
     sourceName?: string;
+    volumeLevel: number;
     select_radio_details: {
-      label: string;
-      slug: string;
-      show_radio_name_only: boolean;
       image_url: string;
+      label: string;
+      show_radio_name_only: boolean;
+      slug: string;
     };
   };
 };

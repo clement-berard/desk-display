@@ -1,5 +1,11 @@
 <template>
   <div class="flex items-center justify-center grayscale h-full flex-col" @click="wakeUpScreen">
+    <div
+        v-show="dataWsNodeRed?.sonos_player_media?.isPlaying && dataWsNodeRed?.sonos_player_media?.mediaImageUrl"
+        class="absolute top-0 right-0 w-1/2 h-full pointer-events-none z-[-1] bg-cover bg-center bg-no-repeat"
+        :style="backgroundStyle">
+    </div>
+
     <div class="text-6xl block font-normal mb-8">
       {{fullDate}}
       <span class="text-4xl font-light">
@@ -22,9 +28,15 @@
   </div>
 </template>
 <script setup lang="ts">
-import { storeToRefs, useClock, useDisplayStore, useWsNodeRedStore } from '#imports';
+import { computed, storeToRefs, useClock, useDisplayStore, useWsNodeRedStore } from '#imports';
 const wsNodeRedStore = useWsNodeRedStore();
 const { dataWsNodeRed } = storeToRefs(wsNodeRedStore);
 const { wakeUpScreen } = useDisplayStore();
+
 const { fullDate } = useClock({ fullDayName: true });
+
+const backgroundStyle = computed(() => ({
+  backgroundImage: `linear-gradient(to left, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%),
+                    url('${dataWsNodeRed?.value.sonos_player_media?.mediaImageUrl}')`,
+}));
 </script>
