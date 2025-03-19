@@ -5,7 +5,7 @@ import { computed, ref, storeToRefs, useFetch, useWsNodeRedStore } from '#import
 
 export function useLightsPanel() {
   const { dataWsNodeRed } = storeToRefs(useWsNodeRedStore());
-  const panel = ref<Panel>(new Panel({ id: 'lights_panel', name: 'Lights' }));
+  const panel = ref<Panel>(new Panel({ id: 'lights_panel', name: 'Lights', emoji: '💡' }));
 
   async function setScene(name: any) {
     return useFetch('/api/node-red/desk-display-api', {
@@ -72,7 +72,7 @@ export function useLightsPanel() {
 
     panel.value.addPages(
       Page.generatePagesFromItems(rawItems, {
-        pageRows: 3,
+        pageRows: 2,
       }),
     );
   }

@@ -54,7 +54,7 @@ Additionally, this API serves as a bridge to integrate with tools like Node-RED,
 
 ![IMG_8459.JPG](docs/photos/IMG_8459.JPG)
 ![IMG_8468.JPG](docs/photos/IMG_8468.JPG)
-![IMG_8477.jpg](docs/photos/IMG_8477.jpg)
+![IMG_8556.JPG](docs/photos/IMG_8556.JPG)
+![IMG_8557.JPG](docs/photos/IMG_8557.JPG)
 ![IMG_8478.JPG](docs/photos/IMG_8478.JPG)
-![IMG_8479.JPG](docs/photos/IMG_8479.JPG)
 

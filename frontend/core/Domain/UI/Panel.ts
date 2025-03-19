@@ -4,6 +4,7 @@ interface PanelParams {
   id: string;
   name?: string;
   isLoading?: boolean;
+  emoji?: string;
   pages?: Page[] | Page;
 }
 
@@ -11,11 +12,13 @@ export class Panel {
   private _pages: Page[] = [];
   id: string;
   name?: string;
+  emoji?: string;
   isLoading?: boolean;
 
   constructor(params: PanelParams) {
     this.id = params.id;
     this.name = params?.name;
+    this.emoji = params?.emoji;
     this.isLoading = params?.isLoading ?? false;
     this.addPages(params?.pages || []);
   }
