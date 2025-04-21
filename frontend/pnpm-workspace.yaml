@@ -1,0 +1,6 @@
+onlyBuiltDependencies:
+  - '@biomejs/biome'
+  - '@hebilicious/vue-query-nuxt'
+  - '@parcel/watcher'
+  - esbuild
+  - vue-demi
