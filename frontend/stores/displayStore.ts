@@ -1,4 +1,5 @@
 import { useIdle, whenever } from '@vueuse/core';
+import { APP_CONFIG } from '~/config';
 import { callDisplayHandler } from '~/services/display/display';
 import { computed, defineStore, ref, storeToRefs, useWsNodeRedStore, watch } from '#imports';
 const isDev = ref<boolean>(import.meta.env.DEV);
@@ -6,7 +7,7 @@ const isDev = ref<boolean>(import.meta.env.DEV);
 const ONE_MINUTE = 60 * 1_000;
 const IDLE_TIME_SHORT = ONE_MINUTE;
 const IDLE_TIME_MEDIUM = ONE_MINUTE * 2;
-const FORCE_IDLE_SCREEN = false;
+const FORCE_IDLE_SCREEN = APP_CONFIG.FORCE_IDLE_MODE;
 
 export const useDisplayStore = defineStore('displayStore', () => {
   const wsNodeRedStore = useWsNodeRedStore();
