@@ -25,6 +25,9 @@
             {{ dataWsNodeRed?.sonos_player_media?.mediaTitle }}
           </div>
         </template>
+        <div class="mt-6 text-2xl italic max-w-[60%]">
+          {{textDailyKnow}}
+        </div>
       </template>
       <template v-else>
         <div class="text-4xl italic">
@@ -41,7 +44,7 @@ const wsNodeRedStore = useWsNodeRedStore();
 const { dataWsNodeRed } = storeToRefs(wsNodeRedStore);
 const { wakeUpScreen } = useDisplayStore();
 
-const textDailyKnow = computed(() => dataWsNodeRed.value?.main_sensors?.text_daily_know);
+const textDailyKnow = computed(() => dataWsNodeRed.value?.main_sensors?.text_daily_know || '');
 
 const { fullDate } = useClock({ fullDayName: true });
 
