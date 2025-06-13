@@ -18,23 +18,25 @@ export class Repository implements IRepository {
       const response = await this.nocoDbKyInstance
         .get(`${NC_TABLE_RADIO_ID}/records`, {
           searchParams: {
-            fields: 'slug,label,out_media_img',
+            fields: 'slug,label,out_media_img,out_media_url',
             sort: '-counter,-last_selected_date,slug',
           },
         })
         .json<{ list: any[] }>();
 
-      return response.list.map(
-        (item) =>
-          new RadioItem({
-            img_url: item.out_media_img,
+      return response.list
+        .filter((item) => item.slug)
+        .map((item) => {
+          return new RadioItem({
+            audioMediaUrl: item.out_media_url,
+            imgUrl: item.out_media_img,
             label: item.label,
             slug: item.slug,
-          }),
-      );
+          });
+        });
     } catch (error) {
-      console.error('Erreur lors de la récupération des radios:', error);
-      throw new Error('Impossible de récupérer les radios.');
+      console.error('Error while fetching radios:', error);
+      throw new Error('Unable to fetch radios.');
     }
   }
 

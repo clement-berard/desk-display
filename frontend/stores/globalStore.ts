@@ -9,10 +9,12 @@ export const useGlobalStore = defineStore(
     const allPanels = ref<Panels>();
     const currentPanel = ref<Panel>();
     const currentSideCarousel = ref<'media' | 'weather'>('media');
+    const currentDisplayView = ref<'screen' | 'desktop'>('screen');
     const showDialogDebug = ref(false);
 
     return {
       allPanels,
+      currentDisplayView,
       currentPanel,
       currentSideCarousel,
       showDialogDebug,

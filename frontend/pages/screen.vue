@@ -4,6 +4,7 @@ import Settings from '~/components/Screens/SettingsScreen.vue';
 import GlobalFrameSection from '~/components/Sections/GlobalFrameSection.vue';
 import HeaderSection from '~/components/Sections/HeaderSection.vue';
 import SideSection from '~/components/Sections/SideSection/SideSection.vue';
+import TabSide from '~/components/Side/TabSide.vue';
 import UIPanel from '~/components/UI-Panel/UI-Panel.vue';
 import { Tabs, TabsList, TabsTrigger } from '~/components/ui/tabs';
 import { processNodeWsRedMessage } from '~/services/ws/node-red-matcher';
@@ -29,9 +30,10 @@ const deskDisplayReloadButton = computed(
 
 watch(deskDisplayReloadButton, () => location.reload());
 
-const { allPanels, currentPanel } = storeToRefs(globalStore);
+const { currentPanel, currentDisplayView } = storeToRefs(globalStore);
 
 const { showIdleScreen } = storeToRefs(displayStore);
+currentDisplayView.value = 'screen';
 
 definePageMeta({
   layout: 'screen',
@@ -47,15 +49,7 @@ definePageMeta({
       <SideSection/>
     </template>
     <template #side-footer>
-      <Tabs class="h-full" :model-value="currentPanel?.id">
-        <TabsList class="w-full h-full">
-          <template v-for="(panel, index) in allPanels?.panelList" :key="index">
-            <TabsTrigger :value="panel.id" @click="currentPanel = panel" class="h-full w-full">
-              <span class="text-4xl">{{ panel.name }}</span>
-            </TabsTrigger>
-          </template>
-        </TabsList>
-      </Tabs>
+      <TabSide />
     </template>
     <template #content v-if="currentPanel">
       <UIPanel :panel="currentPanel"/>
