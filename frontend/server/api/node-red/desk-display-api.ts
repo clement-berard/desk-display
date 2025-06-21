@@ -4,6 +4,7 @@ import { defineEventHandler, getQuery } from '#imports';
 export default defineEventHandler(async (event) => {
   const { action } = getQuery<{ action: string }>(event);
   const repository = new Repository();
+
   if (action === 'display-on') {
     await repository.callNodeRedDisplayDeskApi('action_hard_display', { service: 'on' });
   }
