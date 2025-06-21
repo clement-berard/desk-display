@@ -33,7 +33,46 @@ Additionally, I'll be repurposing a Raspberry Pi that's been sitting unused in m
 
 ## Communication
 
-![comm-schema.svg](docs/comm-schema.svg)
+### Architecture
+```mermaid
+graph TD
+    classDef nuxtStyle fill:#90EE90,color:#000
+    classDef displayStyle fill:#FFFFE0,color:#000
+    classDef rpiStyle fill:#FFFFE0,color:#000
+
+    subgraph Display["📺 Display"]
+        WD["🖥️ Waveshare display<br/><a href='https://www.waveshare.com/product/raspberry-pi/displays/lcd-oled/9.3inch-1600x600-lcd.htm'>Waveshare 9.3inch</a>"]:::displayStyle
+        
+        subgraph RPI5["Raspberry Pi 5"]
+            DI2C["golang API to manage I2C"]:::rpiStyle
+            GPIO["python to manage GPIO"]:::rpiStyle
+            NCK["Nuxt App on Chromium Kiosk Mode"]:::nuxtStyle
+        end
+    end
+
+    RPI5 -->|"I2C"| WD
+```
+
+```mermaid
+graph TD
+%% Styling
+    classDef nodeRedStyle fill:#8B4513,color:#fff
+    classDef nuxtStyle fill:#90EE90,color:#000
+
+%% Main components
+    subgraph Homelab["🏠 Homelab"]
+        HA["Home Assistant"]
+        DB["NocoDb / Pocket DB"]
+        Other["Other services..."]
+    end
+
+    NR["node-red"]:::nodeRedStyle
+    ND["Nuxt App on Docker"]:::nuxtStyle
+
+    Homelab <-->|"/api"| NR
+    ND -->|"/api"| NR
+    NR -->|"/web socket"| ND
+```
 
 There is a small API written in Golang running on a Raspberry Pi using the DietPi OS.
 
