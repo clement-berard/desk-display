@@ -1,5 +1,5 @@
-import { Repository } from '~/core/Infra/Repository';
 import { defineEventHandler, getQuery } from '#imports';
+import { Repository } from '~/core/Infra/Repository';
 
 export default defineEventHandler(async (event) => {
   const { action } = getQuery<{ action: string }>(event);

@@ -1,13 +1,4 @@
 <script setup lang="ts">
-import IdleScreen from '~/components/Screens/IdleScreen.vue';
-import Settings from '~/components/Screens/SettingsScreen.vue';
-import GlobalFrameSection from '~/components/Sections/GlobalFrameSection.vue';
-import HeaderSection from '~/components/Sections/HeaderSection.vue';
-import SideSection from '~/components/Sections/SideSection/SideSection.vue';
-import TabSide from '~/components/Side/TabSide.vue';
-import UIPanel from '~/components/UI-Panel/UI-Panel.vue';
-import { Tabs, TabsList, TabsTrigger } from '~/components/ui/tabs';
-import { processNodeWsRedMessage } from '~/services/ws/node-red-matcher';
 import {
   computed,
   definePageMeta,
@@ -17,6 +8,15 @@ import {
   useWsNodeRedStore,
   watch,
 } from '#imports';
+import IdleScreen from '~/components/Screens/IdleScreen.vue';
+import Settings from '~/components/Screens/SettingsScreen.vue';
+import GlobalFrameSection from '~/components/Sections/GlobalFrameSection.vue';
+import HeaderSection from '~/components/Sections/HeaderSection.vue';
+import SideSection from '~/components/Sections/SideSection/SideSection.vue';
+import TabSide from '~/components/Side/TabSide.vue';
+import UIPanel from '~/components/UI-Panel/UI-Panel.vue';
+import { Tabs, TabsList, TabsTrigger } from '~/components/ui/tabs';
+import { processNodeWsRedMessage } from '~/services/ws/node-red-matcher';
 
 const globalStore = useGlobalStore();
 const displayStore = useDisplayStore();

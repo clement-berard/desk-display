@@ -21,21 +21,18 @@ export class WebSocketService {
     this.socket.onopen = () => {
       console.log('[ws_node_red] connected to WebSocket');
       this.isConnected = true;
-      // biome-ignore lint/complexity/noForEach: <explanation>
       this.connectionCallbacks.forEach((callback) => callback(true));
     };
 
     this.socket.onmessage = (event) => {
       console.log('[ws_node_red] msg received:', event.data);
       const data = JSON.parse(event.data);
-      // biome-ignore lint/complexity/noForEach: <explanation>
       this.messageCallbacks.forEach((callback) => callback(data));
     };
 
     this.socket.onclose = () => {
       console.log('[ws_node_red] disconnected from WebSocket');
       this.isConnected = false;
-      // biome-ignore lint/complexity/noForEach: <explanation>
       this.connectionCallbacks.forEach((callback) => callback(false));
       this.handleReconnect();
     };
@@ -43,7 +40,6 @@ export class WebSocketService {
     this.socket.onerror = (error) => {
       console.error('[ws_node_red] error WebSocket:', error);
       this.isConnected = false;
-      // biome-ignore lint/complexity/noForEach: <explanation>
       this.connectionCallbacks.forEach((callback) => callback(false));
       this.handleReconnect();
     };

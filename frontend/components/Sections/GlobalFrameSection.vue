@@ -24,9 +24,9 @@
   </div>
 </template>
 <script setup lang="ts">
+import { storeToRefs } from '#imports';
 import { FRAME_BODY_HEIGHT, FRAME_HEADER_HEIGHT } from '~/constants/app.constants';
 import { useDisplayStore } from '~/stores/displayStore';
-import { storeToRefs } from '#imports';
 
 const displayStore = useDisplayStore();
 

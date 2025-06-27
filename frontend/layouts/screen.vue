@@ -8,9 +8,10 @@
 </template>
 
 <script lang="ts" setup>
+import { onMounted, storeToRefs, useGlobalStore } from '#imports';
 import { useInitPanels } from '~/composables/Panels/useInitPanels';
 import { DISPLAY_SCREEN_FRAME_HEIGHT, DISPLAY_SCREEN_FRAME_WIDTH } from '~/constants/app.constants';
-import { onMounted, storeToRefs, useGlobalStore } from '#imports';
+
 const store = useGlobalStore();
 const { initAllPanels } = useInitPanels();
 const { allPanels, currentPanel } = storeToRefs(store);

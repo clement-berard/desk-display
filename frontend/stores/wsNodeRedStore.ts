@@ -68,7 +68,7 @@ export const useWsNodeRedStore = defineStore(
   () => {
     const dataWsNodeRed = ref<Partial<WsNodeRedKeysObject>>({});
 
-    const { messages, isConnected } = useWebSocket(`ws://${import.meta.env.VITE_NODE_RED_WS_URL as string}`);
+    const { messages } = useWebSocket(`ws://${import.meta.env.VITE_NODE_RED_WS_URL as string}`);
 
     watch(messages, (newMessage) => {
       if (newMessage) {
