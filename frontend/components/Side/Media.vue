@@ -47,7 +47,7 @@
 </template>
 <script setup lang="ts">
 import { CirclePause, CirclePlay, Volume1, Volume2 } from 'lucide-vue-next';
-
+import { ref, storeToRefs } from '#imports';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -57,7 +57,6 @@ import {
   AlertDialogHeader,
 } from '@/components/ui/alert-dialog';
 import { useWsNodeRedStore } from '~/stores/wsNodeRedStore';
-import { ref, storeToRefs } from '#imports';
 
 const revealModalCurrentMedia = ref(false);
 

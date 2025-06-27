@@ -22,13 +22,14 @@
 
 
 <script lang="ts" setup>
+import { onMounted, storeToRefs } from '#imports';
 import AudioDeviceSelector from '~/components/Screens/Desktop/AudioDeviceSelector.vue';
 import MediaPart from '~/components/Side/Media.vue';
 import TabSide from '~/components/Side/TabSide.vue';
 import UIPanel from '~/components/UI-Panel/UI-Panel.vue';
 import { useInitPanels } from '~/composables/Panels/useInitPanels';
 import { useGlobalStore } from '~/stores/globalStore';
-import { onMounted, storeToRefs } from '#imports';
+
 const globalStore = useGlobalStore();
 const { allPanels, currentPanel, currentDisplayView } = storeToRefs(globalStore);
 const { initAllPanels } = useInitPanels();

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { Checkbox } from '@/components/ui/checkbox';
 import { computed, ref } from '#imports';
+import { Checkbox } from '@/components/ui/checkbox';
 
 import { useWsNodeRedStore } from '~/stores/wsNodeRedStore';
 

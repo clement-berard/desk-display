@@ -45,14 +45,17 @@
 <script setup lang="ts">
 import { crush } from 'radash';
 import { onMounted } from 'vue';
+import { computed, ref, storeToRefs } from '#imports';
 import { Button } from '~/components/ui/button';
 import { Drawer, DrawerContent, DrawerFooter, DrawerHeader } from '~/components/ui/drawer';
 import { Tabs, TabsList, TabsTrigger } from '~/components/ui/tabs';
 import { useGlobalStore } from '~/stores/globalStore';
 import { useWsNodeRedStore } from '~/stores/wsNodeRedStore';
-import { computed, ref, storeToRefs } from '#imports';
+
 const currentMainScreen = ref('global');
+
 import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table';
+
 let resolution = {
   available: '',
   real: '',

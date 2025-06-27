@@ -1,7 +1,8 @@
 import { useIdle, whenever } from '@vueuse/core';
+import { computed, defineStore, ref, storeToRefs, useWsNodeRedStore, watch } from '#imports';
 import { APP_CONFIG } from '~/config';
 import { callDisplayHandler } from '~/services/display/display';
-import { computed, defineStore, ref, storeToRefs, useWsNodeRedStore, watch } from '#imports';
+
 const isDev = ref<boolean>(import.meta.env.DEV);
 
 const ONE_MINUTE = 60 * 1_000;

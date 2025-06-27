@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { Tabs, TabsList, TabsTrigger } from '~/components/ui/tabs';
 import { storeToRefs, useGlobalStore } from '#imports';
+import { Tabs, TabsList, TabsTrigger } from '~/components/ui/tabs';
+
 const globalStore = useGlobalStore();
 const { allPanels, currentPanel } = storeToRefs(globalStore);
 </script>

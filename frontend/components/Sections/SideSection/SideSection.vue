@@ -1,10 +1,10 @@
 <script setup lang="ts">
+import { storeToRefs } from '#imports';
 import MediaPart from '~/components/Side/Media.vue';
 import Weather from '~/components/Side/Weather.vue';
 import { Carousel, CarouselContent, CarouselItem } from '~/components/ui/carousel';
 import { FRAME_SIDE_CONTENT_HEIGHT } from '~/constants/app.constants';
 import { useGlobalStore } from '~/stores/globalStore';
-import { storeToRefs } from '#imports';
 
 const globalStore = useGlobalStore();
 

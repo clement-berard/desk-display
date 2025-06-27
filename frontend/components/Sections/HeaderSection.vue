@@ -27,9 +27,9 @@
 </template>
 
 <script lang="ts" setup>
+import { storeToRefs, useClock, useGlobalStore, useWsNodeRedStore } from '#imports';
 import MusicBar from '~/components/assets/icons/MusicBar.vue';
 import { useRadiosPanel } from '~/composables/Panels/useRadiosPanel';
-import { storeToRefs, useClock, useGlobalStore, useWsNodeRedStore } from '#imports';
 
 const { fullDate } = useClock();
 const globalStore = useGlobalStore();

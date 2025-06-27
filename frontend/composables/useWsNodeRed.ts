@@ -1,5 +1,5 @@
-import { WebSocketService } from '@/services/ws/node-red';
 import { onBeforeUnmount, onMounted, ref } from 'vue';
+import { WebSocketService } from '@/services/ws/node-red';
 
 export function useWebSocket(url: string, reconnectInterval = 5000) {
   const messages = ref<any>(null);
