@@ -1,9 +1,17 @@
 {
-	"$schema": "https://biomejs.dev/schemas/1.8.3/schema.json",
-	"organizeImports": { "enabled": true },
+	"$schema": "https://biomejs.dev/schemas/2.0.0/schema.json",
+	"assist": { "actions": { "source": { "organizeImports": "on" } } },
 	"files": {
-		"include": ["*.vue", "*.ts", "*.json", "tailwind.config.js"],
-		"ignore": ["**/dist", "components/ui/*", ".nuxt", ".output"]
+		"includes": [
+			"**/*.vue",
+			"**/*.ts",
+			"**/*.json",
+			"**/tailwind.config.js",
+			"!**/dist",
+			"!**/components/ui/**/*",
+			"!**/.nuxt",
+			"!**/.output"
+		]
 	},
 	"javascript": {
 		"formatter": {
@@ -19,14 +27,30 @@
 			"recommended": true,
 			"suspicious": {
 				"noExplicitAny": "off"
+			},
+			"style": {
+				"noParameterAssign": "error",
+				"useAsConstAssertion": "error",
+				"useDefaultParameterLast": "error",
+				"useEnumInitializers": "error",
+				"useSelfClosingElements": "error",
+				"useSingleVarDeclarator": "error",
+				"noUnusedTemplateLiteral": "error",
+				"useNumberNamespace": "error",
+				"noInferrableTypes": "error",
+				"noUselessElse": "error"
 			}
 		}
 	},
 	"overrides": [
 		{
-			"include": ["*.vue"],
+			"includes": ["**/*.vue"],
 			"linter": {
 				"rules": {
+					"correctness": {
+						"noUnusedVariables": "off",
+						"noUnusedImports": "off"
+					},
 					"style": {
 						"useConst": "off",
 						"useImportType": "off"
