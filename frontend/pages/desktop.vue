@@ -2,8 +2,11 @@
   <div class="flex h-screen">
     <!-- Left Sidebar -->
     <aside class="w-1/5 border-r border-gray-900">
-      <SideSection/>
+      <div class="mb-4">
+        <MediaPart :full-width="false" />
+      </div>
       <TabSide />
+      <AudioDeviceSelector class="mt-4 mx-2"></AudioDeviceSelector>
     </aside>
 
     <!-- Main Content -->
@@ -19,16 +22,15 @@
 
 
 <script lang="ts" setup>
-import SideSection from '~/components/Sections/SideSection/SideSection.vue';
+import AudioDeviceSelector from '~/components/Screens/Desktop/AudioDeviceSelector.vue';
+import MediaPart from '~/components/Side/Media.vue';
 import TabSide from '~/components/Side/TabSide.vue';
 import UIPanel from '~/components/UI-Panel/UI-Panel.vue';
 import { useInitPanels } from '~/composables/Panels/useInitPanels';
 import { useGlobalStore } from '~/stores/globalStore';
-import { getCurrentHostName } from '~/utils/utils';
 import { onMounted, storeToRefs } from '#imports';
 const globalStore = useGlobalStore();
 const { allPanels, currentPanel, currentDisplayView } = storeToRefs(globalStore);
-const hostname = getCurrentHostName();
 const { initAllPanels } = useInitPanels();
 const panelsGroup = await initAllPanels();
 currentDisplayView.value = 'desktop';

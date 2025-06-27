@@ -19,7 +19,7 @@
       </AlertDialogFooter>
     </AlertDialogContent>
   </AlertDialog>
-  <div class="h-full text-center p-2">
+  <div class="text-center p-2" :class="{'h-full': fullWidth}">
     <img
         :src="dataWsNodeRed?.sonos_player_media?.mediaImageUrl"
         @click="setVolume('toggle_mute')" alt=""
@@ -60,6 +60,10 @@ import { useWsNodeRedStore } from '~/stores/wsNodeRedStore';
 import { ref, storeToRefs } from '#imports';
 
 const revealModalCurrentMedia = ref(false);
+
+const { fullWidth = true } = defineProps<{
+  fullWidth?: boolean;
+}>();
 
 const wsNodeRedStore = useWsNodeRedStore();
 const { dataWsNodeRed } = storeToRefs(wsNodeRedStore);

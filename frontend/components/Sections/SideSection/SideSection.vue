@@ -23,7 +23,3 @@ const { currentSideCarousel } = storeToRefs(globalStore);
     </CarouselContent>
   </Carousel>
 </template>
-
-<style scoped lang="scss">
-
-</style>
