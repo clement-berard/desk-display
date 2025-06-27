@@ -1,0 +1,30 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/frontend"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "clement-berard"
+    labels:
+      - "dependencies"
+      - "frontend"
+    groups:
+      patch-updates:
+        patterns:
+          - "*"
+        update-types:
+          - "patch"
+
+      minor-updates:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+
+      major-updates:
+        patterns:
+          - "*"
+        update-types:
+          - "major"
