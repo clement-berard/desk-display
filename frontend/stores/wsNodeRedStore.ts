@@ -53,6 +53,7 @@ export type WsNodeRedKeys = {
       image_url: string;
       label: string;
       show_radio_name_only: boolean;
+      out_media_url: string;
       slug: string;
     };
   };

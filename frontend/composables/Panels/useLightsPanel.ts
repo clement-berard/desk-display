@@ -1,12 +1,13 @@
 import { Page } from '~/core/Domain/UI/Page';
 import { PageItem } from '~/core/Domain/UI/PageItem';
 import { Panel } from '~/core/Domain/UI/Panel';
-import { computed, ref, storeToRefs, useFetch, useWsNodeRedStore } from '#imports';
+import { computed, ref, storeToRefs, useFetch, useGlobalStore, useWsNodeRedStore } from '#imports';
 
 export function useLightsPanel() {
   const { dataWsNodeRed } = storeToRefs(useWsNodeRedStore());
+  const globalStore = useGlobalStore();
   const panel = ref<Panel>(new Panel({ id: 'lights_panel', name: 'Lights', emoji: '💡' }));
-
+  const { currentDisplayView } = storeToRefs(globalStore);
   async function setScene(name: any) {
     return useFetch('/api/node-red/desk-display-api', {
       query: {
@@ -72,7 +73,8 @@ export function useLightsPanel() {
 
     panel.value.addPages(
       Page.generatePagesFromItems(rawItems, {
-        pageRows: 2,
+        pageRows: currentDisplayView.value === 'screen' ? 2 : 10,
+        pageColumn: currentDisplayView.value === 'screen' ? 5 : 10,
       }),
     );
   }

@@ -26,11 +26,8 @@ jobs:
         name: Install pnpm
         with:
           version: 10
-          run_install: false
-
-      - name: Install dependencies with pnpm
-        run: pnpm install
-        working-directory: ./frontend
+          run_install: |
+            - cwd: ./frontend
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -38,10 +35,6 @@ jobs:
           node-version: 20
           cache: pnpm
           cache-dependency-path: frontend/pnpm-lock.yaml
-
-      - name: Install dependencies
-        working-directory: frontend
-        run: pnpm install
 
       - name: Lint
         working-directory: frontend
