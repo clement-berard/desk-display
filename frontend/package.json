@@ -27,15 +27,15 @@
 		"class-variance-authority": "0.7.1",
 		"clsx": "2.1.1",
 		"embla-carousel-vue": "8.6.0",
-		"es-toolkit": "1.39.5",
+		"es-toolkit": "1.39.7",
 		"ky": "1.8.1",
 		"lucide-vue-next": "0.525.0",
-		"nuxt": "3.17.5",
+		"nuxt": "3.17.7",
 		"pinia": "3.0.3",
 		"pinia-plugin-persistedstate": "4.3.0",
 		"radash": "12.1.1",
 		"radix-vue": "1.9.17",
-		"reka-ui": "2.3.1",
+		"reka-ui": "2.3.2",
 		"shadcn-nuxt": "2.2.0",
 		"tailwind-merge": "3.3.1",
 		"tailwindcss-animate": "1.0.7",
@@ -44,7 +44,7 @@
 		"vue-router": "latest",
 		"vue3-marquee": "4.2.2",
 		"vueperslides": "3.6.0",
-		"ws": "8.18.2"
+		"ws": "8.18.3"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "2.0.6",
