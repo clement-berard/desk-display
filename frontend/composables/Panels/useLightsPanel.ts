@@ -1,4 +1,4 @@
-import { computed, ref, storeToRefs, useFetch, useGlobalStore, useWsNodeRedStore } from '#imports';
+import { computed, ref, storeToRefs, useGlobalStore, useWsNodeRedStore } from '#imports';
 import { Page } from '~/core/Domain/UI/Page';
 import { PageItem } from '~/core/Domain/UI/PageItem';
 import { Panel } from '~/core/Domain/UI/Panel';
@@ -9,7 +9,7 @@ export function useLightsPanel() {
   const panel = ref<Panel>(new Panel({ id: 'lights_panel', name: 'Lights', emoji: '💡' }));
   const { currentDisplayView } = storeToRefs(globalStore);
   async function setScene(name: any) {
-    return useFetch('/api/node-red/desk-display-api', {
+    return $fetch('/api/node-red/desk-display-api', {
       query: {
         action: `set_lights_${name}`,
       },

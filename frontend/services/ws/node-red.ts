@@ -5,6 +5,7 @@ export class WebSocketService {
   private socket: WebSocket | null = null;
   private url: string;
   private reconnectInterval: number;
+  // biome-ignore lint/correctness/noUnusedPrivateClassMembers: ok
   private isConnected = false;
   private messageCallbacks: WebSocketCallback[] = [];
   private connectionCallbacks: ((isConnected: boolean) => void)[] = [];
