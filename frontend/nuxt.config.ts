@@ -32,4 +32,10 @@ export default defineNuxtConfig({
       },
     },
   },
+  nitro: {
+    experimental: {
+      wasm: true,
+    },
+    logLevel: 4, // Mode verbose
+  },
 });
