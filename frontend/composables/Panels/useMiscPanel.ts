@@ -1,3 +1,4 @@
+import { Blocks } from 'lucide-vue-next';
 import { ref, storeToRefs, useGlobalStore } from '#imports';
 import { Page } from '~/core/Domain/UI/Page';
 import { PageItem } from '~/core/Domain/UI/PageItem';
@@ -6,7 +7,7 @@ import { Panel } from '~/core/Domain/UI/Panel';
 export function useMiscPanel() {
   const globalStore = useGlobalStore();
   const { currentDisplayView } = storeToRefs(globalStore);
-  const panel = ref<Panel>(new Panel({ id: 'misc_panel', name: 'Misc', emoji: '🪭' }));
+  const panel = ref<Panel>(new Panel({ id: 'misc_panel', name: 'Misc', emoji: Blocks }));
 
   async function callHaService(path: string, entityId: string) {
     return $fetch('/api/ha/services', {
