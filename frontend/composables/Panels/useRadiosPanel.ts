@@ -9,7 +9,7 @@ export function useRadiosPanel() {
   const globalStore = useGlobalStore();
   const { currentDisplayView } = storeToRefs(globalStore);
   const currentSelectedRadio = computed(() => dataWsNodeRed?.value?.sonos_player_media?.select_radio_details?.slug);
-  const panel = ref<Panel>(new Panel({ id: 'radios_panel', name: 'Radios', emoji: '📡' }));
+  const panel = ref<Panel>(new Panel({ id: 'radios_panel', name: 'Radios', emoji: '📻' }));
 
   async function initPanel() {
     panel.value.isLoading = true;
