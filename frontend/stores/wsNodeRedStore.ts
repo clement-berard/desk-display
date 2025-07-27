@@ -13,6 +13,11 @@ type DeskDisplayConfig = {
 
 export type WsNodeRedKeys = {
   main_sensors: {
+    all_main_information: {
+      '3d_printer.prise': boolean;
+      '3d_printer.light': boolean;
+      'fan_xiaomi.power': boolean;
+    };
     desk_display_config: DeskDisplayConfig;
     all_lights: {
       chambre: number;
