@@ -31,13 +31,6 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  if (action.startsWith('set_trigger')) {
-    const [, scene] = action.split('set_trigger_');
-    await repository.callNodeRedDisplayDeskApi('action_trigger', {
-      scene,
-    });
-  }
-
   return {
     ok: true,
   };
