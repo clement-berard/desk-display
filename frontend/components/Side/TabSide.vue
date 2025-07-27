@@ -11,7 +11,9 @@ const { allPanels, currentPanel } = storeToRefs(globalStore);
     <TabsList class="w-full h-full">
       <template v-for="(panel, index) in allPanels?.panelList" :key="index">
         <TabsTrigger :value="panel.id" @click="currentPanel = panel" class="h-full w-full whitespace-normal overflow-visible">
-          <span class="text-3xl">{{panel.emoji}}</span>
+          <span class="text-4xl">
+            <Component :is="panel.emoji" :size="48" />
+          </span>
         </TabsTrigger>
       </template>
     </TabsList>

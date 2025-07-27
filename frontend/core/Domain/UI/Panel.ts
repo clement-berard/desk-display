@@ -4,7 +4,7 @@ interface PanelParams {
   id: string;
   name?: string;
   isLoading?: boolean;
-  emoji?: string;
+  emoji?: string | any; // Using any to allow for icons like Camera from lucide-vue-next
   pages?: Page[] | Page;
 }
 
@@ -12,7 +12,7 @@ export class Panel {
   private _pages: Page[] = [];
   id: string;
   name?: string;
-  emoji?: string;
+  emoji?: string | any; // Using any to allow for icons like Camera from lucide-vue-next
   isLoading?: boolean;
 
   constructor(params: PanelParams) {
