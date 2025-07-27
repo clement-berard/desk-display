@@ -74,8 +74,8 @@ export function useLightsPanel() {
 
     panel.value.addPages(
       Page.generatePagesFromItems(rawItems, {
-        pageRows: currentDisplayView.value === 'screen' ? 2 : 10,
-        pageColumn: currentDisplayView.value === 'screen' ? 5 : 10,
+        pageRows: currentDisplayView.value === 'screen' ? 2 : 6,
+        pageColumn: currentDisplayView.value === 'screen' ? 5 : 6,
       }),
     );
   }

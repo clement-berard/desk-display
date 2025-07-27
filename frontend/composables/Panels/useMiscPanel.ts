@@ -24,9 +24,14 @@ export function useMiscPanel() {
 
     const rawItems = [
       {
-        title: 'Fan',
+        title: 'Fan Xiaomi',
         onClick: () => callHaService('fan/toggle', 'fan.xiaomi_smart_fan'),
         backgroundImage: 'unsplash-1582558006297-f996ed8adfec',
+      },
+      {
+        title: '3D Power',
+        onClick: () => callHaService('homeassistant/toggle', 'switch.prise_3d_printer'),
+        backgroundImage: 'http://local-static.home/misc/p1s.jpg',
       },
       {
         title: '3D Light',
@@ -37,8 +42,8 @@ export function useMiscPanel() {
 
     panel.value.addPages(
       Page.generatePagesFromItems(rawItems, {
-        pageRows: currentDisplayView.value === 'screen' ? 2 : 10,
-        pageColumn: currentDisplayView.value === 'screen' ? 5 : 10,
+        pageRows: currentDisplayView.value === 'screen' ? 2 : 6,
+        pageColumn: currentDisplayView.value === 'screen' ? 5 : 6,
       }),
     );
 
