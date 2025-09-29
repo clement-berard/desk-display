@@ -29,7 +29,7 @@
 		"embla-carousel-vue": "8.6.0",
 		"es-toolkit": "1.39.10",
 		"ky": "1.8.2",
-		"lucide-vue-next": "0.526.0",
+		"lucide-vue-next": "0.544.0",
 		"nuxt": "4.0.1",
 		"pinia": "3.0.3",
 		"pinia-plugin-persistedstate": "4.4.1",
