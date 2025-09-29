@@ -24,8 +24,8 @@ importers:
         specifier: 1.0.0
         version: 1.0.0(vue@3.5.22(typescript@5.8.3))
       '@tanstack/query-core':
-        specifier: 5.83.0
-        version: 5.83.0
+        specifier: 5.90.2
+        version: 5.90.2
       '@tanstack/vue-query':
         specifier: 5.83.0
         version: 5.83.0(vue@3.5.22(typescript@5.8.3))
@@ -1639,6 +1639,9 @@ packages:
 
   '@tanstack/query-core@5.83.0':
     resolution: {integrity: sha512-0M8dA+amXUkyz5cVUm/B+zSk3xkQAcuXuz5/Q/LveT4ots2rBpPTZOzd7yJa2Utsf8D2Upl5KyjhHRY+9lB/XA==}
+
+  '@tanstack/query-core@5.90.2':
+    resolution: {integrity: sha512-k/TcR3YalnzibscALLwxeiLUub6jN5EDLwKDiO7q5f4ICEoptJ+n9+7vcEFy5/x/i6Q+Lb/tXrsKCggf5uQJXQ==}
 
   '@tanstack/table-core@8.21.3':
     resolution: {integrity: sha512-ldZXEhOBb8Is7xLs01fR3YEc3DERiz5silj8tnGkFZytt1abEvl/GhUmCE0PMLaMPTa3Jk4HbKmRlHmu+gCftg==}
@@ -6363,6 +6366,8 @@ snapshots:
       remove-accents: 0.5.0
 
   '@tanstack/query-core@5.83.0': {}
+
+  '@tanstack/query-core@5.90.2': {}
 
   '@tanstack/table-core@8.21.3': {}
 
