@@ -47,7 +47,7 @@
     "ws": "8.18.3"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.1.2",
+    "@biomejs/biome": "2.2.5",
     "@tailwindcss/line-clamp": "0.4.4",
     "@types/ws": "8.18.1",
     "sass-embedded": "1.93.2"
