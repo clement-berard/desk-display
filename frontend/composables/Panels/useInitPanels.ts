@@ -13,7 +13,7 @@ export function useInitPanels() {
 
     const panelsGroup = new Panels();
 
-    // @ts-ignore
+    // @ts-expect-error
     panelsGroup?.addPanels([panelRadios.value, panelLights.value, panelMisc.value]);
 
     return panelsGroup;

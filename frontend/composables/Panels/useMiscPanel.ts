@@ -35,7 +35,7 @@ export function useMiscPanel() {
       {
         title: '3D Power',
         onClick: () => callHaService('homeassistant/toggle', 'switch.prise_3d_printer'),
-        backgroundImage: 'http://local-static.home/misc/p1s.jpg',
+        backgroundImage: `${import.meta.env.VITE_LOCAL_API_STATIC_SERVER}/files/misc/p1s.jpg`,
         isBackgroundImageGray: computed(
           () => !dataWsNodeRed.value?.main_sensors?.all_main_information?.['3d_printer.prise'],
         ),
