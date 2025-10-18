@@ -80,7 +80,7 @@ export const useWsNodeRedStore = defineStore(
         const { key, value } = newMessage;
 
         if (key) {
-          // @ts-ignore
+          // @ts-expect-error
           dataWsNodeRed.value[key] = processNodeWsRedMessage(key, value);
         }
       }

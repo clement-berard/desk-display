@@ -6,7 +6,7 @@ const matcherUrls = {
 };
 
 export function getIconUrlFromState(state: string) {
-  // @ts-ignore
+  // @ts-expect-error
   const nameMatch = matcherUrls?.[state] || state;
 
   return getFullUrl(nameMatch);

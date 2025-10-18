@@ -22,26 +22,34 @@ export class WebSocketService {
     this.socket.onopen = () => {
       console.log('[ws_node_red] connected to WebSocket');
       this.isConnected = true;
-      this.connectionCallbacks.forEach((callback) => callback(true));
+      for (const callback of this.connectionCallbacks) {
+        callback(true);
+      }
     };
 
     this.socket.onmessage = (event) => {
       console.log('[ws_node_red] msg received:', event.data);
       const data = JSON.parse(event.data);
-      this.messageCallbacks.forEach((callback) => callback(data));
+      for (const callback of this.messageCallbacks) {
+        callback(data);
+      }
     };
 
     this.socket.onclose = () => {
       console.log('[ws_node_red] disconnected from WebSocket');
       this.isConnected = false;
-      this.connectionCallbacks.forEach((callback) => callback(false));
+      for (const callback of this.connectionCallbacks) {
+        callback(false);
+      }
       this.handleReconnect();
     };
 
     this.socket.onerror = (error) => {
       console.error('[ws_node_red] error WebSocket:', error);
       this.isConnected = false;
-      this.connectionCallbacks.forEach((callback) => callback(false));
+      for (const callback of this.connectionCallbacks) {
+        callback(false);
+      }
       this.handleReconnect();
     };
   }
