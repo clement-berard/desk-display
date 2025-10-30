@@ -7,19 +7,15 @@
         </DrawerHeader>
         <div class="p-4">
           <template v-if="currentMainScreen === 'global'">
-            <Button @click="reloadPage" class="mb-4 rounded-none">Reload</Button>
-            <Table>
+            <button @click="reloadPage" class="mb-4 rounded-none">Reload</button>
+            <table>
               <TableBody>
                 <TableRow v-for="(tableRow, index) in tableBodyRows" :key="index">
-                  <TableCell class="font-medium w-[15%]">
-                    {{tableRow.label}}
-                  </TableCell>
-                  <TableCell>
-                    {{tableRow.value}}
-                  </TableCell>
+                  <TableCell class="font-medium w-[15%]">{{tableRow.label}}</TableCell>
+                  <TableCell>{{tableRow.value}}</TableCell>
                 </TableRow>
               </TableBody>
-            </Table>
+            </table>
           </template>
           <template v-if="currentMainScreen === 'stores'">
             <pre>{{crush(globalStore.$state)}}</pre>
@@ -30,12 +26,8 @@
       <DrawerFooter class="h-[20%]">
         <Tabs :default-value="currentMainScreen" class="h-full">
           <TabsList class="w-full h-full">
-            <TabsTrigger value="global" @click="currentMainScreen = 'global'" class="h-full w-full">
-              Global
-            </TabsTrigger>
-            <TabsTrigger value="stores" @click="currentMainScreen = 'stores'" class="h-full w-full">
-              Stores
-            </TabsTrigger>
+            <TabsTrigger value="global" @click="currentMainScreen = 'global'" class="h-full w-full">Global</TabsTrigger>
+            <TabsTrigger value="stores" @click="currentMainScreen = 'stores'" class="h-full w-full">Stores</TabsTrigger>
           </TabsList>
         </Tabs>
       </DrawerFooter>

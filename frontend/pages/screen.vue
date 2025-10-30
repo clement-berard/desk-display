@@ -49,7 +49,7 @@ definePageMeta({
       <SideSection/>
     </template>
     <template #side-footer>
-      <TabSide />
+      <TabSide/>
     </template>
     <template #content v-if="currentPanel">
       <UIPanel :panel="currentPanel"/>
@@ -62,4 +62,3 @@ definePageMeta({
     <Settings/>
   </client-only>
 </template>
-

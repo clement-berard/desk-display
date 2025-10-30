@@ -1,10 +1,10 @@
 <template>
   <NuxtLayout>
-    <NuxtPage />
+    <NuxtPage/>
   </NuxtLayout>
 </template>
 
-<style lang="scss">
+<style>
 body {
   margin: 0;
 }

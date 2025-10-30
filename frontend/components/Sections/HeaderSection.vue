@@ -3,11 +3,14 @@
     <div class="col-span-4 h-full">
       <div class="h-full">
         <span class="font-bold text-3xl">
-        {{ dataWsNodeRed?.main_sensors?.sensor?.temps_salon }} °C -
-        {{ dataWsNodeRed?.main_sensors?.weather?.state_translated }}
+          {{ dataWsNodeRed?.main_sensors?.sensor?.temps_salon }}°C -
+          {{ dataWsNodeRed?.main_sensors?.weather?.state_translated }}
         </span>
-        <img :src="dataWsNodeRed?.main_sensors?.weather?.stateIconUrl" alt="weather-icon"
-             class="w-12 inline-block -mt-3 ml-2"/>
+        <img
+          :src="dataWsNodeRed?.main_sensors?.weather?.stateIconUrl"
+          alt="weather-icon"
+          class="w-12 inline-block -mt-3 ml-2"
+        >
       </div>
     </div>
     <div class="col-span-4 flex justify-center h-full text-3xl">
