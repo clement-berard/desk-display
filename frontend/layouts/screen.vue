@@ -1,10 +1,12 @@
 <template>
-    <div class="relative w-screen h-screen overflow-hidden screen-layout">
-        <div class="fixed top-0 left-0 overflow-hidden"
-            :style="{ height: `${DISPLAY_SCREEN_FRAME_HEIGHT}px`, width: `${DISPLAY_SCREEN_FRAME_WIDTH}px` }">
-            <slot></slot>
-        </div>
+  <div class="relative w-screen h-screen overflow-hidden screen-layout">
+    <div
+      class="fixed top-0 left-0 overflow-hidden"
+      :style="{ height: `${DISPLAY_SCREEN_FRAME_HEIGHT}px`, width: `${DISPLAY_SCREEN_FRAME_WIDTH}px` }"
+    >
+      <slot></slot>
     </div>
+  </div>
 </template>
 
 <script lang="ts" setup>

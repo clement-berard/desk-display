@@ -3,9 +3,9 @@
     <!-- Left Sidebar -->
     <aside class="w-1/5 border-r border-gray-900">
       <div class="mb-4">
-        <MediaPart :full-width="false" />
+        <MediaPart :full-width="false"/>
       </div>
-      <TabSide />
+      <TabSide/>
       <AudioDeviceSelector class="mt-4 mx-2"></AudioDeviceSelector>
     </aside>
 
@@ -19,7 +19,6 @@
     </main>
   </div>
 </template>
-
 
 <script lang="ts" setup>
 import { onMounted, storeToRefs } from '#imports';
