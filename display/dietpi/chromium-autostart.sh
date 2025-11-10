@@ -45,7 +45,7 @@ CHROMIUM_OPTS=(
   --tablet-ui  # Interface optimisée pour tablettes
   --disable-gpu-vsync  # Désactiver la synchronisation verticale (peut aider sur le tearing)
   --disable-frame-rate-limit  # Désactiver la limite de FPS
-        )
+	)
 
 # Home page
 URL=$(sed -n '/^[[:blank:]]*SOFTWARE_CHROMIUM_AUTOSTART_URL=/{s/^[^=]*=//p;q}' /boot/dietpi.txt)
@@ -58,5 +58,5 @@ FP_CHROMIUM=$(command -v chromium-browser)
 STARTX='xinit'
 [ "$USER" = 'root' ] || STARTX='startx'
 
-#/root/display-api &
+/root/display-control &
 exec "$STARTX" "$FP_CHROMIUM" ${CHROMIUM_OPTS[@]} "${URL:-https://dietpi.com/}" -- -nocursor
