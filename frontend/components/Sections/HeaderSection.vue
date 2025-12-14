@@ -2,15 +2,15 @@
   <header class="grid grid-cols-12 gap-4 bg-background px-4 py-2 h-full">
     <div class="col-span-4 h-full">
       <div class="h-full">
-        <span class="font-bold text-3xl">
-          {{ dataWsNodeRed?.main_sensors?.sensor?.temps_salon }}°C -
-          {{ dataWsNodeRed?.main_sensors?.weather?.state_translated }}
-        </span>
+        <span class="font-bold text-3xl"> {{ dataWsNodeRed?.main_sensors?.sensor?.temps_salon }}°C </span>
         <img
           :src="dataWsNodeRed?.main_sensors?.weather?.stateIconUrl"
           alt="weather-icon"
-          class="w-12 inline-block -mt-3 ml-2"
+          class="w-12 inline-block -mt-3 mr-1"
         >
+        <span class="font-bold text-3xl">
+          {{ dataWsNodeRed?.main_sensors?.sensor?.sensor_temp_balcon_temperature }}°C
+        </span>
       </div>
     </div>
     <div class="col-span-4 flex justify-center h-full text-3xl">
