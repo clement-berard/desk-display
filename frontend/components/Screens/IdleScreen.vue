@@ -9,9 +9,10 @@
     <div class="p-6 w-3/4 flex flex-col">
       <div class="text-6xl block font-normal mb-8">
         {{ fullDate }}
-        <span class="text-4xl font-light">
+        <div class="text-2xl font-light">
+          {{ dataWsNodeRed?.main_sensors?.sensor?.temps_salon }}°C /
           {{ dataWsNodeRed?.main_sensors?.sensor?.sensor_temp_balcon_temperature }}°C
-        </span>
+        </div>
       </div>
       <template v-if="dataWsNodeRed?.sonos_player_media?.isPlaying">
         <div class="text-xl line-clamp-1 font-semibold" v-if="dataWsNodeRed?.sonos_player_media?.sourceName">
