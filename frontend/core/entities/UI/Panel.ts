@@ -1,4 +1,4 @@
-import type { Page } from '~/core/Domain/UI/Page';
+import type { Page } from '~/core/entities/UI/Page';
 
 interface PanelParams {
   id: string;

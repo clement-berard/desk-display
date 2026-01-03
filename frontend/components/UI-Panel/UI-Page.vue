@@ -6,7 +6,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import type { Page } from '~/core/Domain/UI/Page';
+import type { Page } from '~/core/entities/UI/Page';
 import PageItem from './UI-PageItem.vue';
 
 const { page } = defineProps<{ page: Page }>();

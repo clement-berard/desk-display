@@ -1,5 +1,5 @@
 import { cluster } from 'radash';
-import type { PageItem } from '~/core/Domain/UI/PageItem';
+import type { PageItem } from '~/core/entities/UI/PageItem';
 
 interface PageParams {
   pageColumn?: number;

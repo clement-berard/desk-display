@@ -1,4 +1,4 @@
-import { RadioItem } from '~/core/Domain/Entities/Radio';
+import { RadioItem } from '~/core/entities/Radio';
 import { NC_TABLE_RADIO_ID, nocodbInstance } from '~/core/providers/noco-db';
 
 export async function getRadios() {

@@ -14,7 +14,7 @@
 import UIPanelFrame from '~/components/UI-Panel/UI-Panel-Frame.vue';
 import { Carousel, CarouselContent, CarouselItem } from '~/components/ui/carousel';
 import { Skeleton } from '~/components/ui/skeleton';
-import type { Panel } from '~/core/Domain/UI/Panel';
+import type { Panel } from '~/core/entities/UI/Panel';
 import Page from './UI-Page.vue';
 
 const { panel } = defineProps<{ panel: Panel }>();
