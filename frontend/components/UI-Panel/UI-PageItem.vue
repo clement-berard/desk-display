@@ -19,7 +19,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import type { PageItem } from '~/core/Domain/UI/PageItem';
+import type { PageItem } from '~/core/entities/UI/PageItem';
 
 const { pageItem } = defineProps<{ pageItem: PageItem }>();
 </script>

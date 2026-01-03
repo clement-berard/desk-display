@@ -16,7 +16,7 @@ import SideSection from '~/components/Sections/SideSection/SideSection.vue';
 import TabSide from '~/components/Side/TabSide.vue';
 import UIPanel from '~/components/UI-Panel/UI-Panel.vue';
 import { Tabs, TabsList, TabsTrigger } from '~/components/ui/tabs';
-import { processNodeWsRedMessage } from '~/services/ws/node-red-matcher';
+import { processNodeWsRedMessage } from '~/services/ws/node-red-ws-matcher.services';
 
 const globalStore = useGlobalStore();
 const displayStore = useDisplayStore();

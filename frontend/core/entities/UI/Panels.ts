@@ -1,4 +1,4 @@
-import type { Panel } from '~/core/Domain/UI/Panel';
+import type { Panel } from '~/core/entities/UI/Panel';
 
 export class Panels {
   panels: Panel[] = [];

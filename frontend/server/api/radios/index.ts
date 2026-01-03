@@ -1,7 +1,6 @@
 import { defineEventHandler } from '#imports';
-import { Repository } from '~/core/Infra/Repository';
+import { getRadios } from '~/core/services/nocodb.services';
 
 export default defineEventHandler(async () => {
-  const repository = new Repository();
-  return repository.getRadios();
+  return getRadios();
 });

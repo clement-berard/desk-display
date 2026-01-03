@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
-import type { Panel } from '~/core/Domain/UI/Panel';
-import type { Panels } from '~/core/Domain/UI/Panels';
+import type { Panel } from '~/core/entities/UI/Panel';
+import type { Panels } from '~/core/entities/UI/Panels';
 
 export const useGlobalStore = defineStore(
   'globalStore',

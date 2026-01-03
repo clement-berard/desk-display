@@ -1,7 +1,7 @@
 import { useLightsPanel } from '~/composables/Panels/useLightsPanel';
 import { useMiscPanel } from '~/composables/Panels/useMiscPanel';
 import { useRadiosPanel } from '~/composables/Panels/useRadiosPanel';
-import { Panels } from '~/core/Domain/UI/Panels';
+import { Panels } from '~/core/entities/UI/Panels';
 
 export function useInitPanels() {
   const { panel: panelRadios, initPanel: initPanelRadios } = useRadiosPanel();

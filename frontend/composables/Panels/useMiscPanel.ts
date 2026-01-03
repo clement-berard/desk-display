@@ -1,8 +1,8 @@
 import { Blocks } from 'lucide-vue-next';
 import { computed, ref, storeToRefs, useGlobalStore, useWsNodeRedStore } from '#imports';
-import { Page } from '~/core/Domain/UI/Page';
-import { PageItem } from '~/core/Domain/UI/PageItem';
-import { Panel } from '~/core/Domain/UI/Panel';
+import { Page } from '~/core/entities/UI/Page';
+import { PageItem } from '~/core/entities/UI/PageItem';
+import { Panel } from '~/core/entities/UI/Panel';
 
 export function useMiscPanel() {
   const globalStore = useGlobalStore();

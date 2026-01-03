@@ -1,16 +1,15 @@
 import { defineEventHandler, getQuery } from '#imports';
-import { Repository } from '~/core/Infra/Repository';
+import { setRadio, setRandomRadio } from '~/core/services/node-red.services';
 
 export default defineEventHandler(async (event) => {
   const { random = false, slug } = getQuery<{ random: boolean; slug?: string }>(event);
-  const repository = new Repository();
 
   if (random) {
-    await repository.setRandomRadio();
+    await setRandomRadio();
   }
 
   if (slug) {
-    await repository.setRadio(slug);
+    await setRadio(slug);
   }
 
   return {
