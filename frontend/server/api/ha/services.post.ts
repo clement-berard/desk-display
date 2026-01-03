@@ -1,5 +1,5 @@
 import { defineEventHandler, getQuery } from '#imports';
-import { haApiServicePost } from '~/core/Infra/Providers/ha-api';
+import { haApiServicePost } from '~/core/providers/ha-api';
 
 export default defineEventHandler(async (event) => {
   const { entityId = '', path = '' } = getQuery<{ entityId: string; path?: string }>(event);

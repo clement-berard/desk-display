@@ -1,5 +1,5 @@
 import { construct } from 'radash';
-import { getIconUrlFromState } from '~/services/weather';
+import { getIconUrlFromState } from '~/services/weather/weather.services';
 import type { WsNodeRedKeys } from '~/stores/wsNodeRedStore';
 
 export function processNodeWsRedMessage(key: keyof WsNodeRedKeys, value: any) {
