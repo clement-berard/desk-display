@@ -9,7 +9,7 @@
     <div class="p-6 w-3/4 flex flex-col">
       <div class="text-6xl block font-normal mb-8">
         {{ fullDate }}
-        <div class="text-2xl font-light">
+        <div class="text-3xl font-light">
           {{ dataWsNodeRed?.main_sensors?.sensor?.temps_salon }}°C /
           {{ dataWsNodeRed?.main_sensors?.sensor?.sensor_temp_balcon_temperature }}°C
         </div>
