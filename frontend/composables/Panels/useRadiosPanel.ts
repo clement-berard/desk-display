@@ -1,9 +1,9 @@
 import { Music4 } from 'lucide-vue-next';
 import { computed, ref, storeToRefs, useFetch, useGlobalStore, useWsNodeRedStore } from '#imports';
+import type { RadioItem } from '~/core/entities/Radio';
 import { Page } from '~/core/entities/UI/Page';
 import { PageItem } from '~/core/entities/UI/PageItem';
 import { Panel } from '~/core/entities/UI/Panel';
-import type { RadioItem } from '~/core/entities/Radio';
 
 export function useRadiosPanel() {
   const { dataWsNodeRed } = storeToRefs(useWsNodeRedStore());

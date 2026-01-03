@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { ref, watch } from 'vue';
 import { useWebSocket } from '~/composables/useWsNodeRed';
-import { processNodeWsRedMessage } from '~/services/ws/node-red-matcher';
+import { processNodeWsRedMessage } from '~/services/ws/node-red-ws-matcher.services';
 
 type DeskDisplayConfig = {
   prevent_standby: boolean;
