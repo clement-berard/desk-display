@@ -3,7 +3,7 @@
     <Carousel :opts="{align: 'start'}" orientation="horizontal" class="w-full h-full flex carousel-parent">
       <CarouselContent class="h-full">
         <CarouselItem class="h-full w-full overflow-hidden" v-for="(page, indexPage) in panel.pages" :key="indexPage">
-          <Page :page="page"/>
+          <Page :page="page" />
         </CarouselItem>
       </CarouselContent>
     </Carousel>

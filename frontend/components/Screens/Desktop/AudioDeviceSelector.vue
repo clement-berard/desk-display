@@ -17,7 +17,7 @@ const currentRadioUrl = computed(() => {
   <div>
     <div class="mt-4">
       <div class="flex items-center space-x-2 mb-4">
-        <Checkbox id="terms" v-model="shouldAutoPlay"/>
+        <Checkbox id="terms" v-model="shouldAutoPlay" />
         <label for="terms">Auto play</label>
       </div>
       <audio controls :src="currentRadioUrl" :autoplay="shouldAutoPlay" class="w-full"></audio>

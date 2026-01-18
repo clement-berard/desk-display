@@ -19,7 +19,7 @@
     <transition name="fade">
       <div class="col-span-4 flex justify-end w-full">
         <template v-if="dataWsNodeRed?.sonos_player_media?.isPlaying">
-          <MusicBar class="mr-2 inline-block text-primary mt-1" width="24" height="24"/>
+          <MusicBar class="mr-2 inline-block text-primary mt-1" width="24" height="24" />
           <div class="truncate font-bold text-3xl" @click="triggerRandomRadio">
             {{ dataWsNodeRed?.sonos_player_media?.sourceName }}
           </div>

@@ -15,10 +15,10 @@ const { currentSideCarousel } = storeToRefs(globalStore);
   <Carousel :opts="{align: 'start'}" orientation="vertical" class="w-full" v-model="currentSideCarousel">
     <CarouselContent :style="{height: `${FRAME_SIDE_CONTENT_HEIGHT}px`}">
       <CarouselItem class=" h-full" key="media">
-        <MediaPart/>
+        <MediaPart />
       </CarouselItem>
       <CarouselItem class=" h-full" key="weather">
-        <Weather/>
+        <Weather />
       </CarouselItem>
     </CarouselContent>
   </Carousel>
