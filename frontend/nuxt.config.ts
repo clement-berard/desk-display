@@ -1,4 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+
+const isDev = process.env.NODE_ENV === 'development';
+
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
@@ -33,9 +36,15 @@ export default defineNuxtConfig({
     },
   },
   nitro: {
-    experimental: {
-      wasm: true,
-    },
+    noExternals: !isDev,
+    rollupConfig: !isDev
+      ? {
+          output: {
+            inlineDynamicImports: true,
+          },
+        }
+      : undefined,
+    minify: !isDev,
     logLevel: 4, // Mode verbose
   },
 });
