@@ -1,24 +1,19 @@
+import { z } from 'zod';
 import { defineEventHandler, getQuery } from '#imports';
 import { callNodeRedDisplayDeskApi } from '~/core/services/node-red.services';
 
 export default defineEventHandler(async (event) => {
-  const { action } = getQuery<{ action: string }>(event);
+  const { action: inputAction } = getQuery<{ action: string }>(event);
+  const action = z.string().parse(inputAction);
 
-  if (action === 'display-on') {
-    await callNodeRedDisplayDeskApi('action_hard_display', { service: 'on' });
-  }
-
-  if (action === 'display-standby') {
-    await callNodeRedDisplayDeskApi('action_hard_display', { service: 'standby' });
-  }
-
-  if (action === 'display-low-brightness') {
-    await callNodeRedDisplayDeskApi('action_hard_display', { service: 'low-brightness' });
+  if (action.startsWith('hard-display-')) {
+    const [, service] = action.split('hard-display-');
+    await callNodeRedDisplayDeskApi('action_hard_display', { service });
   }
 
   if (action.startsWith('player_action')) {
     const [, kind] = action.split('player_action_');
-    await callNodeRedDisplayDeskApi('action_sonos_media_player_volume', {
+    return callNodeRedDisplayDeskApi('action_sonos_media_player_volume', {
       direction: kind,
     });
   }
@@ -32,5 +27,6 @@ export default defineEventHandler(async (event) => {
 
   return {
     ok: true,
+    action,
   };
 });

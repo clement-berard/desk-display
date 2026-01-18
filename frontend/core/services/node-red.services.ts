@@ -1,17 +1,12 @@
 import { nodeRedClient } from '~/core/providers/node-red';
 
 export async function callNodeRedDisplayDeskApi(action = '', payload = {}) {
-  try {
-    await nodeRedClient.post('desk-display', {
-      json: {
-        action,
-        payload,
-      },
-    });
-  } catch (e) {
-    console.error('callNodeRedDisplayDeskApi:', e);
-    throw new Error('Error when callNodeRedDisplayDeskApi');
-  }
+  return nodeRedClient.post('desk-display', {
+    json: {
+      action,
+      payload,
+    },
+  });
 }
 
 export async function setRandomRadio() {

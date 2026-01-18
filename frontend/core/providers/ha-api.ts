@@ -11,13 +11,13 @@ export const haApiInstance = ky.create({
   searchParams: {},
 });
 
-export function haApiServicePost(params: { path: string; entityId?: string }) {
-  const inst = haApiInstance.extend({
-    prefixUrl: `${baseApiUrl}/services`,
-    method: 'POST',
-  });
+const haAPiServicesInstance = haApiInstance.extend(({ prefixUrl }) => ({
+  prefixUrl: `${prefixUrl}/services`,
+  method: 'POST',
+}));
 
-  return inst(params.path, {
+export function haApiServicePost(params: { path: string; entityId?: string }) {
+  return haAPiServicesInstance(params.path, {
     json: {
       entity_id: params.entityId,
     },
