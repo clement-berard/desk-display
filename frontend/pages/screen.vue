@@ -43,22 +43,22 @@ definePageMeta({
 <template>
   <GlobalFrameSection :is-idle-state="showIdleScreen">
     <template #header>
-      <HeaderSection/>
+      <HeaderSection />
     </template>
     <template #side-content>
-      <SideSection/>
+      <SideSection />
     </template>
     <template #side-footer>
-      <TabSide/>
+      <TabSide />
     </template>
     <template #content v-if="currentPanel">
-      <UIPanel :panel="currentPanel"/>
+      <UIPanel :panel="currentPanel" />
     </template>
     <template #idle>
-      <IdleScreen/>
+      <IdleScreen />
     </template>
   </GlobalFrameSection>
   <client-only>
-    <Settings/>
+    <Settings />
   </client-only>
 </template>

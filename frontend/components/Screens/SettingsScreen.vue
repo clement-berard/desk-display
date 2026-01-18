@@ -11,8 +11,8 @@
             <table>
               <TableBody>
                 <TableRow v-for="(tableRow, index) in tableBodyRows" :key="index">
-                  <TableCell class="font-medium w-[15%]">{{tableRow.label}}</TableCell>
-                  <TableCell>{{tableRow.value}}</TableCell>
+                  <TableCell class="font-medium w-[15%]">{{ tableRow.label }}</TableCell>
+                  <TableCell>{{ tableRow.value }}</TableCell>
                 </TableRow>
               </TableBody>
             </table>

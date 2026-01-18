@@ -24,7 +24,7 @@ export class PageItem {
   private getBackgroundImage(inputBackgroundImage?: string) {
     if (!inputBackgroundImage?.startsWith('unsplash')) return inputBackgroundImage;
     const [, id] = inputBackgroundImage.split('unsplash-');
-    return getUnsplashImage(id);
+    return getUnsplashImage(id || '');
   }
 
   onClick(): ReturnType<NonNullable<typeof this.onClickHandler>> | undefined {
