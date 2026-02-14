@@ -1,17 +1,18 @@
 import { RadioItem } from '~/core/entities/Radio';
-import { NC_TABLE_RADIO_ID, nocodbInstance } from '~/core/providers/noco-db';
+import { formatSearchParamsSorting, NC_TABLE_RADIO_ID, nocodbDeskDisplay } from '~/core/providers/noco-db';
 
 export async function getRadios() {
-  const response = await nocodbInstance
+  const response = await nocodbDeskDisplay
     .get(`${NC_TABLE_RADIO_ID}/records`, {
       searchParams: {
         fields: 'slug,label,out_media_img,out_media_url',
-        sort: '-counter,-last_selected_date,slug',
+        sort: formatSearchParamsSorting('-counter,-last_selected_date,slug'),
       },
     })
-    .json<{ list: any[] }>();
+    .json<{ records: any[] }>();
 
-  return response.list
+  return response.records
+    .map((item) => ({ id: item.id, ...item.fields }))
     .filter((item) => item.slug)
     .map((item) => {
       return new RadioItem({
