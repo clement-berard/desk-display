@@ -8,9 +8,11 @@
     </aside>
 
     <!-- Main Content -->
-    <main class="flex-1 overflow-y-auto">
-      <div class="p-4">
-        <template v-if="currentPanel"> <UIPanel :panel="currentPanel" /> </template>
+    <main class="flex-1 overflow-y-auto overflow-x-hidden">
+      <div class="p-4 h-full">
+        <Transition name="fade" mode="out-in">
+          <UIPanel v-if="currentPanel" :panel="currentPanel" :key="currentPanel.id" />
+        </Transition>
       </div>
     </main>
   </div>
@@ -36,3 +38,18 @@ onMounted(() => {
   currentPanel.value = panelsGroup.firstPanel;
 });
 </script>
+
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition:
+    opacity 0.15s ease-out,
+    transform 0.15s ease-out;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+  transform: scale(0.98);
+}
+</style>

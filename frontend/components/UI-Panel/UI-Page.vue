@@ -1,5 +1,11 @@
 <template>
-  <div :class="[`grid-cols-${page.pageColumn}`, `grid-rows-${page.pageRows}`]" class="grid gap-3 h-full min-h-0">
+  <div
+    class="grid gap-3 h-full min-h-0"
+    :style="{
+      gridTemplateColumns: `repeat(${page.pageColumn}, minmax(0, 1fr))`,
+      gridTemplateRows: `repeat(${page.pageRows}, minmax(0, 1fr))`
+    }"
+  >
     <template v-for="(pageItem, index) in page.getItems()" :key="index"> <PageItem :page-item="pageItem" /> </template>
   </div>
 </template>

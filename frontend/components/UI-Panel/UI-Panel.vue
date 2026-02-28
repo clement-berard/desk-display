@@ -2,7 +2,11 @@
   <UIPanelFrame>
     <Carousel :opts="{align: 'start'}" orientation="horizontal" class="w-full h-full flex carousel-parent">
       <CarouselContent class="h-full">
-        <CarouselItem class="h-full w-full overflow-hidden" v-for="(page, indexPage) in panel.pages" :key="indexPage">
+        <CarouselItem
+          v-for="page in panel.pages"
+          :key="page.id"
+          class="h-full w-full overflow-hidden animate-in fade-in duration-500 ease-out"
+        >
           <Page :page="page" />
         </CarouselItem>
       </CarouselContent>
@@ -13,7 +17,6 @@
 <script setup lang="ts">
 import UIPanelFrame from '~/components/UI-Panel/UI-Panel-Frame.vue';
 import { Carousel, CarouselContent, CarouselItem } from '~/components/ui/carousel';
-import { Skeleton } from '~/components/ui/skeleton';
 import type { Panel } from '~/core/entities/UI/Panel';
 import Page from './UI-Page.vue';
 
