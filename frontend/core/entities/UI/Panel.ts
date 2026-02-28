@@ -1,31 +1,37 @@
+import type { Component } from 'vue';
 import type { Page } from '~/core/entities/UI/Page';
 
 interface PanelParams {
   id: string;
   name?: string;
   isLoading?: boolean;
-  emoji?: string | any; // Using any to allow for icons like Camera from lucide-vue-next
+  emoji?: string | Component;
   pages?: Page[] | Page;
 }
 
 export class Panel {
-  private _pages: Page[] = [];
   id: string;
   name?: string;
-  emoji?: string | any; // Using any to allow for icons like Camera from lucide-vue-next
-  isLoading?: boolean;
+  emoji?: string | Component;
+  isLoading: boolean;
 
-  constructor(params: PanelParams) {
-    this.id = params.id;
-    this.name = params?.name;
-    this.emoji = params?.emoji;
-    this.isLoading = params?.isLoading ?? false;
-    this.addPages(params?.pages || []);
+  private _pages: Page[] = [];
+
+  constructor({ id, name, emoji, isLoading = false, pages = [] }: PanelParams) {
+    this.id = id;
+    this.name = name;
+    this.emoji = emoji;
+    this.isLoading = isLoading;
+
+    if (pages) {
+      this.addPages(pages);
+    }
   }
 
   addPages(pages: Page[] | Page) {
-    const allPages: Page[] = Array.isArray(pages) ? pages : [pages];
-    this._pages = [...this._pages, ...allPages];
+    const allPages = Array.isArray(pages) ? pages : [pages];
+
+    this._pages.push(...allPages);
   }
 
   get pages(): Page[] {

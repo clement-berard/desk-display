@@ -14,7 +14,7 @@ function setCurrentPanel(panel: Panel) {
 <template>
   <Tabs class="h-24" :model-value="currentPanel?.id">
     <TabsList class="w-full h-full">
-      <template v-for="(panel) in (allPanels?.panelList || [])" :key="index">
+      <template v-for="panel in (allPanels?.panelList || [])" :key="panel.id">
         <TabsTrigger
           :value="panel.id"
           @click="setCurrentPanel(panel)"
