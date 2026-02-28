@@ -3,6 +3,7 @@ import { computed, ref, storeToRefs, useGlobalStore, useWsNodeRedStore } from '#
 import { Page } from '~/core/entities/UI/Page';
 import { PageItem } from '~/core/entities/UI/PageItem';
 import { Panel } from '~/core/entities/UI/Panel';
+import { getStaticFileUrl } from '~/services/static-files';
 
 export function useLightsPanel() {
   const { dataWsNodeRed } = storeToRefs(useWsNodeRedStore());
@@ -22,27 +23,27 @@ export function useLightsPanel() {
       {
         title: 'Work',
         onClick: () => setScene('desk_work'),
-        backgroundImage: 'unsplash-1486312338219-ce68d2c6f44d',
+        backgroundImage: getStaticFileUrl('light_scene/work.png'),
       },
       {
-        title: 'Salon Edison',
+        title: 'Edison',
         onClick: () => setScene('salon_edison'),
-        backgroundImage: 'unsplash-1458172594959-b57570af4d0a',
+        backgroundImage: getStaticFileUrl('light_scene/edison.png'),
       },
       {
-        title: 'Salon Edison Lite',
+        title: 'Edison Lite',
         onClick: () => setScene('salon_edison_lite'),
-        backgroundImage: 'unsplash-1458172594959-b57570af4d0a',
+        backgroundImage: getStaticFileUrl('light_scene/edison.png'),
       },
       {
         title: 'Salon Off',
         onClick: () => setScene('salon_off'),
-        backgroundImage: 'unsplash-1580644327874-c637192725a8',
+        backgroundImage: getStaticFileUrl('light_scene/off.png'),
       },
       {
         title: 'Salon Red',
         onClick: () => setScene('salon_red'),
-        backgroundImage: 'unsplash-1535868463750-c78d9543614f',
+        backgroundImage: getStaticFileUrl('light_scene/red.png'),
       },
       {
         title: 'Salon Energize',
@@ -65,7 +66,7 @@ export function useLightsPanel() {
         backgroundImage: 'unsplash-1571534494457-af9aa81ca32b',
       },
       {
-        title: 'Chambre Toggle',
+        title: 'Chambre',
         onClick: () => setScene('chambre_toggle'),
         backgroundImage: 'unsplash-1522771739844-6a9f6d5f14af',
         isBackgroundImageGray: computed(() => dataWsNodeRed.value?.main_sensors?.all_lights?.chambre === 0),
