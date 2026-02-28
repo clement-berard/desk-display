@@ -2,20 +2,18 @@
   <Drawer :open="showDialogDebug" @update:open="open => showDialogDebug = open">
     <DrawerContent class="h-screen">
       <div class="h-[80%] overflow-y-scroll">
-        <DrawerHeader>
-          <div class="text-xl font-bold">Settings</div>
-        </DrawerHeader>
+        <DrawerHeader> <div class="text-xl font-bold">Settings</div> </DrawerHeader>
         <div class="p-4">
           <template v-if="currentMainScreen === 'global'">
-            <button @click="reloadPage" class="mb-4 rounded-none">Reload</button>
-            <table>
+            <Button @click="reloadPage" class="mb-4 rounded-none">Reload</Button>
+            <Table>
               <TableBody>
                 <TableRow v-for="(tableRow, index) in tableBodyRows" :key="index">
                   <TableCell class="font-medium w-[15%]">{{ tableRow.label }}</TableCell>
                   <TableCell>{{ tableRow.value }}</TableCell>
                 </TableRow>
               </TableBody>
-            </table>
+            </Table>
           </template>
           <template v-if="currentMainScreen === 'stores'">
             <pre>{{crush(globalStore.$state)}}</pre>

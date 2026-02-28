@@ -1,6 +1,6 @@
 <template>
-  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14">
-    <!-- Première barre -->
+  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" title="icon-music-bar">
+    <title>icon-music-bar</title>
     <path
       fill="none"
       stroke="currentColor"

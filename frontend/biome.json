@@ -58,6 +58,9 @@
       "includes": ["**/*.vue"],
       "linter": {
         "rules": {
+          "suspicious": {
+            "noAssignInExpressions": "warn"
+          },
           "correctness": {
             "noUnusedVariables": "off",
             "noUnusedImports": "off"
@@ -65,6 +68,9 @@
           "style": {
             "useConst": "off",
             "useImportType": "off"
+          },
+          "a11y": {
+            "useMediaCaption": "off"
           }
         }
       }

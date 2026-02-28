@@ -1,8 +1,6 @@
 <template>
   <div :class="[`grid-cols-${page.pageColumn}`, `grid-rows-${page.pageRows}`]" class="grid gap-3 h-full min-h-0">
-    <template v-for="(pageItem, index) in page.getItems()" :key="index">
-      <PageItem :page-item="pageItem" />
-    </template>
+    <template v-for="(pageItem, index) in page.getItems()" :key="index"> <PageItem :page-item="pageItem" /> </template>
   </div>
 </template>
 <script setup lang="ts">
