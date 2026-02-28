@@ -1,33 +1,37 @@
 import type { ComputedRef } from 'vue';
 import { getUnsplashImage } from '~/utils/utils';
 
+type OnClickHandler = (pageItem: PageItem) => unknown | Promise<unknown>;
+
 interface PageItemParams {
   backgroundImage?: string;
   title?: string;
-  onClick?: (pageItem: PageItem) => any | Promise<any>;
+  onClick?: OnClickHandler;
   isBackgroundImageGray?: boolean | ComputedRef<boolean>;
 }
 
 export class PageItem {
   readonly backgroundImage?: string;
-  private readonly onClickHandler?: (pageItem: PageItem) => any | Promise<any>;
   readonly title?: string;
-  readonly isBackgroundImageGray?: boolean | ComputedRef<boolean> = false;
+  readonly isBackgroundImageGray: boolean | ComputedRef<boolean>;
 
-  constructor(params?: PageItemParams) {
-    this.backgroundImage = this.getBackgroundImage(params?.backgroundImage);
-    this.onClickHandler = params?.onClick;
-    this.title = params?.title;
-    this.isBackgroundImageGray = params?.isBackgroundImageGray;
+  private readonly onClickHandler?: OnClickHandler;
+
+  constructor({ backgroundImage, title, onClick, isBackgroundImageGray = false }: PageItemParams = {}) {
+    this.backgroundImage = this.parseBackgroundImage(backgroundImage);
+    this.title = title;
+    this.onClickHandler = onClick;
+    this.isBackgroundImageGray = isBackgroundImageGray;
   }
 
-  private getBackgroundImage(inputBackgroundImage?: string) {
-    if (!inputBackgroundImage?.startsWith('unsplash')) return inputBackgroundImage;
-    const [, id] = inputBackgroundImage.split('unsplash-');
-    return getUnsplashImage(id || '');
+  private parseBackgroundImage(input?: string): string | undefined {
+    if (input?.startsWith('unsplash-')) {
+      return getUnsplashImage(input.slice(9));
+    }
+    return input;
   }
 
-  onClick(): ReturnType<NonNullable<typeof this.onClickHandler>> | undefined {
+  onClick(): unknown | Promise<unknown> | undefined {
     return this.onClickHandler?.(this);
   }
 }

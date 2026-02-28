@@ -6,46 +6,45 @@ interface PageParams {
   pageRows?: number;
 }
 
-interface GeneratePagesFromItemsParams {
-  pageColumn?: number;
-  pageRows?: number;
-}
-
 const DEFAULT_PAGE = {
   COLUMNS: 5,
   ROWS: 2,
 } as const;
 
 export class Page {
-  pageItems: PageItem[] = [];
+  private _pageItems: PageItem[] = [];
+
   private readonly maxPageItems: number;
   pageColumn: number;
   pageRows: number;
 
-  constructor(params?: PageParams) {
-    this.pageColumn = params?.pageColumn || DEFAULT_PAGE.COLUMNS;
-    this.pageRows = params?.pageRows || DEFAULT_PAGE.ROWS;
+  constructor({ pageColumn = DEFAULT_PAGE.COLUMNS, pageRows = DEFAULT_PAGE.ROWS }: PageParams = {}) {
+    this.pageColumn = Math.max(1, pageColumn);
+    this.pageRows = Math.max(1, pageRows);
+
     this.maxPageItems = this.pageColumn * this.pageRows;
   }
 
-  addPageItems(items: PageItem[] | PageItem) {
-    const allPageItems: PageItem[] = Array.isArray(items) ? items : [items];
-    this.pageItems.push(...allPageItems);
+  addPageItems(items: PageItem[] | PageItem): this {
+    const allPageItems = Array.isArray(items) ? items : [items];
+    this._pageItems.push(...allPageItems);
 
     return this;
   }
 
   getItems(): PageItem[] {
-    return this.pageItems.slice(0, this.maxPageItems);
+    return this._pageItems.slice(0, this.maxPageItems);
   }
 
-  static generatePagesFromItems(items: PageItem[], opts?: GeneratePagesFromItemsParams) {
-    const realColumns = opts?.pageColumn !== undefined ? opts.pageColumn : DEFAULT_PAGE.COLUMNS;
-    const realRows = opts?.pageRows !== undefined ? opts.pageRows : DEFAULT_PAGE.ROWS;
-    const itemsPerPage = realColumns * realRows;
+  static generatePagesFromItems(items: PageItem[], opts?: PageParams): Page[] {
+    if (!items?.length) return [];
 
-    return cluster(items ?? [], itemsPerPage).map((pageItems) => {
-      return new Page({ pageColumn: realColumns, pageRows: realRows }).addPageItems(pageItems);
+    const { pageColumn = DEFAULT_PAGE.COLUMNS, pageRows = DEFAULT_PAGE.ROWS } = opts || {};
+
+    const itemsPerPage = Math.max(1, pageColumn * pageRows);
+
+    return cluster(items, itemsPerPage).map((pageItems) => {
+      return new Page({ pageColumn, pageRows }).addPageItems(pageItems);
     });
   }
 }

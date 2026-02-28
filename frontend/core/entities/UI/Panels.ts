@@ -1,26 +1,27 @@
 import type { Panel } from '~/core/entities/UI/Panel';
 
 export class Panels {
-  panels: Panel[] = [];
+  private _panels: Panel[] = [];
 
-  addPanels(panels: Panel[] | Panel) {
-    const allPanels: Panel[] = Array.isArray(panels) ? panels : [panels];
-    this.panels = [...this.panels, ...allPanels];
+  addPanels(panels: Panel[] | Panel): void {
+    const allPanels = Array.isArray(panels) ? panels : [panels];
+
+    this._panels.push(...allPanels);
   }
 
-  get panelNumber() {
-    return this.panels.length;
+  get panelNumber(): number {
+    return this._panels.length;
   }
 
-  get panelList() {
-    return this.panels;
+  get panelList(): Panel[] {
+    return this._panels;
   }
 
-  findById(id: string) {
-    return this.panels.find((panel) => panel.id === id);
+  findById(id: string): Panel | undefined {
+    return this._panels.find((panel) => panel.id === id);
   }
 
-  get firstPanel() {
-    return this.panels[0];
+  get firstPanel(): Panel | undefined {
+    return this._panels[0];
   }
 }
