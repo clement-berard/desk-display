@@ -1,6 +1,6 @@
 <template>
   <div
-    class="h-full w-full aspect-square rounded-lg border-gray-600"
+    class="h-full w-full aspect-square rounded-lg border-gray-800"
     :class="{ border: !pageItem?.backgroundImage || pageItem?.title }"
     @click="pageItem?.onClick"
   >
