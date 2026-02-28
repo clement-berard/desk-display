@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="col-span-4 flex justify-center h-full text-3xl">
-      <span class="font-bold" @click="showDialogDebug = true">{{ fullDate }}</span>
+      <span class="font-bold" @click="() => showDialogDebug = true">{{ fullDate }}</span>
     </div>
     <transition name="fade">
       <div class="col-span-4 flex justify-end w-full">
