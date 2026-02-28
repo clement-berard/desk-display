@@ -10,7 +10,7 @@
         </AlertDialogDescription>
       </AlertDialogHeader>
       <AlertDialogFooter>
-        <AlertDialogAction @click="revealModalCurrentMedia = false">OK</AlertDialogAction>
+        <AlertDialogAction @click="setRevealModalCurrentMedia(false)">OK</AlertDialogAction>
       </AlertDialogFooter>
     </AlertDialogContent>
   </AlertDialog>
@@ -22,7 +22,7 @@
       class="w-[60%] rounded-lg mb-4 object-cover aspect-square mx-auto"
       :class="{grayscale: dataWsNodeRed?.sonos_player_media?.isMute}"
     >
-    <div v-if="dataWsNodeRed?.sonos_player_media?.showAuthorTitle" @click="revealModalCurrentMedia = true">
+    <div v-if="dataWsNodeRed?.sonos_player_media?.showAuthorTitle" @click="setRevealModalCurrentMedia(true)">
       <div class="text-3xl block line-clamp-1 font-semibold">{{ dataWsNodeRed?.sonos_player_media?.mediaArtist }}</div>
       <div class="text-2xl line-clamp-1 font-semibold">{{ dataWsNodeRed?.sonos_player_media?.mediaTitle }}</div>
     </div>
@@ -63,6 +63,10 @@ const { fullWidth = true } = defineProps<{
 
 const wsNodeRedStore = useWsNodeRedStore();
 const { dataWsNodeRed } = storeToRefs(wsNodeRedStore);
+
+function setRevealModalCurrentMedia(val: boolean) {
+  revealModalCurrentMedia.value = val;
+}
 
 async function setVolume(kind: 'up' | 'down' | 'pause' | 'play' | 'toggle_mute') {
   return $fetch('/api/node-red/desk-display-api', {

@@ -24,8 +24,12 @@
       <DrawerFooter class="h-[20%]">
         <Tabs :default-value="currentMainScreen" class="h-full">
           <TabsList class="w-full h-full">
-            <TabsTrigger value="global" @click="currentMainScreen = 'global'" class="h-full w-full">Global</TabsTrigger>
-            <TabsTrigger value="stores" @click="currentMainScreen = 'stores'" class="h-full w-full">Stores</TabsTrigger>
+            <TabsTrigger value="global" @click="() => currentMainScreen = 'global'" class="h-full w-full"
+              >Global</TabsTrigger
+            >
+            <TabsTrigger value="stores" @click="() => currentMainScreen = 'stores'" class="h-full w-full"
+              >Stores</TabsTrigger
+            >
           </TabsList>
         </Tabs>
       </DrawerFooter>
