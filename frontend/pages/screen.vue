@@ -15,8 +15,6 @@ import HeaderSection from '~/components/Sections/HeaderSection.vue';
 import SideSection from '~/components/Sections/SideSection/SideSection.vue';
 import TabSide from '~/components/Side/TabSide.vue';
 import UIPanel from '~/components/UI-Panel/UI-Panel.vue';
-import { Tabs, TabsList, TabsTrigger } from '~/components/ui/tabs';
-import { processNodeWsRedMessage } from '~/services/ws/node-red-ws-matcher.services';
 
 const globalStore = useGlobalStore();
 const displayStore = useDisplayStore();
@@ -42,23 +40,11 @@ definePageMeta({
 
 <template>
   <GlobalFrameSection :is-idle-state="showIdleScreen">
-    <template #header>
-      <HeaderSection />
-    </template>
-    <template #side-content>
-      <SideSection />
-    </template>
-    <template #side-footer>
-      <TabSide />
-    </template>
-    <template #content v-if="currentPanel">
-      <UIPanel :panel="currentPanel" />
-    </template>
-    <template #idle>
-      <IdleScreen />
-    </template>
+    <template #header> <HeaderSection /> </template>
+    <template #side-content> <SideSection /> </template>
+    <template #side-footer> <TabSide /> </template>
+    <template #content v-if="currentPanel"> <UIPanel :panel="currentPanel" /> </template>
+    <template #idle> <IdleScreen /> </template>
   </GlobalFrameSection>
-  <client-only>
-    <Settings />
-  </client-only>
+  <client-only> <Settings /> </client-only>
 </template>

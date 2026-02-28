@@ -2,9 +2,7 @@
   <div class="flex h-screen">
     <!-- Left Sidebar -->
     <aside class="w-1/5 border-r border-gray-900">
-      <div class="mb-4">
-        <MediaPart :full-width="false" />
-      </div>
+      <div class="mb-4"><MediaPart :full-width="false" /></div>
       <TabSide />
       <AudioDeviceSelector class="mt-4 mx-2"></AudioDeviceSelector>
     </aside>
@@ -12,9 +10,7 @@
     <!-- Main Content -->
     <main class="flex-1 overflow-y-auto">
       <div class="p-4">
-        <template v-if="currentPanel">
-          <UIPanel :panel="currentPanel" />
-        </template>
+        <template v-if="currentPanel"> <UIPanel :panel="currentPanel" /> </template>
       </div>
     </main>
   </div>
