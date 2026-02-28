@@ -2,7 +2,7 @@
 
 ⚠️ WIP Project
 
-<img src="https://m.media-amazon.com/images/I/615R1XOqbkL._AC_SL1500_.jpg" height="400px">
+<img src="https://m.media-amazon.com/images/I/615R1XOqbkL._AC_SL1500_.jpg" height="200px">
 
 ## Goals
 
@@ -16,20 +16,17 @@ Additionally, I'll be repurposing a Raspberry Pi that's been sitting unused in m
 
 - [Waveshare 9.3inch Capacitive Touch Display](https://www.waveshare.com/product/raspberry-pi/displays/lcd-oled/9.3inch-1600x600-lcd.htm)
 - [Wiki Waveshare 9.3inch](https://www.waveshare.com/wiki/9.3inch_1600x600_LCD#Resource)
-- ~~[RaspberryPi 3B](https://www.raspberrypi.com/products/raspberry-pi-3-model-b/)~~ (too old, bad performance)
 - [RaspberryPi 5 4GB](https://www.raspberrypi.com/products/raspberry-pi-5/)
 - [Support / Stand 3D Model](https://www.thingiverse.com/thing:6439195)
 
 
 ## Stack
 
-- Nuxt 3
+- Nuxt 4
 - Node-RED
 - Home Assistant
-- PocketBase
 - NocoDB
 - Golang / Python
-- ...
 
 ## Communication
 
