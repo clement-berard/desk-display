@@ -43,8 +43,29 @@ definePageMeta({
     <template #header> <HeaderSection /> </template>
     <template #side-content> <SideSection /> </template>
     <template #side-footer> <TabSide /> </template>
-    <template #content v-if="currentPanel"> <UIPanel :panel="currentPanel" /> </template>
+
+    <template #content>
+      <Transition name="fade" mode="out-in">
+        <UIPanel v-if="currentPanel" :panel="currentPanel" :key="currentPanel.id" />
+      </Transition>
+    </template>
+
     <template #idle> <IdleScreen /> </template>
   </GlobalFrameSection>
   <client-only> <Settings /> </client-only>
 </template>
+
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition:
+    opacity 0.08s ease-out,
+    transform 0.08s ease-out;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+  transform: scale(0.98);
+}
+</style>

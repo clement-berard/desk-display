@@ -12,6 +12,7 @@ const DEFAULT_PAGE = {
 } as const;
 
 export class Page {
+  public readonly id: string = `page-${Math.random().toString(36).substring(2, 9)}`;
   private _pageItems: PageItem[] = [];
 
   private readonly maxPageItems: number;
