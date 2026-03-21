@@ -41,7 +41,7 @@ jobs:
 
       - name: Lint
         working-directory: frontend
-        run: pnpm lint:check
+        run: pnpm lint:ci
 
       - name: Build
         working-directory: frontend

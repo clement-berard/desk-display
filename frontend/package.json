@@ -11,6 +11,7 @@
     "format": "pnpm biome format",
     "lint": "pnpm biome lint",
     "lint:check": "pnpm biome check",
+    "lint:ci": "pnpm biome ci",
     "deploy:nas": "scp -r -p -O ./.output/* nas-jupiter.home:/volume1/docker/desk-display-nuxt/",
     "b-and-d": "pnpm build && pnpm deploy:nas"
   },
