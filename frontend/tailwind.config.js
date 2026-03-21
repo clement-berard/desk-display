@@ -5,12 +5,12 @@ module.exports = {
   darkMode: ['class'],
   safelist: [
     'dark',
-    {
-      pattern: /grid-cols-+/,
-    },
-    {
-      pattern: /grid-rows-+/,
-    },
+    // {
+    //   pattern: /grid-cols-+/,
+    // },
+    // {
+    //   pattern: /grid-rows-+/,
+    // },
   ],
   prefix: '',
 

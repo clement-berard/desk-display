@@ -21,7 +21,7 @@ union() {
     //main rod
     cube([main_rod_width,main_rod_length,main_rod_height], center=false);
 
-    //top screw 
+    //top screw
     difference(){
         translate([main_rod_width,main_rod_length-10,0]){
             cube([9,10,main_rod_height], center=false);

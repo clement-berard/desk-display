@@ -48,22 +48,22 @@ export function useLightsPanel() {
       {
         title: 'Salon Energize',
         onClick: () => setScene('salon_energize'),
-        backgroundImage: 'unsplash-1663426242582-7c707af07128',
+        backgroundImage: getStaticFileUrl('light_scene/energize.png'),
       },
       {
         title: 'Calm TV 1',
         onClick: () => setScene('salon_calm_tv_1'),
-        backgroundImage: 'unsplash-1593305841991-05c297ba4575',
+        backgroundImage: getStaticFileUrl('light_scene/calm_tv.png'),
       },
       {
         title: 'Calm TV 2',
         onClick: () => setScene('salon_calm_tv_2'),
-        backgroundImage: 'unsplash-1624115773145-9b77fe912897',
+        backgroundImage: getStaticFileUrl('light_scene/calm_tv.png'),
       },
       {
         title: 'Salon Miami',
         onClick: () => setScene('salon_miami'),
-        backgroundImage: 'unsplash-1571534494457-af9aa81ca32b',
+        backgroundImage: getStaticFileUrl('light_scene/miami.png'),
       },
       {
         title: 'Chambre',
