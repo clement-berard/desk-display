@@ -1,4 +1,4 @@
-import { cluster } from 'radash';
+import { chunk } from 'es-toolkit';
 import type { PageItem } from '~/core/entities/UI/PageItem';
 
 interface PageParams {
@@ -44,7 +44,7 @@ export class Page {
 
     const itemsPerPage = Math.max(1, pageColumn * pageRows);
 
-    return cluster(items, itemsPerPage).map((pageItems) => {
+    return chunk(items, itemsPerPage).map((pageItems) => {
       return new Page({ pageColumn, pageRows }).addPageItems(pageItems);
     });
   }

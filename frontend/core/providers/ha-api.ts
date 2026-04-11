@@ -3,7 +3,7 @@ import ky from 'ky';
 const baseApiUrl = process.env.HA_BASE_API_URL as string;
 
 export const haApiInstance = ky.create({
-  prefixUrl: baseApiUrl,
+  prefix: baseApiUrl,
   headers: {
     Authorization: `Bearer ${process.env.HA_API_TOKEN as string}`,
     'Content-Type': 'application/json',
@@ -11,8 +11,8 @@ export const haApiInstance = ky.create({
   searchParams: {},
 });
 
-const haAPiServicesInstance = haApiInstance.extend(({ prefixUrl }) => ({
-  prefixUrl: `${prefixUrl}/services`,
+const haAPiServicesInstance = haApiInstance.extend(({ prefix }) => ({
+  prefix: `${prefix}/services`,
   method: 'POST',
 }));
 
