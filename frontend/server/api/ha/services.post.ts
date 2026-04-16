@@ -1,13 +1,11 @@
-import { z } from 'zod';
+import * as z from 'zod/mini';
 import { defineEventHandler, getQuery } from '#imports';
 import { haApiServicePost } from '~/core/providers/ha-api';
 
-const handlerParamsSchema = z
-  .object({
-    entityId: z.string(),
-    path: z.string(),
-  })
-  .strict();
+const handlerParamsSchema = z.strictObject({
+  entityId: z.string(),
+  path: z.string(),
+});
 
 export default defineEventHandler(async (event) => {
   const queryParams = getQuery<z.infer<typeof handlerParamsSchema>>(event);

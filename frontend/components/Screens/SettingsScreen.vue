@@ -16,8 +16,8 @@
             </Table>
           </template>
           <template v-if="currentMainScreen === 'stores'">
-            <pre>{{crush(globalStore.$state)}}</pre>
-            <pre>{{crush(wsNodeRedStore.$state)}}</pre>
+            <pre>{{globalStore.$state}}</pre>
+            <pre>{{wsNodeRedStore.$state}}</pre>
           </template>
         </div>
       </div>
@@ -37,7 +37,6 @@
   </Drawer>
 </template>
 <script setup lang="ts">
-import { crush } from 'radash';
 import { onMounted } from 'vue';
 import { computed, ref, storeToRefs } from '#imports';
 import { Button } from '~/components/ui/button';

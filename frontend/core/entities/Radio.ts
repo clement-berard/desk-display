@@ -1,13 +1,11 @@
-import { z } from 'zod';
+import * as z from 'zod/mini';
 
-const radioParamsSchema = z
-  .object({
-    audioMediaUrl: z.string().optional(),
-    imgUrl: z.string().optional(),
-    label: z.string(),
-    slug: z.string(),
-  })
-  .strict();
+const radioParamsSchema = z.strictObject({
+  audioMediaUrl: z.optional(z.string()),
+  imgUrl: z.optional(z.string()),
+  label: z.string(),
+  slug: z.string(),
+});
 
 export class RadioItem {
   audioMediaUrl?: string;

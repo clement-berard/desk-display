@@ -1,4 +1,4 @@
-const getFullUrl = (name = '') => `https://basmilius.github.io/weather-icons/production/fill/all/${name}.svg`;
+const getFullUrl = (name = '') => `https://basmilius.github.io/meteocons/production/fill/svg/${name}.svg`;
 const matcherUrls = {
   partlycloudy: 'partly-cloudy-day',
   sunny: 'clear-day',

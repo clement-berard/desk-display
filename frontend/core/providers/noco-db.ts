@@ -1,7 +1,7 @@
 import ky from 'ky';
 export const NC_TABLE_RADIO_ID = 'mpuxqg1lu7rspo6';
 export const nocodbInstance = ky.create({
-  prefixUrl: `${process.env.NOCODB_API_URL as string}/data`,
+  prefix: `${process.env.NOCODB_API_URL as string}/data`,
   headers: {
     'xc-token': process.env.NOCODB_API_TOKEN as string,
     'Content-Type': 'application/json',
@@ -13,7 +13,7 @@ export const nocodbInstance = ky.create({
 
 function getNocoDbInstance(dbName: string) {
   return nocodbInstance.extend((parentOptions) => ({
-    prefixUrl: `${parentOptions.prefixUrl}/${dbName}`,
+    prefix: `${parentOptions.prefix}/${dbName}`,
   }));
 }
 

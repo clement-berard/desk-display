@@ -3,7 +3,7 @@
 const isDev = process.env.NODE_ENV === 'development';
 
 export default defineNuxtConfig({
-  compatibilityDate: '2024-11-01',
+  compatibilityDate: '2026-01-01',
   devtools: { enabled: true },
   experimental: { appManifest: false },
   imports: {
@@ -12,10 +12,9 @@ export default defineNuxtConfig({
   modules: [
     '@nuxtjs/tailwindcss',
     'shadcn-nuxt',
-    '@nuxtjs/color-mode',
+    // '@nuxtjs/color-mode',
     '@pinia/nuxt',
     'pinia-plugin-persistedstate/nuxt',
-    '@hebilicious/vue-query-nuxt',
   ],
   shadcn: {
     /**

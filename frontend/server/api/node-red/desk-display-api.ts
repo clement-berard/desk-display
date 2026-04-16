@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import * as z from 'zod/mini';
 import { defineEventHandler, getQuery } from '#imports';
 import { callNodeRedDisplayDeskApi } from '~/core/services/node-red.services';
 
