@@ -43,7 +43,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { CirclePause, CirclePlay, Volume1, Volume2 } from 'lucide-vue-next';
+import { CirclePause, CirclePlay, Volume1, Volume2 } from '@lucide/vue';
 import { ref, storeToRefs } from '#imports';
 import {
   AlertDialog,

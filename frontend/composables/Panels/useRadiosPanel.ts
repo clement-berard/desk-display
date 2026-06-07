@@ -1,4 +1,4 @@
-import { Music4 } from 'lucide-vue-next';
+import { Music4 } from '@lucide/vue';
 import { computed, ref, storeToRefs, useFetch, useGlobalStore, useWsNodeRedStore } from '#imports';
 import type { RadioItem } from '~/core/entities/Radio';
 import { Page } from '~/core/entities/UI/Page';

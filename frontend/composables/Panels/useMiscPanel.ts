@@ -1,4 +1,4 @@
-import { Blocks } from 'lucide-vue-next';
+import { Blocks } from '@lucide/vue';
 import { computed, ref, storeToRefs, useGlobalStore, useWsNodeRedStore } from '#imports';
 import { Page } from '~/core/entities/UI/Page';
 import { PageItem } from '~/core/entities/UI/PageItem';
