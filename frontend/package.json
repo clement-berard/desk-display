@@ -50,7 +50,7 @@
     "@biomejs/biome": "2.4.16",
     "@tailwindcss/line-clamp": "0.4.4",
     "@types/ws": "8.18.1",
-    "sass-embedded": "1.99.0"
+    "sass-embedded": "1.100.0"
   },
   "packageManager": "pnpm@11.5.2"
 }
