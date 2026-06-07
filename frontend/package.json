@@ -16,6 +16,7 @@
     "b-and-d": "pnpm build && pnpm deploy:nas"
   },
   "dependencies": {
+    "@lucide/vue": "^1.17.0",
     "@nuxtjs/tailwindcss": "6.14.0",
     "@pinia/nuxt": "0.11.3",
     "@radix-icons/vue": "1.0.0",
@@ -28,7 +29,6 @@
     "embla-carousel-vue": "8.6.0",
     "es-toolkit": "1.47.0",
     "ky": "2.0.2",
-    "lucide-vue-next": "1.0.0",
     "nuxt": "4.4.7",
     "pinia": "3.0.4",
     "pinia-plugin-persistedstate": "4.7.1",
