@@ -25,7 +25,7 @@ sudo apt install -y ddcutil
 
 #### **2. Compile and Run**
 ```sh
-go build -o display-control display-control.go
+GOOS=linux GOARCH=arm64 go build -o display-control display-control.go
 sudo ./display-control
 ```
 

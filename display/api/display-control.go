@@ -1,9 +1,13 @@
 package main
 
 import (
+    "fmt"
     "log"
     "net/http"
+    "os"
     "os/exec"
+    "strconv"
+    "strings"
 )
 
 const (
@@ -47,11 +51,31 @@ func onHandler(w http.ResponseWriter, r *http.Request) {
     w.WriteHeader(http.StatusOK)
 }
 
+func cpuTemperatureHandler(w http.ResponseWriter, r *http.Request) {
+    data, err := os.ReadFile("/sys/class/thermal/thermal_zone0/temp")
+    if err != nil {
+        http.Error(w, "Failed to read CPU temperature", http.StatusInternalServerError)
+        log.Printf("Error reading temperature: %s\n", err.Error())
+        return
+    }
+
+    millidegrees, err := strconv.Atoi(strings.TrimSpace(string(data)))
+    if err != nil {
+        http.Error(w, "Failed to parse temperature", http.StatusInternalServerError)
+        return
+    }
+
+    temp := float64(millidegrees) / 1000.0
+    w.Header().Set("Content-Type", "application/json")
+    fmt.Fprintf(w, `{"temperature_celsius": %.2f}`, temp)
+}
+
 func main() {
     // Start HTTP server
     http.HandleFunc("/api/low-brightness", lowBrightnessHandler)
     http.HandleFunc("/api/standby", standbyHandler)
     http.HandleFunc("/api/on", onHandler)
+    http.HandleFunc("/api/temperature", cpuTemperatureHandler)
 
     log.Printf("Server started on port %s\n", PORT)
     log.Fatal(http.ListenAndServe(PORT, nil))
