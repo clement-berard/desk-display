@@ -1,7 +1,18 @@
+import { useDebounceFn } from '@vueuse/core';
 import { defineStore } from 'pinia';
 import { ref, watch } from 'vue';
 import { useWebSocket } from '~/composables/useWsNodeRed';
 import { processNodeWsRedMessage } from '~/services/ws/node-red-ws-matcher.services';
+
+const debouncedSetItem = useDebounceFn((key: string, value: string) => {
+  localStorage.setItem(key, value);
+}, 1000);
+
+const debouncedLocalStorage = {
+  getItem: (key: string) => localStorage.getItem(key),
+  removeItem: (key: string) => localStorage.removeItem(key),
+  setItem: (key: string, value: string) => debouncedSetItem(key, value),
+};
 
 type DeskDisplayConfig = {
   prevent_standby: boolean;
@@ -89,6 +100,8 @@ export const useWsNodeRedStore = defineStore(
     return { dataWsNodeRed };
   },
   {
-    persist: true,
+    persist: {
+      storage: debouncedLocalStorage,
+    },
   },
 );

@@ -15,7 +15,7 @@
         :class="{ 'grayscale': pageItem?.isBackgroundImageGray }"
       >
 
-      <div v-if="pageItem?.title" class="absolute z-20 bottom-0 left-0 right-0 p-4 backdrop-blur-sm bg-black/80">
+      <div v-if="pageItem?.title" class="absolute z-20 bottom-0 left-0 right-0 p-4 bg-black/80">
         <span class="text-xl font-bold text-white">{{ pageItem.title }}</span>
       </div>
     </div>

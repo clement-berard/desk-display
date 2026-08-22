@@ -39,12 +39,10 @@ CHROMIUM_OPTS=(
   --ignore-gpu-blocklist  # Activer l'accélération GPU même si elle est bloquée par Chromium
   --use-gl=egl  # Forcer OpenGL avec EGL
   --enable-gpu-rasterization  # Activer la rasterisation GPU pour les images
-  #--enable-smooth-scrolling  # Améliorer le scrolling fluide
+  --enable-smooth-scrolling  # Améliorer le scrolling fluide
   --enable-gpu
   --force-tablet-mode  # Mode tablette forcé (pour le tactile)
   --tablet-ui  # Interface optimisée pour tablettes
-  --disable-gpu-vsync  # Désactiver la synchronisation verticale (peut aider sur le tearing)
-  --disable-frame-rate-limit  # Désactiver la limite de FPS
         )
 
 # Home page
