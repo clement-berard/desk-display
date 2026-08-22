@@ -47,10 +47,10 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.4.16",
+    "@biomejs/biome": "2.5.9",
     "@tailwindcss/line-clamp": "0.4.4",
     "@types/ws": "8.18.1",
-    "sass-embedded": "1.100.0"
+    "sass-embedded": "1.103.1"
   },
   "packageManager": "pnpm@11.22.0+sha512.1ff870c4c6133dfd88fb2afc46dd13d47f09c9794b438c6fdb47ca98caf3bc16381ee0be93a091b8e3824cf01f889f46d7d9e20910fb0be1ab0fb5baa80dd621"
 }
