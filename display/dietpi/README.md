@@ -51,3 +51,16 @@ timedatectl set-timezone Europe/Paris
 ## Manage display screen
 
 [ddcutil.md](ddcutil.md)
+
+## Nightly Chromium restart (watchdog)
+
+Chromium runs unsupervised from boot with no process manager restarting it, and its rendering gets janky the longer the session has been up. Until the root causes are all fixed app-side, force a clean nightly restart via cron so the kiosk self-heals daily instead of degrading indefinitely. DietPi's autostart (the `startx`/`xinit` wrapper running `chromium-autostart.sh`) automatically respawns Chromium when the process dies, so simply killing it is enough.
+
+```shell
+crontab -e
+```
+
+```cron
+# restart the kiosk browser every night at 4am so it doesn't degrade over long uptimes
+0 4 * * * pkill -f chromium
+```

@@ -7,6 +7,8 @@ export class WebSocketService {
   private reconnectInterval: number;
   // biome-ignore lint/correctness/noUnusedPrivateClassMembers: ok
   private isConnected = false;
+  private reconnectTimer: ReturnType<typeof setTimeout> | null = null;
+  private isClosedByClient = false;
   private messageCallbacks: WebSocketCallback[] = [];
   private connectionCallbacks: ((isConnected: boolean) => void)[] = [];
 
@@ -28,7 +30,6 @@ export class WebSocketService {
     };
 
     this.socket.onmessage = (event) => {
-      console.log('[ws_node_red] msg received:', event.data);
       const data = JSON.parse(event.data);
       for (const callback of this.messageCallbacks) {
         callback(data);
@@ -41,7 +42,9 @@ export class WebSocketService {
       for (const callback of this.connectionCallbacks) {
         callback(false);
       }
-      this.handleReconnect();
+      if (!this.isClosedByClient) {
+        this.handleReconnect();
+      }
     };
 
     this.socket.onerror = (error) => {
@@ -50,12 +53,16 @@ export class WebSocketService {
       for (const callback of this.connectionCallbacks) {
         callback(false);
       }
-      this.handleReconnect();
     };
   }
 
   private handleReconnect() {
-    setTimeout(() => {
+    if (this.reconnectTimer) {
+      return;
+    }
+
+    this.reconnectTimer = setTimeout(() => {
+      this.reconnectTimer = null;
       console.log('[ws_node_red] Retry to connect...');
       this.connect();
     }, this.reconnectInterval);
@@ -70,6 +77,13 @@ export class WebSocketService {
   }
 
   public close() {
+    this.isClosedByClient = true;
+
+    if (this.reconnectTimer) {
+      clearTimeout(this.reconnectTimer);
+      this.reconnectTimer = null;
+    }
+
     if (this.socket) {
       this.socket.close();
     }

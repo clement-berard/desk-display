@@ -28,7 +28,7 @@ const deskDisplayReloadButton = computed(
 
 watch(deskDisplayReloadButton, () => location.reload());
 
-const { currentPanel, currentDisplayView } = storeToRefs(globalStore);
+const { allPanels, currentPanel, currentDisplayView } = storeToRefs(globalStore);
 
 const { showIdleScreen } = storeToRefs(displayStore);
 currentDisplayView.value = 'screen';
@@ -45,9 +45,16 @@ definePageMeta({
     <template #side-footer> <TabSide /> </template>
 
     <template #content>
-      <Transition name="fade" mode="out-in">
-        <UIPanel v-if="currentPanel" :panel="currentPanel" :key="currentPanel.id" />
-      </Transition>
+      <div class="panel-stack">
+        <div
+          v-for="panel in allPanels?.panelList"
+          :key="panel.id"
+          class="panel-stack-item"
+          :class="{ 'panel-stack-item--active': panel.id === currentPanel?.id }"
+        >
+          <UIPanel :panel="panel" />
+        </div>
+      </div>
     </template>
 
     <template #idle> <IdleScreen /> </template>
@@ -56,16 +63,26 @@ definePageMeta({
 </template>
 
 <style scoped>
-.fade-enter-active,
-.fade-leave-active {
+.panel-stack {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.panel-stack-item {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.98);
   transition:
     opacity 0.08s ease-out,
     transform 0.08s ease-out;
 }
 
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-  transform: scale(0.98);
+.panel-stack-item--active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: scale(1);
 }
 </style>
