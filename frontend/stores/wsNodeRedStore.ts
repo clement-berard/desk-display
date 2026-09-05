@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { ref, watch } from 'vue';
+import { ref, toRaw, watch } from 'vue';
 import { useWebSocket } from '~/composables/useWsNodeRed';
 import { processNodeWsRedMessage } from '~/services/ws/node-red-ws-matcher.services';
 
@@ -75,16 +75,24 @@ export const useWsNodeRedStore = defineStore(
 
     const { messages } = useWebSocket(`ws://${import.meta.env.VITE_NODE_RED_WS_URL as string}`);
 
-    watch(messages, (newMessage) => {
-      if (newMessage) {
-        const { key, value } = newMessage;
+    watch(
+      messages,
+      (newMessage) => {
+        console.log('messages:', JSON.parse(JSON.stringify(toRaw(newMessage))));
+        if (newMessage) {
+          const { key, value } = newMessage;
 
-        if (key) {
-          // @ts-expect-error
-          dataWsNodeRed.value[key] = processNodeWsRedMessage(key, value);
+          const excludedKeys = ['media_player'];
+
+          console.log('excludedKeys', excludedKeys, excludedKeys.includes(key), key);
+          if (key && !excludedKeys.includes(key)) {
+            const typedKey = key as keyof WsNodeRedKeys;
+            dataWsNodeRed.value[typedKey] = processNodeWsRedMessage(typedKey, value);
+          }
         }
-      }
-    });
+      },
+      { deep: true },
+    );
 
     return { dataWsNodeRed };
   },

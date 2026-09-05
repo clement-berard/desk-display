@@ -21,7 +21,7 @@
         <template v-if="dataWsNodeRed?.sonos_player_media?.isPlaying">
           <MusicBar class="mr-2 inline-block text-primary mt-1" width="24" height="24" />
           <div class="truncate font-bold text-3xl" @click="triggerRandomRadio">
-            {{ dataWsNodeRed?.sonos_player_media?.sourceName }}
+            {{ mediaPlayer?.media?.audioSourceName }}
           </div>
         </template>
       </div>
@@ -30,7 +30,7 @@
 </template>
 
 <script lang="ts" setup>
-import { storeToRefs, useClock, useGlobalStore, useWsNodeRedStore } from '#imports';
+import { storeToRefs, useClock, useGlobalStore, useMediaPlayerStore, useWsNodeRedStore } from '#imports';
 import MusicBar from '~/components/assets/icons/MusicBar.vue';
 import { useRadiosPanel } from '~/composables/Panels/useRadiosPanel';
 
@@ -42,8 +42,10 @@ const { showDialogDebug } = storeToRefs(globalStore);
 const { setRandomRadio } = useRadiosPanel();
 
 const wsNodeRedStore = useWsNodeRedStore();
-
 const { dataWsNodeRed } = storeToRefs(wsNodeRedStore);
+
+const mediaPlayerStore = useMediaPlayerStore();
+const { mediaPlayer } = storeToRefs(mediaPlayerStore);
 
 async function triggerRandomRadio() {
   await setRandomRadio();
