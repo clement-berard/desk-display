@@ -16,19 +16,19 @@
     "b-and-d": "pnpm build && pnpm deploy:nas"
   },
   "dependencies": {
-    "@lucide/vue": "^1.33.0",
+    "@lucide/vue": "^1.40.0",
     "@nuxtjs/tailwindcss": "6.14.0",
     "@pinia/nuxt": "1.0.2",
     "@radix-icons/vue": "1.0.0",
-    "@tanstack/query-core": "5.101.4",
-    "@tanstack/vue-query": "5.101.4",
-    "@tanstack/vue-table": "9.1.2",
+    "@tanstack/query-core": "5.102.8",
+    "@tanstack/vue-query": "5.102.8",
+    "@tanstack/vue-table": "9.2.4",
     "@vueuse/core": "14.4.0",
     "class-variance-authority": "0.7.1",
     "clsx": "2.1.1",
     "embla-carousel-vue": "8.6.0",
-    "es-toolkit": "1.51.0",
-    "ky": "2.0.2",
+    "es-toolkit": "1.52.0",
+    "ky": "2.1.0",
     "nuxt": "4.5.2",
     "pinia": "4.0.3",
     "pinia-plugin-persistedstate": "4.7.1",
@@ -44,13 +44,13 @@
     "vue3-marquee": "4.2.2",
     "vueperslides": "3.6.0",
     "ws": "8.21.3",
-    "zod": "^4.4.3"
+    "zod": "^4.5.4"
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.9",
     "@tailwindcss/line-clamp": "0.4.4",
     "@types/ws": "8.18.1",
-    "sass-embedded": "1.103.1"
+    "sass-embedded": "1.104.0"
   },
   "packageManager": "pnpm@11.22.0+sha512.1ff870c4c6133dfd88fb2afc46dd13d47f09c9794b438c6fdb47ca98caf3bc16381ee0be93a091b8e3824cf01f889f46d7d9e20910fb0be1ab0fb5baa80dd621"
 }
