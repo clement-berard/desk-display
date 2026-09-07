@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { ref, watch } from 'vue';
+import { ref, toRaw, watch } from 'vue';
 import { useWebSocket } from '~/composables/useWsNodeRed';
 import { processNodeWsRedMessage } from '~/services/ws/node-red-ws-matcher.services';
 
@@ -42,26 +42,6 @@ export type WsNodeRedKeys = {
       state_translated: string;
     };
   };
-  sonos_player_media: {
-    hasAuthorTitle: boolean;
-    hasRadioSelected: boolean;
-    isMute?: boolean;
-    isPlaying: boolean;
-    mediaArtist?: string;
-    mediaImageUrl: string;
-    mediaTitle?: string;
-    showAuthorTitle: boolean;
-    showRadioName: boolean;
-    sourceName?: string;
-    volumeLevel: number;
-    select_radio_details: {
-      image_url: string;
-      label: string;
-      show_radio_name_only: boolean;
-      out_media_url: string;
-      slug: string;
-    };
-  };
 };
 
 type WsNodeRedKeysObject = {
@@ -75,16 +55,21 @@ export const useWsNodeRedStore = defineStore(
 
     const { messages } = useWebSocket(`ws://${import.meta.env.VITE_NODE_RED_WS_URL as string}`);
 
-    watch(messages, (newMessage) => {
-      if (newMessage) {
-        const { key, value } = newMessage;
+    watch(
+      messages,
+      (newMessage) => {
+        if (newMessage) {
+          const { key, value } = newMessage;
+          const excludedKeys = ['media_player', 'sonos_player_media'];
 
-        if (key) {
-          // @ts-expect-error
-          dataWsNodeRed.value[key] = processNodeWsRedMessage(key, value);
+          if (key && !excludedKeys.includes(key)) {
+            const typedKey = key as keyof WsNodeRedKeys;
+            dataWsNodeRed.value[typedKey] = processNodeWsRedMessage(typedKey, value);
+          }
         }
-      }
-    });
+      },
+      { deep: true },
+    );
 
     return { dataWsNodeRed };
   },

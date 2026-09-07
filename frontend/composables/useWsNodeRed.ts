@@ -1,26 +1,43 @@
 import { onBeforeUnmount, onMounted, ref } from 'vue';
 import { WebSocketService } from '~/services/ws/node-red-ws.services';
 
+type SharedConnection = {
+  service: WebSocketService;
+  refCount: number;
+};
+
+const connections = new Map<string, SharedConnection>();
+
 export function useWebSocket(url: string, reconnectInterval = 5000) {
   const messages = ref<any>(null);
   const isConnected = ref(false);
 
-  let webSocketService: WebSocketService;
-
   onMounted(() => {
-    webSocketService = new WebSocketService(url, reconnectInterval);
+    let connection = connections.get(url);
 
-    webSocketService.onMessage((data) => {
+    if (!connection) {
+      connection = { service: new WebSocketService(url, reconnectInterval), refCount: 0 };
+      connections.set(url, connection);
+    }
+
+    connection.refCount++;
+
+    connection.service.onMessage((data) => {
       messages.value = data;
     });
 
-    webSocketService.onConnectionChange((connected) => {
+    connection.service.onConnectionChange((connected) => {
       isConnected.value = connected;
     });
-  });
 
-  onBeforeUnmount(() => {
-    webSocketService.close();
+    onBeforeUnmount(() => {
+      connection.refCount--;
+
+      if (connection.refCount <= 0) {
+        connection.service.close();
+        connections.delete(url);
+      }
+    });
   });
 
   return {

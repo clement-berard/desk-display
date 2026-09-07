@@ -4,8 +4,8 @@
       <AlertDialogHeader>
         <AlertDialogDescription>
           <div class="text-center">
-            <div class="text-xl block font-semibold mb-1">{{ dataWsNodeRed?.sonos_player_media?.mediaArtist }}</div>
-            <div class="text-xl">{{ dataWsNodeRed?.sonos_player_media?.mediaTitle }}</div>
+            <div class="text-xl block font-semibold mb-1">{{ mediaPlayer?.media?.artist }}</div>
+            <div class="text-xl">{{ mediaPlayer?.media?.title }}</div>
           </div>
         </AlertDialogDescription>
       </AlertDialogHeader>
@@ -16,35 +16,50 @@
   </AlertDialog>
   <div class="text-center p-2" :class="{'h-full': fullWidth}">
     <img
-      :src="dataWsNodeRed?.sonos_player_media?.mediaImageUrl"
+      :src="mediaPlayer?.media?.mediaPictureFinal"
       @click="setVolume('toggle_mute')"
       alt=""
       class="w-[60%] rounded-lg mb-4 object-cover aspect-square mx-auto"
-      :class="{grayscale: dataWsNodeRed?.sonos_player_media?.isMute}"
+      :class="{grayscale: mediaPlayer?.player?.isMuted}"
     >
-    <div v-if="dataWsNodeRed?.sonos_player_media?.showAuthorTitle" @click="setRevealModalCurrentMedia(true)">
-      <div class="text-3xl block line-clamp-1 font-semibold">{{ dataWsNodeRed?.sonos_player_media?.mediaArtist }}</div>
-      <div class="text-2xl line-clamp-1 font-semibold">{{ dataWsNodeRed?.sonos_player_media?.mediaTitle }}</div>
-    </div>
-    <div class="flex mt-2 gap-6 items-center justify-center">
-      <Volume1 @click="setVolume('down')" class="h-[55px] w-[55px] cursor-pointer"></Volume1>
-      <CirclePlay
-        @click="setVolume('play')"
-        class="h-[85px] w-[85px] cursor-pointer"
-        v-show="!dataWsNodeRed?.sonos_player_media?.isPlaying"
-      ></CirclePlay>
-      <CirclePause
-        @click="setVolume('pause')"
-        class="h-[85px] w-[85px] cursor-pointer"
-        v-show="dataWsNodeRed?.sonos_player_media?.isPlaying"
-      ></CirclePause>
-      <Volume2 @click="setVolume('up')" class="h-[55px] w-[55px] cursor-pointer"></Volume2>
-    </div>
+    <template v-if="mediaPlayer?.player?.isPlaying">
+      <div @click="setRevealModalCurrentMedia(true)">
+        <template v-if="mediaPlayer?.media?.showOnlySourceName">
+          <div class="text-3xl block line-clamp-1 font-semibold">{{ mediaPlayer?.media?.audioSourceName }}</div>
+        </template>
+        <template v-else>
+          <div class="text-3xl block line-clamp-1 font-semibold">{{ mediaPlayer?.media?.artist }}</div>
+          <div class="text-2xl line-clamp-1 font-semibold">{{ mediaPlayer?.media?.title }}</div>
+        </template>
+      </div>
+      <div class="flex mt-2 gap-6 items-center justify-center">
+        <Volume1
+          @click="setVolume('down')"
+          v-if="mediaPlayer?.player?.isPlaying"
+          class="h-[55px] w-[55px] cursor-pointer"
+        ></Volume1>
+        <CirclePlay
+          @click="setVolume('play')"
+          class="h-[85px] w-[85px] cursor-pointer"
+          v-if="!mediaPlayer?.player?.isPlaying"
+        ></CirclePlay>
+        <CirclePause
+          @click="setVolume('pause')"
+          class="h-[85px] w-[85px] cursor-pointer"
+          v-if="mediaPlayer?.player?.isPlaying"
+        ></CirclePause>
+        <Volume2
+          @click="setVolume('up')"
+          v-if="mediaPlayer?.player?.isPlaying"
+          class="h-[55px] w-[55px] cursor-pointer"
+        ></Volume2>
+      </div>
+    </template>
   </div>
 </template>
 <script setup lang="ts">
 import { CirclePause, CirclePlay, Volume1, Volume2 } from '@lucide/vue';
-import { ref, storeToRefs } from '#imports';
+import { ref, storeToRefs, useMediaPlayerStore } from '#imports';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -53,7 +68,6 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
 } from '@/components/ui/alert-dialog';
-import { useWsNodeRedStore } from '~/stores/wsNodeRedStore';
 
 const revealModalCurrentMedia = ref(false);
 
@@ -61,8 +75,8 @@ const { fullWidth = true } = defineProps<{
   fullWidth?: boolean;
 }>();
 
-const wsNodeRedStore = useWsNodeRedStore();
-const { dataWsNodeRed } = storeToRefs(wsNodeRedStore);
+const mediaPlayerStore = useMediaPlayerStore();
+const { mediaPlayer } = storeToRefs(mediaPlayerStore);
 
 function setRevealModalCurrentMedia(val: boolean) {
   revealModalCurrentMedia.value = val;
