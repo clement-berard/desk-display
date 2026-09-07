@@ -1,15 +1,16 @@
 import { Music4 } from '@lucide/vue';
-import { computed, ref, storeToRefs, useFetch, useGlobalStore, useWsNodeRedStore } from '#imports';
+import { computed, ref, storeToRefs, useFetch, useGlobalStore, useMediaPlayerStore } from '#imports';
 import type { RadioItem } from '~/core/entities/Radio';
 import { Page } from '~/core/entities/UI/Page';
 import { PageItem } from '~/core/entities/UI/PageItem';
 import { Panel } from '~/core/entities/UI/Panel';
 
 export function useRadiosPanel() {
-  const { dataWsNodeRed } = storeToRefs(useWsNodeRedStore());
   const globalStore = useGlobalStore();
   const { currentDisplayView } = storeToRefs(globalStore);
-  const currentSelectedRadio = computed(() => dataWsNodeRed?.value?.sonos_player_media?.select_radio_details?.slug);
+  const mediaPlayerStore = useMediaPlayerStore();
+  const { mediaPlayer } = storeToRefs(mediaPlayerStore);
+  const currentSelectedRadio = computed(() => mediaPlayer?.value?.selectedRadio?.slug);
   const panel = ref<Panel>(new Panel({ id: 'radios_panel', name: 'Radios', emoji: Music4 }));
 
   async function initPanel() {

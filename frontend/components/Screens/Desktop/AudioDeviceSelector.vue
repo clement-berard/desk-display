@@ -1,15 +1,14 @@
 <script setup lang="ts">
-import { computed, ref } from '#imports';
+import { computed, ref, storeToRefs, useMediaPlayerStore } from '#imports';
 import { Checkbox } from '@/components/ui/checkbox';
 
-import { useWsNodeRedStore } from '~/stores/wsNodeRedStore';
-
-const wsNodeRedStore = useWsNodeRedStore();
+const mediaPlayerStore = useMediaPlayerStore();
+const { mediaPlayer } = storeToRefs(mediaPlayerStore);
 
 const shouldAutoPlay = ref(false);
 
 const currentRadioUrl = computed(() => {
-  return wsNodeRedStore.dataWsNodeRed?.sonos_player_media?.select_radio_details.out_media_url || '';
+  return mediaPlayer?.value?.selectedRadio?.out_media_url || '';
 });
 </script>
 
