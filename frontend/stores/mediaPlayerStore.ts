@@ -61,7 +61,7 @@ export const useMediaPlayerStore = defineStore(
       (newMessage) => {
         if (newMessage?.key === 'media_player') {
           const raw = newMessage.value as MediaInfo;
-          const hasSelectedRadio = raw?.selectedRadio?.Id;
+          const hasSelectedRadio = raw?.selectedRadio?.slug;
           const hasMediaArtistAndTitle = raw?.media?.artist && raw?.media?.title;
           const showOnlySourceName = !hasMediaArtistAndTitle;
 
