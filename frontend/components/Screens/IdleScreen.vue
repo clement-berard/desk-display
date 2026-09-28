@@ -1,10 +1,19 @@
 <template>
-  <div class="flex justify-center grayscale h-full flex-col" @click="wakeUpScreen">
+  <div class="relative flex justify-center grayscale h-full flex-col" @click="wakeUpScreen">
     <div
       v-show="mediaPlayer?.player?.isPlaying && mediaPlayer?.media?.mediaPictureFinal"
       class="absolute top-0 right-0 w-1/2 h-full pointer-events-none z-[-1] bg-cover bg-center bg-no-repeat"
       :style="backgroundStyle"
     ></div>
+
+    <button
+      type="button"
+      class="absolute bottom-[24px] right-[24px] w-[72px] h-[72px] rounded-full bg-black/80 flex items-center justify-center"
+      @click.stop="toggleMute"
+    >
+      <VolumeX v-if="mediaPlayer?.player?.isMuted" class="w-8 h-8 text-white"></VolumeX>
+      <Volume2 v-else class="w-8 h-8 text-white"></Volume2>
+    </button>
 
     <div class="p-6 w-3/4 flex flex-col">
       <div class="text-6xl block font-normal mb-8">
@@ -31,7 +40,9 @@
   </div>
 </template>
 <script setup lang="ts">
+import { Volume2, VolumeX } from '@lucide/vue';
 import { computed, storeToRefs, useClock, useDisplayStore, useMediaPlayerStore, useWsNodeRedStore } from '#imports';
+import { callMediaPlayerAction } from '~/services/media/media.services';
 
 const wsNodeRedStore = useWsNodeRedStore();
 const { dataWsNodeRed } = storeToRefs(wsNodeRedStore);
@@ -41,6 +52,10 @@ const mediaPlayerStore = useMediaPlayerStore();
 const { mediaPlayer } = storeToRefs(mediaPlayerStore);
 
 const textDailyKnow = computed(() => dataWsNodeRed.value?.main_sensors?.text_daily_know || '');
+
+function toggleMute() {
+  return callMediaPlayerAction('toggle_mute');
+}
 
 const { fullDate } = useClock({ fullDayName: true });
 
